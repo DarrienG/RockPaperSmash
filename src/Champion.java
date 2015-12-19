@@ -7,10 +7,12 @@ import java.io.FileReader;
 
 // TODO: MAKE THIS ABSTRACT
 // SERIOUSLY IT IS ONLY NOT ABSTRACT FOR TESTING
-public class Champion {
+public abstract class Champion {
 
-    public Champion(){
-        dataCrawler("lol.txt");
+    public Champion(String fileName){
+        dataCrawler(fileName);
+        percentDmg = 0;
+        isKO = false;
     }
 
     /******************************
@@ -53,8 +55,6 @@ public class Champion {
      * END DATA MEMBERS
      *****************************/
 
-
-
     // Switches KO status from true to false, and false to true
     public void toggleKO(){
         isKO = !isKO;
@@ -65,6 +65,8 @@ public class Champion {
     public void setActionFlag(int action){
         actionFlag = !(action > 2) || !(action < 0) ? action : (int)(Math.random() % 2);
     }
+
+    public abstract void specialMove();
 
     /*****************************
      * START GETTERS
