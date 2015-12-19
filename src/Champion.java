@@ -37,7 +37,7 @@ public abstract class Champion {
     protected double[][] stats;
 
     // How heavy the player is, affects vertical survivability, and horizontal recovery
-    private double weight;
+    private double gravity;
 
     // Amount of damage character has taken thus far
     private double percentDmg;
@@ -119,8 +119,8 @@ public abstract class Champion {
         return stats[2][2];
     }
 
-    public double getWeight() {
-        return weight;
+    public double getGravity() {
+        return gravity;
     }
 
     public String getCharName() {
@@ -175,16 +175,12 @@ public abstract class Champion {
                     System.out.println("Invalid arguments. Process failed.");
                     System.exit(1);
                 }
-                System.out.println("i: " + i);
-                System.out.println("tokens[0]: " + tokens[0]);
-                System.out.println("tokens[0]: " + tokens[1]);
-                System.out.println("tokens[0]: " + tokens[2]);
                 stats[i][0] = Double.parseDouble(tokens[0]);
                 stats[i][1] = Double.parseDouble(tokens[1]);
                 stats[i][2] = Integer.parseInt(tokens[2]);
             }
 
-            weight = Double.parseDouble(br.readLine());
+            gravity = Double.parseDouble(br.readLine());
         }catch (java.io.IOException e){
             System.out.println("Invalid or corrupted file data. Failing");
             System.exit(0);
