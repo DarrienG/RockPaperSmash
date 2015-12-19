@@ -5,7 +5,7 @@ import java.io.FileReader;
  * Created by Darrien on 12/17/15.
  */
 
-public class Champion {
+public abstract class Champion {
 
     public Champion(String file){
         dataCrawler(file);
@@ -23,7 +23,7 @@ public class Champion {
     // Possible array of strings containing all file names needed to access?
     private String[] fileNames;
 
-    // Where we store the power statistics for each character
+    // Where we store the power statistics for each character, for atkDir, 0 means horizontal, 1 means vertical
     /*
         +-----------+----------+-----------+
         | atkDmg    | atkKB    | atkDir    |
@@ -34,10 +34,10 @@ public class Champion {
         +-----------+----------+-----------+
      */
 
-    private double[][] stats;
+    protected double[][] stats;
 
     // How heavy the player is, affects vertical survivability, and horizontal recovery
-    private double weight;
+    private double gravity;
 
     // Amount of damage character has taken thus far
     private double percentDmg;
@@ -53,11 +53,17 @@ public class Champion {
      * END DATA MEMBERS
      *****************************/
 
-    double attack(Character rhs){
-
-        return 0;
+    // Deals damage to opponent based on the move used, and returns knockback
+    public double attack(Champion rhs){
+        rhs.takeDamage(stats[actionFlag][0]);
+        return stats[actionFlag][1];
     }
 
+    public abstract double specialAttack(Champion rhs);
+
+    public void takeDamage(double amtDmg){
+        percentDmg += amtDmg;
+    }
     // Switches KO status from true to false, and false to true
     public void toggleKO(){
         isKO = !isKO;
@@ -83,7 +89,6 @@ public class Champion {
 
     public double getAtkKB() {
         return stats[0][1];
-
     }
 
     public double getAtkDir() {
@@ -114,8 +119,8 @@ public class Champion {
         return stats[2][2];
     }
 
-    public double getWeight() {
-        return weight;
+    public double getGravity() {
+        return gravity;
     }
 
     public String getCharName() {
@@ -136,8 +141,8 @@ public class Champion {
 
 
     /*****************************
-    * END GETTERS
-    ****************************/
+     * END GETTERS
+     ****************************/
 
     // Reads in data for a character based off of given file name
     public void dataCrawler(String file) {
@@ -147,37 +152,35 @@ public class Champion {
         int numArgs = 3;
 
         try{
-        BufferedReader br = new BufferedReader(new FileReader(file));
-        String[] tokens;
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String[] tokens;
 
-        // Set file information immediately to raw data in file
-        fileNames = br.readLine().split(DELIMITER);
+            // Set file information immediately to raw data in file
+            fileNames = br.readLine().split(DELIMITER);
 
-        if (fileNames.length != 6){
-            // Make real exceptions when class is finished
-            // throw invalidData;
-            System.out.println("Invalid arguments. Process failed.");
-            System.exit(1);
-        }
-
-        // Get attack, grab, and shield stats, and set them
-        for (int i = 0; i < numArgs; ++i){
-            tokens = br.readLine().split(DELIMITER);
-
-            if (tokens.length < numArgs){
+            if (fileNames.length != 6){
                 // Make real exceptions when class is finished
                 // throw invalidData;
                 System.out.println("Invalid arguments. Process failed.");
                 System.exit(1);
             }
-            System.out.println("i: " + i);
-            tokens = br.readLine().split(DELIMITER);
-            stats[i][0] = Double.parseDouble(tokens[0]);
-            stats[i][1] = Double.parseDouble(tokens[1]);
-            stats[i][2] = Integer.parseInt(tokens[2]);
-        }
 
-        weight = Double.parseDouble(br.readLine());
+            // Get attack, grab, and shield stats, and set them
+            for (int i = 0; i < numArgs; ++i){
+                tokens = br.readLine().split(DELIMITER);
+
+                if (tokens.length < numArgs){
+                    // Make real exceptions when class is finished
+                    // throw invalidData;
+                    System.out.println("Invalid arguments. Process failed.");
+                    System.exit(1);
+                }
+                stats[i][0] = Double.parseDouble(tokens[0]);
+                stats[i][1] = Double.parseDouble(tokens[1]);
+                stats[i][2] = Integer.parseInt(tokens[2]);
+            }
+
+            gravity = Double.parseDouble(br.readLine());
         }catch (java.io.IOException e){
             System.out.println("Invalid or corrupted file data. Failing");
             System.exit(0);
