@@ -5,7 +5,7 @@ import java.io.FileReader;
  * Created by Darrien on 12/17/15.
  */
 
-public class Champion {
+public abstract class Champion {
 
     public Champion(String file){
         dataCrawler(file);
@@ -23,7 +23,7 @@ public class Champion {
     // Possible array of strings containing all file names needed to access?
     private String[] fileNames;
 
-    // Where we store the power statistics for each character
+    // Where we store the power statistics for each character, for atkDir, 0 means horizontal, 1 means vertical
     /*
         +-----------+----------+-----------+
         | atkDmg    | atkKB    | atkDir    |
@@ -34,7 +34,7 @@ public class Champion {
         +-----------+----------+-----------+
      */
 
-    private double[][] stats;
+    protected double[][] stats;
 
     // How heavy the player is, affects vertical survivability, and horizontal recovery
     private double weight;
@@ -53,11 +53,17 @@ public class Champion {
      * END DATA MEMBERS
      *****************************/
 
-    double attack(Character rhs){
-
-        return 0;
+    // Deals damage to opponent based on the move used, and returns knockback
+    public double attack(Champion rhs){
+        rhs.takeDamage(stats[actionFlag][0]);
+        return stats[actionFlag][1];
     }
 
+    public abstract double specialAttack(Champion rhs);
+
+    public void takeDamage(double amtDmg){
+        percentDmg += amtDmg;
+    }
     // Switches KO status from true to false, and false to true
     public void toggleKO(){
         isKO = !isKO;
@@ -83,7 +89,6 @@ public class Champion {
 
     public double getAtkKB() {
         return stats[0][1];
-
     }
 
     public double getAtkDir() {
