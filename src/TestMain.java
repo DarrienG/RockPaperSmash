@@ -1,6 +1,6 @@
 public class TestMain{
     public static void main(String args[]){
-
+        debugChar();
     }
 
     public static void println(Object object){
@@ -9,9 +9,9 @@ public class TestMain{
 
     // For debugging characters based on stats
 
-    /*
+
     public static void debugChar(){
-    Champion ch = new Champion();
+    Champion ch = new Champion("test1.txt");
     for (int i = 0; i < ch.getFileNames().length; ++i){
         println(ch.getFileNames()[i]);
     }
@@ -32,5 +32,5 @@ public class TestMain{
     println(ch.getShieldDir());
 
     println("Weight: " + ch.getWeight());
-    }*/
+    }
 }

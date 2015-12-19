@@ -5,12 +5,12 @@ import java.io.FileReader;
  * Created by Darrien on 12/17/15.
  */
 
-// TODO: MAKE THIS ABSTRACT
-// SERIOUSLY IT IS ONLY NOT ABSTRACT FOR TESTING
 public class Champion {
 
-    public Champion(){
-        dataCrawler("lol.txt");
+    public Champion(String file){
+        dataCrawler(file);
+        percentDmg = 0;
+        isKO = false;
     }
 
     /******************************
@@ -18,23 +18,23 @@ public class Champion {
      ******************************/
 
     // Name of the player if given
-    private String charName;
+    protected String charName;
 
     // Possible array of strings containing all file names needed to access?
     private String[] fileNames;
 
     // Where we store the power statistics for each character
-    private double atkDmg;
-    private double atkKB;
-    private double atkDir;
+    /*
+        +-----------+----------+-----------+
+        | atkDmg    | atkKB    | atkDir    |
+        +-----------+----------+-----------+
+        | grabDmg   | grabKB   | grabDir   |
+        +-----------+----------+-----------+
+        | shieldDmg | shieldKB | shieldDir |
+        +-----------+----------+-----------+
+     */
 
-    private double grabDmg;
-    private double grabKB;
-    private double grabDir;
-
-    private double shieldDmg;
-    private double shieldKB;
-    private double shieldDir;
+    private double[][] stats;
 
     // How heavy the player is, affects vertical survivability, and horizontal recovery
     private double weight;
@@ -53,7 +53,10 @@ public class Champion {
      * END DATA MEMBERS
      *****************************/
 
+    double attack(Character rhs){
 
+        return 0;
+    }
 
     // Switches KO status from true to false, and false to true
     public void toggleKO(){
@@ -75,39 +78,40 @@ public class Champion {
     }
 
     public double getAtkDmg() {
-        return atkDmg;
+        return stats[0][0];
     }
 
     public double getAtkKB() {
-        return atkKB;
+        return stats[0][1];
+
     }
 
     public double getAtkDir() {
-        return atkDir;
+        return stats[0][2];
     }
 
     public double getGrabDmg() {
-        return grabDmg;
+        return stats[1][0];
     }
 
     public double getGrabKB() {
-        return grabKB;
+        return stats[1][1];
     }
 
     public double getGrabDir() {
-        return grabDir;
+        return stats[1][2];
     }
 
     public double getShieldDmg() {
-        return shieldDmg;
+        return stats[2][0];
     }
 
     public double getShieldKB() {
-        return shieldKB;
+        return stats[2][1];
     }
 
     public double getShieldDir() {
-        return shieldDir;
+        return stats[2][2];
     }
 
     public double getWeight() {
@@ -137,6 +141,8 @@ public class Champion {
 
     // Reads in data for a character based off of given file name
     public void dataCrawler(String file) {
+        stats = new double[3][3];
+
         String DELIMITER = ", ";
         int numArgs = 3;
 
@@ -155,44 +161,21 @@ public class Champion {
         }
 
         // Get attack, grab, and shield stats, and set them
-        tokens = br.readLine().split(DELIMITER);
+        for (int i = 0; i < numArgs; ++i){
+            tokens = br.readLine().split(DELIMITER);
 
-        if (tokens.length < numArgs){
-            // Make real exceptions when class is finished
-            // throw invalidData;
-            System.out.println("Invalid arguments. Process failed.");
-            System.exit(1);
+            if (tokens.length < numArgs){
+                // Make real exceptions when class is finished
+                // throw invalidData;
+                System.out.println("Invalid arguments. Process failed.");
+                System.exit(1);
+            }
+            System.out.println("i: " + i);
+            tokens = br.readLine().split(DELIMITER);
+            stats[i][0] = Double.parseDouble(tokens[0]);
+            stats[i][1] = Double.parseDouble(tokens[1]);
+            stats[i][2] = Integer.parseInt(tokens[2]);
         }
-
-        atkDmg = Double.parseDouble(tokens[0]);
-        atkKB = Double.parseDouble(tokens[1]);
-        atkDir = Integer.parseInt(tokens[2]);
-
-        tokens = br.readLine().split(DELIMITER);
-
-        if (tokens.length < numArgs){
-            // Make real exceptions when class is finished
-            // throw invalidData;
-            System.out.println("Invalid arguments. Process failed.");
-            System.exit(1);
-        }
-
-        grabDmg = Double.parseDouble(tokens[0]);
-        grabKB = Double.parseDouble(tokens[1]);
-        grabDir = Integer.parseInt(tokens[2]);
-
-        tokens = br.readLine().split(DELIMITER);
-
-        if (tokens.length < numArgs){
-            // Make real exceptions when class is finished
-            // throw invalidData;
-            System.out.println("Invalid arguments. Process failed.");
-            System.exit(1);
-        }
-
-        shieldDmg = Double.parseDouble(tokens[0]);
-        shieldKB = Double.parseDouble(tokens[1]);
-        shieldDir = Integer.parseInt(tokens[2]);
 
         weight = Double.parseDouble(br.readLine());
         }catch (java.io.IOException e){
