@@ -28,4 +28,9 @@ public class Marth extends Champion {
         rhs.takeDamage(getAtkDmg() * 2);
         return getAtkKB() * 1.25;
     }
+
+    @Override
+    public String getChampionName(){
+        return "MARTH";
+    }
 }

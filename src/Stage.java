@@ -4,7 +4,7 @@ import java.io.FileReader;
 /**
  * Created by darrien on 12/19/15.
  */
-public class Stage {
+public abstract class Stage {
 
     /*
         +---------------+-------------+

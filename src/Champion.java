@@ -52,6 +52,7 @@ public abstract class Champion {
     // Attack, Grab, or Shield respectively as 0, 1, or 2
     private int actionFlag;
 
+    private String championName;
     /******************************
      * END DATA MEMBERS
      *****************************/
@@ -126,6 +127,10 @@ public abstract class Champion {
         return gravity;
     }
 
+    public double getRecovery() {
+        return recovery;
+    }
+
     public String getCharName() {
         return charName;
     }
@@ -142,10 +147,15 @@ public abstract class Champion {
         return actionFlag;
     }
 
+    public abstract String getChampionName();
 
     /*****************************
      * END GETTERS
      ****************************/
+
+    public void resetName(String name){
+        charName = name;
+    }
 
     // Reads in data for a character based off of given file name
     public void dataCrawler(String file) {
@@ -184,6 +194,8 @@ public abstract class Champion {
             }
 
             gravity = Double.parseDouble(br.readLine());
+            recovery = Double.parseDouble(br.readLine());
+
         }catch (java.io.IOException e){
             System.out.println("Invalid or corrupted file data. Failing");
             System.exit(0);
