@@ -6,7 +6,7 @@ public class TestMain{
         String p1Name, p2Name;
 
         while (true){
-            
+
         }
     }
 

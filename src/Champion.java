@@ -39,6 +39,9 @@ public abstract class Champion {
     // How heavy the player is, affects vertical survivability, and horizontal recovery
     private double gravity;
 
+    // How long character's recovery is when knocked off horizontally
+    private double recovery;
+
     // Amount of damage character has taken thus far
     private double percentDmg;
 
