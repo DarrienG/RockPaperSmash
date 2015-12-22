@@ -20,4 +20,5 @@ making his seemingly weak normal attack deal 18 damage, and have an astonishingl
 it a very viable kill move.
 
 Despite having a powerful attack, and grab, Marth suffers from weak out of shield options, only being able to deal
-5 damage off of a shield punish, with a total of 20 knockback, making shielding a below average choice for him.
+5 damage off of a shield punish, with a total of 20 knockback, making fighters with strong shield pressure force
+Marth into a poor position.

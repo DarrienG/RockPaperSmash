@@ -52,7 +52,10 @@ public abstract class Champion {
     // Attack, Grab, or Shield respectively as 0, 1, or 2
     private int actionFlag;
 
-    private String championName;
+    public double[][] getStats() {
+        return stats;
+    }
+
     /******************************
      * END DATA MEMBERS
      *****************************/
@@ -79,6 +82,55 @@ public abstract class Champion {
         actionFlag = !(action > 2) || !(action < 0) ? action : (int)(Math.random() % 2);
     }
 
+
+    public void resetName(String name){
+        charName = name;
+    }
+
+    // Reads in data for a character based off of given file name
+    public void dataCrawler(String file) {
+        stats = new double[3][3];
+
+        String DELIMITER = ", ";
+        int numArgs = 3;
+
+        try{
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String[] tokens;
+
+            // Set file information immediately to raw data in file
+            fileNames = br.readLine().split(DELIMITER);
+
+            if (fileNames.length != 6){
+                // Make real exceptions when class is finished
+                // throw invalidData;
+                System.out.println("Invalid arguments. Process failed.");
+                System.exit(1);
+            }
+
+            // Get attack, grab, and shield stats, and set them
+            for (int i = 0; i < numArgs; ++i){
+                tokens = br.readLine().split(DELIMITER);
+
+                if (tokens.length < numArgs){
+                    // Make real exceptions when class is finished
+                    // throw invalidData;
+                    System.out.println("Invalid arguments. Process failed.");
+                    System.exit(1);
+                }
+                stats[i][0] = Double.parseDouble(tokens[0]);
+                stats[i][1] = Double.parseDouble(tokens[1]);
+                stats[i][2] = Integer.parseInt(tokens[2]);
+            }
+
+            gravity = Double.parseDouble(br.readLine());
+            recovery = Double.parseDouble(br.readLine());
+
+        }catch (java.io.IOException e){
+            System.out.println("Invalid or corrupted file data. Failing");
+            System.exit(0);
+        }
+    }
     /*****************************
      * START GETTERS
      ****************************/
@@ -148,57 +200,4 @@ public abstract class Champion {
     }
 
     public abstract String getChampionName();
-
-    /*****************************
-     * END GETTERS
-     ****************************/
-
-    public void resetName(String name){
-        charName = name;
-    }
-
-    // Reads in data for a character based off of given file name
-    public void dataCrawler(String file) {
-        stats = new double[3][3];
-
-        String DELIMITER = ", ";
-        int numArgs = 3;
-
-        try{
-            BufferedReader br = new BufferedReader(new FileReader(file));
-            String[] tokens;
-
-            // Set file information immediately to raw data in file
-            fileNames = br.readLine().split(DELIMITER);
-
-            if (fileNames.length != 6){
-                // Make real exceptions when class is finished
-                // throw invalidData;
-                System.out.println("Invalid arguments. Process failed.");
-                System.exit(1);
-            }
-
-            // Get attack, grab, and shield stats, and set them
-            for (int i = 0; i < numArgs; ++i){
-                tokens = br.readLine().split(DELIMITER);
-
-                if (tokens.length < numArgs){
-                    // Make real exceptions when class is finished
-                    // throw invalidData;
-                    System.out.println("Invalid arguments. Process failed.");
-                    System.exit(1);
-                }
-                stats[i][0] = Double.parseDouble(tokens[0]);
-                stats[i][1] = Double.parseDouble(tokens[1]);
-                stats[i][2] = Integer.parseInt(tokens[2]);
-            }
-
-            gravity = Double.parseDouble(br.readLine());
-            recovery = Double.parseDouble(br.readLine());
-
-        }catch (java.io.IOException e){
-            System.out.println("Invalid or corrupted file data. Failing");
-            System.exit(0);
-        }
-    }
 }

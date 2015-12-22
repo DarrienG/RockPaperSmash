@@ -14,6 +14,7 @@ public abstract class Stage {
     private double[] stageStats;
 
     public Stage(String statsFile){
+        stageStats = new double[2];
         try{
             BufferedReader br = new BufferedReader(new FileReader(statsFile));
             stageStats[0] = Double.parseDouble(br.readLine());
@@ -33,4 +34,6 @@ public abstract class Stage {
     public double getVerticalLen() {
         return stageStats[1];
     }
+
+    public abstract String getStageName();
 }
