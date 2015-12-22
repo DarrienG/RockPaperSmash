@@ -1,5 +1,5 @@
-import java.util.Scanner;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Driver {
 
@@ -164,7 +164,7 @@ public class Driver {
         // Player 2 goes first
         else{
             println(player2.getCharName() + "(Player 2) goes first!");
-            battleBegin(player1, player2, arena);
+            battleBegin(player2, player1, arena);
         }
     }
 
