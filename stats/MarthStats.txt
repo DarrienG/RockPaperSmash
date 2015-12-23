@@ -1,14 +1,13 @@
-1.txt, 2.txt, 3.txt, 4.txt, 5.txt, 42
+Assets/InfoPages/MarthInfoPage.txt, Assets/CharPortraits/MarthLeft.txt, Assets/CharPortraits/MarthRight.txt, 4.txt, 5.txt, 42
 9, .80, 0
-20, .35, 1
+25, .35, 1
 5, .20, 0
 .87
 75
 
 ____
 
-The hero king makes a return! Known for his spacing in Melee, Marth is based off of grabs, and tippers
-in Rock Paper Smash.
+The hero king makes a return! Known for his spacing, Marth is based off of grabs, and tippers in Rock Paper Smash.
 
 Marth is a character with a very powerful grab. Using grab is a great way to rack up damage quickly.
 Despite having a high damage output, grab is a weak option for securing a kill, with a measly .35 knockback.

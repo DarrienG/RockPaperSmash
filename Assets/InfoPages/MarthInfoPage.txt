@@ -1,0 +1,44 @@
+                               `                __  __          _____ _______ _    _             
+                           !u###$!             |  \/  |   /\   |  __ \__   __| |  | |    
+                          !$%%%$$$3`           | \  / |  /  \  | |__) | | |  | |__| |      
+                          $########!           | |\/| | / /\ \ |  _  /  | |  |  __  |           
+                          "#"j3(%%I            | |  | |/ ____ \| | \ \  | |  | |  | |
+                           !!!!!I))            |_|  |_/_/    \_\_|  \_\ |_|  |_|  |_|
+                            3####
+                           %$!!!!!(            The Hero King, Marth makes a return! 
+                   !! ``  33u""I*              Similar to his Smash Bros. counterpart,            
+               Ju"##########$$%%(!-            in Rock Paper Smash, Marth is based off           
+               !##$###B###B#$$######%$!        of grabs, and tippers    
+                !#Q#j$$##QBB###########$".                
+                 u#"+u$#3###############3.     Marth's grab deals loads of damage, and
+                 u!!!("3#$I$##########$t!!     is able to rack up 25% in a single hit.
+                 "(("""3###$"z$$$%$#%%ju""!    Using it allows Marth to put foes in kill
+                 $!!"$#BB#$$%I""""*"B%'!$#$!   percent at an incredible speed.
+                 3!!"BBBB#$$%%"""I"%Bz!$###$              
+                !!!!"BBBBB##$$##%#$$#####$!    Marth's kill move is his attack. Hitting           
+                %####BBBBB#$$$$$$#%"u#$"!      with a very powerful 80 knockback while          
+               .####BBBBB%3"+(+"I#%""$*        sourspotting, it's already a force to be           
+               !###QBQBB$3u"!((""B$"*"#        reckoned with.            
+         !!'   3###BB#B#33"+""*"$B#(*""                   
+         !%$( !####BQ##uI+!"t""+#B#*""+!       Even so, every time Marth does a basic attack     
+           `"#"%###B######$$I""%B##"u%#"       there's a 30% chance he'll get a tipper,      
+             %###Q##""""##############$$`      doubling his attack damage, and massively           
+             `&##3$$$###$##$########$B##!      increasing knockback.             
+              $#$$#$%$#B###$$######$#B#$"                 
+             !#!u###%%""$##$$######$#B#$%'     Raw stats:                     
+             $#%t3#B##%"!!j#$#######BBB$#!                
+            !######BBBB#%"!!"#BB####B#B("+`       Move    Dmg   Kb     Angle                
+            $####Q###BB$##%"!'+$#$$#Q##!!%!     -------- ----- ---- ------------             
+           !#####B##QB#$J"""""!.!I"$Q##!`$(      Attack     9   80   Vertical              
+           $#####Q##QB###$33$#%+!`(####! ("!     Grab      25   35   Horizontal           
+          (######B###BB#########%"!.+##! ."!     Shield     5   20   Vertical               
+         `#######B###BB###########$*!`!`  ``              
+         "#######B##BBB#####B#####BQ$"!`                  
+        -########Q##BBBQ####B#####BB##%!!`                
+        +%$$########BBB###########3%$$u ` ``              
+              `'!!*"""3##########"                        
+                      `#####BBB##%(!`                     
+                      `#%*!3####$#$##t!                   
+                      `$#####((!"%######                  
+                       ###$$#`                            
+                       .*3$$"                             

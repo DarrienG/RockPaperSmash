@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -33,7 +36,7 @@ public class Driver {
     public static String getName(String player){
         String input, response;
         Scanner sc = new Scanner(System.in);
-        println("");
+        println();
         while (true){
             print(player + " please enter your tag: ");
             input = sc.nextLine();
@@ -52,13 +55,13 @@ public class Driver {
         String input, response;
         boolean goodPick = false;
         Scanner sc = new Scanner(System.in);
-        println("");
+        println();
         while (!goodPick) {
             print("Character list: ");
             for (Champion ch : charList) {
                 print("\"" + ch.getChampionName() + "\" ");
             }
-            println("");
+            println();
             print(player + " please choose your character: ");
             input = sc.nextLine();
 
@@ -73,11 +76,12 @@ public class Driver {
             }
             if (!goodPick){
                 println("Sorry, I don't recognize that character.");
-                println("");
+                println();
             }
 
             // Only go here if the player chose a valid Champion
             if (goodPick){
+                animate(charList[count].getFileNames()[0]);
                 print("Is \"" + input + "\" good?\n> ");
                 response = sc.nextLine();
                 response = response.toLowerCase().trim();
@@ -103,13 +107,13 @@ public class Driver {
         String input, response;
         boolean goodPick = false;
         Scanner sc = new Scanner(System.in);
-        println("");
+        println();
         while (!goodPick) {
             print("Stage list: ");
             for (Stage st : stageList) {
                 print("\"" + st.getStageName() + "\" ");
             }
-            println("");
+            println();
             print("What stage would you like to pick?\n> ");
             input = sc.nextLine();
 
@@ -124,11 +128,12 @@ public class Driver {
             }
             if (!goodPick) {
                 println("Sorry, I don't recognize that stage.");
-                println("");
+                println();
             }
 
             // Only go here if the player chose a valid Stage
             if (goodPick) {
+
                 print("Is \"" + input + "\" good?\n> ");
                 response = sc.nextLine();
                 response = response.toLowerCase().trim();
@@ -171,16 +176,20 @@ public class Driver {
     public static void battleBegin(Champion first, Champion second, Stage arena){
         Scanner sc = new Scanner(System.in);
         String inputFirst, inputSecond;
+        FileCat fc = new FileCat(first.getFileNames()[1], second.getFileNames()[2]);
+        fc.LateralOp("PartBattleFile.txt");
+        animate("PartBattleFile.txt");
+
         double knockBack;
         while(!first.isKO() && !second.isKO()){
             println(first.getCharName() + "\t:\t" + first.getChampionName() + "\t:\t%" + first.getPercentDmg());
             println(second.getCharName() + "\t:\t" + second.getChampionName() + "\t:\t%" + second.getPercentDmg());
 
-            print(first.getCharName() + ", what move do you want to make? a, g, s\n> ");
+            print(first.getCharName() + ", what move do you want to make? attack, grab, shield\n> ");
             inputFirst = sc.nextLine();
 
 
-            print(second.getCharName() + ", what move do you want to make? a, g, s\n> ");
+            print(second.getCharName() + ", what move do you want to make? attack, grab, shield\n> ");
             inputSecond = sc.nextLine();
             // Do the array thing with choices tomorrow
 
@@ -214,7 +223,6 @@ public class Driver {
                 // Print result of each attack
                 // As a reminder, 0 = attack (rock), 1 = grab (scissors), 2 = shield (paper)
 
-                // TODO: Get knockback for each, use flag to determine who was hit, see if opposing player dies
                 int p1Action = first.getActionFlag(), p2Action = second.getActionFlag();
                 if (p1Action == 0 && p2Action == 0 || p1Action == 1 && p2Action == 1 || p1Action == 2 && p2Action == 2){
                     println("Same option chosen by " + first.getCharName() + " and " + second.getCharName() + "!\nNo damage taken.");
@@ -237,7 +245,7 @@ public class Driver {
                     else{
                         knockBack = (second.getPercentDmg() * knockBack) / second.getGravity();
 
-                        if (knockBack > arena.getVerticalLen()){
+                        if (knockBack > arena.getVerticalLen() || knockBack > second.getRecovery()){
                             second.toggleKO();
                             println(second.getCharName() + " has been KO'd!");
                         }
@@ -246,11 +254,11 @@ public class Driver {
 
                 }else{
                     knockBack = second.attack(first);
-                    // Is knockback horizontal
+                    // Is knockback horizontal?
                     if (second.getStats()[second.getActionFlag()][2] == 0){
                         knockBack = (first.getPercentDmg() * knockBack) * first.getGravity();
 
-                        if (knockBack > arena.getHorizontalLen()){
+                        if (knockBack > arena.getHorizontalLen() || knockBack > first.getRecovery()){
                             first.toggleKO();
                             println(first.getCharName() + " has been KO'd!");
                         }
@@ -267,9 +275,6 @@ public class Driver {
                     }
 
                 }
-
-                knockBack = 0;
-
             }
 
             // Invalid action entered by one of the two players
@@ -301,10 +306,28 @@ public class Driver {
         return tmpChamp;
     }
 
+    // Takes a file name, and outputs the result to the screen after clearing the screen
+    public static void animate(String fileName){
+        String line;
+        // The length of my terminal in lines, may or may not correspond to your terminal size
+        for (int i = 0; i < 58; ++i){
+            println();
+        }
+        try{
+            BufferedReader br = new BufferedReader(new FileReader(fileName));
+            while ((line = br.readLine()) != null){
+                println(line);
+            }
+        }catch (java.io.IOException e){
+            println("Info page not found.");
+        }
+    }
+
     // Makes printing easier and shorter
     public static void println(Object object){
         System.out.println(object);
     }
+    public static void println() { System.out.println(); }
     public static void print(Object object) { System.out.print(object); }
 
 }

@@ -6,6 +6,7 @@ public class Battlefield extends Stage{
         super("stage_stats/BattlefieldStats.txt");
     }
 
+    @Override
     public String getStageName(){
         return "BATTLEFIELD";
     }
