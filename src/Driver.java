@@ -234,7 +234,7 @@ public class Driver {
                     println("Same option chosen by " + first.getCharName() + " and " + second.getCharName() + "!\nNo damage taken.");
                 }
 
-                if (p2Action == p1Action + 1 || p2Action == p1Action - 2){
+                else if (p2Action == p1Action + 1 || p2Action == p1Action - 2){
                     knockBack = first.attack(second);
 
                     // Is knockback horizontal?
