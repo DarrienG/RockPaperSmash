@@ -3,6 +3,7 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.Stack;
 
 public class Driver {
 
@@ -177,17 +178,22 @@ public class Driver {
         Scanner sc = new Scanner(System.in);
         String inputFirst, inputSecond;
         FileCat fc = new FileCat(first.getFileNames()[1], second.getFileNames()[2]);
-        fc.LateralOp("PartBattleFile.txt");
-        animate("PartBattleFile.txt");
+        String partBattle = fc.LateralOp("PartBattleFile.txt");
 
         double knockBack;
         while(!first.isKO() && !second.isKO()){
+            animate(partBattle);
             println(first.getCharName() + "\t:\t" + first.getChampionName() + "\t:\t%" + first.getPercentDmg());
             println(second.getCharName() + "\t:\t" + second.getChampionName() + "\t:\t%" + second.getPercentDmg());
+
+            // animate(percentageMaker(first, second));
 
             print(first.getCharName() + ", what move do you want to make? attack, grab, shield\n> ");
             inputFirst = sc.nextLine();
 
+            for (int i = 0; i < 58; ++i){
+                println();
+            }
 
             print(second.getCharName() + ", what move do you want to make? attack, grab, shield\n> ");
             inputSecond = sc.nextLine();
@@ -251,7 +257,6 @@ public class Driver {
                         }
                     }
 
-
                 }else{
                     knockBack = second.attack(first);
                     // Is knockback horizontal?
@@ -285,8 +290,6 @@ public class Driver {
             // TODO: End battle, possible increment counter, champs may require extra data member to determine player number
 
         }
-
-
     }
 
     // Copies values from one champion into a temporary Champion to later be returned
@@ -321,6 +324,32 @@ public class Driver {
         }catch (java.io.IOException e){
             println("Info page not found.");
         }
+    }
+
+    // TODO: Concatenate percentages, add to print list
+    public static String percentageMaker(Champion first, Champion second){
+        Stack<Integer> numStack = new Stack<>();
+        int firstPercent = (int)first.getPercentDmg();
+        int secondPercent = (int)second.getPercentDmg();
+        String grabString;
+
+        while (firstPercent > 0){
+            numStack.push(firstPercent % 0);
+            firstPercent /= 10;
+        }
+
+        // TODO: THIS
+        if (numStack.size() == 1){
+
+        }
+        else {
+            while (numStack.size() > 0){
+                grabString = "";
+
+            }
+        }
+        return null;
+
     }
 
     // Makes printing easier and shorter

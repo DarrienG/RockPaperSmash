@@ -4,6 +4,7 @@ Assets/InfoPages/MarthInfoPage.txt, Assets/CharPortraits/MarthLeft.txt, Assets/C
 5, .20, 0
 .87
 75
+38
 
 ____
 
