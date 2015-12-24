@@ -52,13 +52,16 @@ public abstract class Champion {
     // Attack, Grab, or Shield respectively as 0, 1, or 2
     private int actionFlag;
 
-    public double[][] getStats() {
-        return stats;
-    }
+    // ASCII formatting spacer
+    private int spacer;
 
     /******************************
      * END DATA MEMBERS
      *****************************/
+
+    public double[][] getStats() {
+        return stats;
+    }
 
     // Deals damage to opponent based on the move used, and returns knockback
     public double attack(Champion rhs){
@@ -125,6 +128,7 @@ public abstract class Champion {
 
             gravity = Double.parseDouble(br.readLine());
             recovery = Double.parseDouble(br.readLine());
+            spacer = Integer.parseInt(br.readLine());
 
         }catch (java.io.IOException e){
             System.out.println("Invalid or corrupted file data. Failing");
@@ -197,6 +201,10 @@ public abstract class Champion {
 
     public int getActionFlag() {
         return actionFlag;
+    }
+
+    public int getSpacer() {
+        return spacer;
     }
 
     public abstract String getChampionName();

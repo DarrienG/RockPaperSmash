@@ -107,11 +107,10 @@ public class FileCat {
                 for (int i = 0; i < spaceCount; ++i){
                     line2 += spacer;
                 }
-                do{
-                    line1 = br.readLine();
+                while((line1 = br.readLine()) != null){
                     bw.write(line1 + line2);
                     bw.newLine();
-                }while(line1 != null);
+                }
                 bw.flush();
             }
         }

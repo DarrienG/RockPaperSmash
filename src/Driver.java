@@ -25,8 +25,11 @@ public class Driver {
         // Change to incorporate negative responses, and quit when given negative response
         makeNames();
         while (true){
+            clear();
             Champion p1 = clone(getCharacter(p1Name));
+            clear();
             Champion p2 = clone(getCharacter(p2Name));
+            clear();
             Stage st = getField();
             battle(p1, p2, st);
         }
@@ -161,18 +164,26 @@ public class Driver {
     public static void battle(Champion player1, Champion player2, Stage arena){
         Random rand = new Random();
         double coinFlip = rand.nextDouble();
+        Scanner sc = new Scanner(System.in);
+
+        clear();
 
         println("Today on " + arena.getStageName() + " we have \n" + player1.getCharName() + ": " + player1.getChampionName() +
         "\n\tvs.\n" + player2.getCharName() + ": " + player2.getChampionName());
 
+
         // Player 1 goes first
         if(coinFlip > .5){
-            println(player1.getCharName() + "(Player 1) goes first!");
+            println(player1.getCharName() + " (Player 1) goes first!");
+            print("<ENTER> to begin");
+            sc.nextLine();
             battleBegin(player1, player2, arena);
         }
         // Player 2 goes first
         else{
-            println(player2.getCharName() + "(Player 2) goes first!");
+            println(player2.getCharName() + " (Player 2) goes first!");
+            print("\n\n<ENTER> to begin ");
+            sc.nextLine();
             battleBegin(player2, player1, arena);
         }
     }
@@ -186,10 +197,8 @@ public class Driver {
         double knockBack;
         while(!first.isKO() && !second.isKO()){
             animate(partBattle);
-            println(first.getCharName() + "\t:\t" + first.getChampionName() + "\t:\t%" + first.getPercentDmg());
-            println(second.getCharName() + "\t:\t" + second.getChampionName() + "\t:\t%" + second.getPercentDmg());
-
-            // animate(percentageMaker(first, second));
+            formatNames(first, second);
+            animateNoJump(percentageMaker(first, second));
 
             print(first.getCharName() + ", what move do you want to make? attack, grab, shield\n> ");
             inputFirst = sc.nextLine();
@@ -235,10 +244,14 @@ public class Driver {
                 int p1Action = first.getActionFlag(), p2Action = second.getActionFlag();
                 if (p1Action == 0 && p2Action == 0 || p1Action == 1 && p2Action == 1 || p1Action == 2 && p2Action == 2){
                     println("Same option chosen by " + first.getCharName() + " and " + second.getCharName() + "!\nNo damage taken.");
+                    print("<ENTER> to continue ");
+                    sc.nextLine();
                 }
 
                 else if (p2Action == p1Action + 1 || p2Action == p1Action - 2){
+                    double initDmg = second.getPercentDmg();
                     knockBack = first.attack(second);
+                    println(second.getCharName() + " takes " + (second.getPercentDmg() - initDmg) + "% damage!");
 
                     // Is knockback horizontal?
                     if (first.getStats()[first.getActionFlag()][2] == 0){
@@ -261,7 +274,9 @@ public class Driver {
                     }
 
                 }else{
+                    double initDmg = first.getPercentDmg();
                     knockBack = second.attack(first);
+                    println(first.getCharName() + " takes " + (first.getPercentDmg() - initDmg) + "% damage!");
                     // Is knockback horizontal?
                     if (second.getStats()[second.getActionFlag()][2] == 0){
                         knockBack = (first.getPercentDmg() * knockBack) * first.getGravity();
@@ -281,8 +296,9 @@ public class Driver {
                             println(first.getCharName() + " has been KO'd!");
                         }
                     }
-
                 }
+                println("<ENTER> to continue");
+                sc.nextLine();
             }
 
             // Invalid action entered by one of the two players
@@ -316,9 +332,7 @@ public class Driver {
     public static void animate(String fileName){
         String line;
         // The length of my terminal in lines, may or may not correspond to your terminal size
-        for (int i = 0; i < 58; ++i){
-            println();
-        }
+        clear();
         try{
             BufferedReader br = new BufferedReader(new FileReader(fileName));
             while ((line = br.readLine()) != null){
@@ -329,44 +343,130 @@ public class Driver {
         }
     }
 
-    // TODO: Concatenate percentages, add to print list
+    public static void animateNoJump(String fileName){
+        String line;
+        try{
+            BufferedReader br = new BufferedReader(new FileReader(fileName));
+            while ((line = br.readLine()) != null){
+                println(line);
+            }
+        }catch (java.io.IOException e){
+            println("Info page not found.");
+        }
+    }
+
+    public static void clear(){
+        for (int i = 0; i < 58; ++i){
+            println();
+        }
+    }
+
+    // Creates ASCII output of percentages, damage capped at 999%
     public static String percentageMaker(Champion first, Champion second){
         Stack<Integer> numStack = new Stack<>();
         int firstPercent = (int)first.getPercentDmg();
         int secondPercent = (int)second.getPercentDmg();
+        int spacer = first.getSpacer();
         String tmpLoc = "TmpBattleFiles/";
-        String firstLoc;
+        String firstLoc, secondLoc;
+        boolean hundredPlusFlag = false;
 
         FileCat fc;
 
-        while (firstPercent > 0){
-            numStack.push(firstPercent % 10);
-            firstPercent /= 10;
-        }
+        if (firstPercent > 0){
+            while (firstPercent > 0){
+                numStack.push(firstPercent % 10);
+                firstPercent /= 10;
+            }
 
-        // Leading zero on numbers that
-        if (numStack.size() == 1){
-            fc = new FileCat(numberLoc[0], numberLoc[numStack.pop()]);
+            // Leading zero on percentages less than 10
+            if (numStack.size() == 1){
+                fc = new FileCat(numberLoc[0], numberLoc[numStack.pop()]);
+                firstLoc = fc.LateralOp(tmpLoc + "tmpFirstPercent.txt");
+                fc = new FileCat(firstLoc, numberLoc[10]);
+                firstLoc = fc.LateralOp(tmpLoc + "unspacedFirstPercent.txt");
+            }
+
+            // Percentage greater than/equal to 9
+            else {
+                fc = new FileCat(numberLoc[numStack.pop()], numberLoc[numStack.pop()]);
+                firstLoc = fc.LateralOp(tmpLoc + "tmpFirstPercent.txt");
+                // Percentage greater than 100
+                if (numStack.size() > 0){
+                    fc = new FileCat(firstLoc, numberLoc[numStack.pop()]);
+                    firstLoc = fc.LateralOp(tmpLoc + "tmpFirstPercent2.txt");
+                    hundredPlusFlag = true;
+                }
+                fc = new FileCat(firstLoc, numberLoc[10]);
+                firstLoc = fc.LateralOp(tmpLoc + "unspacedFirstPercent.txt");
+            }
+        }
+        else{
+            fc = new FileCat(numberLoc[0], numberLoc[0]);
             firstLoc = fc.LateralOp(tmpLoc + "tmpFirstPercent.txt");
             fc = new FileCat(firstLoc, numberLoc[10]);
-            firstLoc = fc.LateralOp(tmpLoc + "firstPercent.txt");
+            firstLoc = fc.LateralOp(tmpLoc + "unspacedFirstPercent.txt");
         }
 
-        // TODO: Make it work for percentages above 9, and implement for second player
-        else {
-            while (numStack.size() > 0){
+        spacer = hundredPlusFlag ? spacer - 8 : spacer;
+        fc = new FileCat(firstLoc, " ", spacer);
+        firstLoc = fc.LateralOp(tmpLoc + "firstPercent.txt");
 
+        // Second player's percentage
+        if (secondPercent > 0){
+            while (secondPercent > 0){
+                numStack.push(secondPercent % 10);
+                secondPercent /= 10;
             }
-            // firstLoc =
-        }
-        return null;
 
+            // Leading zero on percentages less than 10
+            if (numStack.size() == 1){
+                fc = new FileCat(numberLoc[0], numberLoc[numStack.pop()]);
+                secondLoc = fc.LateralOp(tmpLoc + "tmpSecondPercent.txt");
+                fc = new FileCat(secondLoc, numberLoc[10]);
+                secondLoc = fc.LateralOp(tmpLoc + "secondPercent.txt");
+            }
+
+            // Percentage greater than/equal to 9
+            else {
+                fc = new FileCat(numberLoc[numStack.pop()], numberLoc[numStack.pop()]);
+                secondLoc = fc.LateralOp(tmpLoc + "tmpSecondPercent.txt");
+                // Percentage greater than 100
+                if (numStack.size() > 0){
+                    fc = new FileCat(secondLoc, numberLoc[numStack.pop()]);
+                    secondLoc = fc.LateralOp(tmpLoc + "tmpSecondPercent2.txt");
+                }
+                fc = new FileCat(secondLoc, numberLoc[10]);
+                secondLoc = fc.LateralOp(tmpLoc + "secondPercent.txt");
+            }
+        }
+        else{
+            fc = new FileCat(numberLoc[0], numberLoc[0]);
+            secondLoc = fc.LateralOp(tmpLoc + "tmpSecondPercent.txt");
+            fc = new FileCat(secondLoc, numberLoc[10]);
+            secondLoc = fc.LateralOp(tmpLoc + "secondPercent.txt");
+        }
+        fc = new FileCat(firstLoc, secondLoc);
+        return fc.LateralOp(tmpLoc + "finalPercents.txt");
+    }
+
+    public static void formatNames(Champion first, Champion second){
+        int trueSpacer = first.getSpacer() + 25 - first.getCharName().length();
+        print(first.getCharName());
+        if (trueSpacer < 1){
+            trueSpacer = 1;
+        }
+        for (int i = 0; i < trueSpacer; ++i){
+            print(" ");
+        }
+        println(second.getCharName());
     }
 
     // Makes printing easier and shorter
     public static void println(Object object){
         System.out.println(object);
     }
+
     public static void println() { System.out.println(); }
     public static void print(Object object) { System.out.print(object); }
 
