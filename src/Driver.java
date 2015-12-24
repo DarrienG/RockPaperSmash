@@ -12,6 +12,9 @@ public class Driver {
     public static final String[] attackOps = {"attack", "a", "1"};
     public static final String[] grabOps = {"grab", "g", "2"};
     public static final String[] shieldOps = {"shield", "s", "3"};
+    public static final String[] numberLoc = {"Assets/Numbers/Zero.txt", "Assets/Numbers/One.txt", "Assets/Numbers/Two.txt",
+    "Assets/Numbers/Three.txt", "Assets/Numbers/Four.txt", "Assets/Numbers/Five.txt", "Assets/Numbers/Six.txt",
+    "Assets/Numbers/Seven.txt", "Assets/Numbers/Eight.txt", "Assets/Numbers/Nine.txt", "Assets/Numbers/Mod.txt"};
 
     public static final Champion[] charList = {new Marth("NULL")};
     public static final Stage[] stageList = {new Battlefield()};
@@ -178,7 +181,7 @@ public class Driver {
         Scanner sc = new Scanner(System.in);
         String inputFirst, inputSecond;
         FileCat fc = new FileCat(first.getFileNames()[1], second.getFileNames()[2]);
-        String partBattle = fc.LateralOp("PartBattleFile.txt");
+        String partBattle = fc.LateralOp("TmpBattleFiles/PartBattleFile.txt");
 
         double knockBack;
         while(!first.isKO() && !second.isKO()){
@@ -331,22 +334,30 @@ public class Driver {
         Stack<Integer> numStack = new Stack<>();
         int firstPercent = (int)first.getPercentDmg();
         int secondPercent = (int)second.getPercentDmg();
-        String grabString;
+        String tmpLoc = "TmpBattleFiles/";
+        String firstLoc;
+
+        FileCat fc;
 
         while (firstPercent > 0){
-            numStack.push(firstPercent % 0);
+            numStack.push(firstPercent % 10);
             firstPercent /= 10;
         }
 
-        // TODO: THIS
+        // Leading zero on numbers that
         if (numStack.size() == 1){
-
+            fc = new FileCat(numberLoc[0], numberLoc[numStack.pop()]);
+            firstLoc = fc.LateralOp(tmpLoc + "tmpFirstPercent.txt");
+            fc = new FileCat(firstLoc, numberLoc[10]);
+            firstLoc = fc.LateralOp(tmpLoc + "firstPercent.txt");
         }
+
+        // TODO: Make it work for percentages above 9, and implement for second player
         else {
             while (numStack.size() > 0){
-                grabString = "";
 
             }
+            // firstLoc =
         }
         return null;
 
