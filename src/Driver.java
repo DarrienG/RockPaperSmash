@@ -251,6 +251,16 @@ public class Driver {
                 else if (p2Action == p1Action + 1 || p2Action == p1Action - 2){
                     double initDmg = second.getPercentDmg();
                     knockBack = first.attack(second);
+
+                    if (first.isSpecial()){
+                        animate(first.getFileNames()[3]);
+                        try{
+                            Thread.sleep(2500);
+                        }catch(java.lang.InterruptedException e){
+                            println("Caught " + e + "\nPlease be more careful next time.");
+                        }
+                    }
+
                     println(second.getCharName() + " takes " + (second.getPercentDmg() - initDmg) + "% damage!");
 
                     // Is knockback horizontal?
@@ -276,6 +286,15 @@ public class Driver {
                 }else{
                     double initDmg = first.getPercentDmg();
                     knockBack = second.attack(first);
+
+                    if (second.isSpecial()){
+                        animate(second.getFileNames()[4]);
+                        try{
+                            Thread.sleep(2500);
+                        }catch(java.lang.InterruptedException e){
+                            println("Caught " + e + "\nPlease be more careful next time.");
+                        }
+                    }
                     println(first.getCharName() + " takes " + (first.getPercentDmg() - initDmg) + "% damage!");
                     // Is knockback horizontal?
                     if (second.getStats()[second.getActionFlag()][2] == 0){
@@ -318,14 +337,12 @@ public class Driver {
     // AAAAAAAAAAAAAAAAAAHHUFGHSDPGFUDSILFGBUP:GBPGFUI
     public static Champion clone(Champion ch){
         if (ch.getChampionName().toLowerCase().equals("marth")){
-            Champion tmpChamp = new Marth(ch.getCharName());
-            return tmpChamp;
+            return new Marth(ch.getCharName());
         }
 
         // Default to Marth if there is some impossible logic flaw that allows this to slip through the cracks
         println("Impossible logic flaw. Defaulting to Marth.");
-        Champion tmpChamp = new Marth(ch.getCharName());
-        return tmpChamp;
+        return new Marth(ch.getCharName());
     }
 
     // Takes a file name, and outputs the result to the screen after clearing the screen
@@ -450,6 +467,7 @@ public class Driver {
         return fc.LateralOp(tmpLoc + "finalPercents.txt");
     }
 
+    // Formats spacing for player names so they are aligned correctly
     public static void formatNames(Champion first, Champion second){
         int trueSpacer = first.getSpacer() + 25 - first.getCharName().length();
         print(first.getCharName());

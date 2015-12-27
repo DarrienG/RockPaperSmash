@@ -12,6 +12,7 @@ public class Marth extends Champion {
     // Same as standard attack, but with 30% chance of triggering special
     @Override
     public double attack(Champion rhs){
+        isSpecial = false;
         if (getActionFlag() == 0){
             Random rand = new Random();
             if (rand.nextDouble() <= .3){
@@ -25,6 +26,7 @@ public class Marth extends Champion {
     // 30% chance of occurring, doubles Marth's attack power, and increases KB by 1.25
     @Override
     public double specialAttack(Champion rhs){
+        isSpecial = true;
         rhs.takeDamage(getAtkDmg() * 2);
         return getAtkKB() * 1.25;
     }
