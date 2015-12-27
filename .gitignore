@@ -47,5 +47,3 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
-# Temporary battle assets created by program
-TmpBattleFiles/*

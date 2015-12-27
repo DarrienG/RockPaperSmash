@@ -1,9 +1,9 @@
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Stack;
+import org.apache.commons.io.FileUtils;
 
 public class Driver {
 
@@ -25,6 +25,7 @@ public class Driver {
         // Change to incorporate negative responses, and quit when given negative response
         makeNames();
         while (true){
+            cleanDir();
             clear();
             Champion p1 = clone(getCharacter(p1Name));
             clear();
@@ -32,6 +33,7 @@ public class Driver {
             clear();
             Stage st = getField();
             battle(p1, p2, st);
+            cleanDir();
         }
     }
 
@@ -460,6 +462,11 @@ public class Driver {
             print(" ");
         }
         println(second.getCharName());
+    }
+
+    // Removes temporary battle files
+    public static void cleanDir(){
+        FileUtils.cleanDirectory("TmpBattleFiles");
     }
 
     // Makes printing easier and shorter
