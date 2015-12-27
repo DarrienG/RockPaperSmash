@@ -11,6 +11,7 @@ public abstract class Champion {
         dataCrawler(file);
         percentDmg = 0;
         isKO = false;
+        isSpecial = false;
     }
 
     /******************************
@@ -54,6 +55,8 @@ public abstract class Champion {
 
     // ASCII formatting spacer
     private int spacer;
+
+    protected boolean isSpecial;
 
     /******************************
      * END DATA MEMBERS
@@ -208,4 +211,8 @@ public abstract class Champion {
     }
 
     public abstract String getChampionName();
+
+    public boolean isSpecial() {
+        return isSpecial;
+    }
 }
