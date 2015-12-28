@@ -56,7 +56,10 @@ public abstract class Champion {
     // ASCII formatting spacer
     private int spacer;
 
+    // Determines if an attack was a special attack or not
     protected boolean isSpecial;
+
+    private String attribute;
 
     /******************************
      * END DATA MEMBERS
@@ -132,6 +135,7 @@ public abstract class Champion {
             gravity = Double.parseDouble(br.readLine());
             recovery = Double.parseDouble(br.readLine());
             spacer = Integer.parseInt(br.readLine());
+            attribute = br.readLine();
 
         }catch (java.io.IOException e){
             System.out.println("Invalid or corrupted file data. Failing");
@@ -214,5 +218,9 @@ public abstract class Champion {
 
     public boolean isSpecial() {
         return isSpecial;
+    }
+
+    public String getAttribute() {
+        return attribute;
     }
 }

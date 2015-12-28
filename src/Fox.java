@@ -25,7 +25,7 @@ public class Fox extends Champion {
     @Override
     public double specialAttack(Champion rhs){
         isSpecial = true;
-        rhs.takeDamage(getStats()[getActionFlag()][0]);
+        rhs.takeDamage(getStats()[getActionFlag()][0] * 1.5);
         return getStats()[getActionFlag()][1];
     }
 

@@ -19,6 +19,19 @@ public class Marth extends Champion {
                 return specialAttack(rhs);
             }
         }
+
+        // Chaingrabs against spacies are especially deadly with Marth
+        if (getActionFlag() == 1 && rhs.getAttribute().equals("spacie")){
+            if (rhs.getPercentDmg() < 80){
+                rhs.takeDamage(46);
+                return getGrabKB();
+            }
+            else{
+                rhs.takeDamage(getGrabDmg() * 1.25);
+                return getGrabKB();
+            }
+        }
+
         rhs.takeDamage(stats[getActionFlag()][0]);
         return stats[getActionFlag()][1];
     }

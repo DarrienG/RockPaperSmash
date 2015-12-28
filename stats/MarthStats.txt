@@ -1,10 +1,11 @@
-Assets/InfoPages/Marth/InfoPage.txt, Assets/CharPortraits/Marth/Left.txt, Assets/CharPortraits/Marth/Right.txt, Assets/CharPortraits/Marth/SpecLeft.txt, Assets/CharPortraits/Marth/SpecRight.txt, 1
+Assets/InfoPages/MarthInfoPage.txt, Assets/CharPortraits/Marth/Left.txt, Assets/CharPortraits/Marth/Right.txt, Assets/CharPortraits/Marth/SpecLeft.txt, Assets/CharPortraits/Marth/SpecRight.txt, 1
 15, .80, 0
 25, .35, 1
-5, .20, 0
+10, .18, 0
 .87
 75
 38
+swordsman
 
 ____
 

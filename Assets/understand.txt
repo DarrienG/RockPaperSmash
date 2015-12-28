@@ -1,0 +1,9 @@
+Files:	  Infopage, portrait left, portrait right, special attack left, special attack right, num frames in special attacks
+Attack:	  damage, knockback, angle (0 = horizontal, 1 = vertical)
+Grab: 	  damage, knockback, angle
+Shield:	  damage, knockback, angle
+Gravity:  Determines horizontal and vertical knockback
+Recovery: Maximum horizontal distance that can be recovered from
+Spacer:	  Number of spaces between percents, and names
+Attribute: A tag that inherently defines character based on archetypes
+	-Certain tags generally have advantages over other tags

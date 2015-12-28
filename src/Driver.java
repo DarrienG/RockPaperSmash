@@ -205,9 +205,7 @@ public class Driver {
             print(first.getCharName() + ", what move do you want to make? attack, grab, shield\n> ");
             inputFirst = sc.nextLine();
 
-            for (int i = 0; i < 58; ++i){
-                println();
-            }
+            clear();
 
             print(second.getCharName() + ", what move do you want to make? attack, grab, shield\n> ");
             inputSecond = sc.nextLine();
@@ -338,8 +336,12 @@ public class Driver {
     // SO MUCH DUPLICATE CODE
     // AAAAAAAAAAAAAAAAAAHHUFGHSDPGFUDSILFGBUP:GBPGFUI
     public static Champion clone(Champion ch){
-        if (ch.getChampionName().toLowerCase().equals("marth")){
+        String selected = ch.getChampionName().toLowerCase();
+        if (selected.equals("marth")){
             return new Marth(ch.getCharName());
+        }
+        else if (selected.equals("fox")){
+            return new Fox(ch.getCharName());
         }
 
         // Default to Marth if there is some impossible logic flaw that allows this to slip through the cracks
