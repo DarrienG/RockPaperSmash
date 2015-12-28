@@ -1,4 +1,4 @@
-Assets/InfoPages/MarthInfoPage.txt, Assets/CharPortraits/MarthLeft.txt, Assets/CharPortraits/MarthRight.txt, Assets/CharPortraits/MarthSpecLeft.txt, Assets/CharPortraits/MarthSpecRight.txt, 1
+Assets/InfoPages/Marth/InfoPage.txt, Assets/CharPortraits/Marth/Left.txt, Assets/CharPortraits/Marth/Right.txt, Assets/CharPortraits/Marth/SpecLeft.txt, Assets/CharPortraits/Marth/SpecRight.txt, 1
 15, .80, 0
 25, .35, 1
 5, .20, 0

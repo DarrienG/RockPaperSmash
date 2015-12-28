@@ -1,0 +1,41 @@
+                                           !$!`              
+                          !              `"&j+!            ______ ______   __   
+                         `#3!.          !$"""!!!          |  ____/ __ \ \ / /  
+                          $#$$j!`!!!!"(($$'!*!!!.         | |__ | |  | \ V /  
+                          u$##%%%$$$I!(""%*!!!'''         |  __|| |  | |> <   
+                          "$##$I$3u""*!!(("3"*!!.         | |   | |__| / . \  
+                          !%#$I*!!''!!!!!!("I%".          |_|    \____/_/ \_\ 
+                           !$$J"+!!!!((!'.!"&%3!.          
+                           `$3(!""""*!!u$"$%uI#3(         Ready to once again bring the metagame
+                          !$#####%$J"#$j(("*!"##"         to its knees, The Lylat Commander, Fox   
+                          !$#####%!!.!*""!!!"%%$u'        McCloud is ready for battle,   
+              .           .$#$33"""'`    ``-!"$%+.        attempting to idealize a glass cannon.   
+.!$#"!!!!`   .'.!!!!jj'    ("z%&##$#'``.!+$####$$"- `.-`     
+##########$3j%u$#######%`     '(###$"(t#%##$#####$"!(!.   All of Fox's moves are kill moves.    
+(QMB##BBBBBB############!       '"##$"3"!""$$#####$!!!    Dealing absurd amounts of damage, or   
+'#######Q##########B#####*"3j"!!(("3"+!!!!!!!.!####*!!!.  knockback, facing Fox requires you to   
+ "$#Q####Q#########B####+!"3$#$!`'!.` ``'.     !#""$`     always be on your toes.   
+ $#################(jBQ#*"z("I$".!!!!!!`       `"###.        
+ +#BBB#############$$$j"+3I"%$#+!**"t"(!!'.`` ``!###!     In addition, on every one of Fox's   
+ !#################$""u3$#J$%%z%$$#$%t"(!!''``..!#($!     moves, there is a 15% chance of   
+ `#########$u"!!'"$%I"!!!"$$$$$$$##$3"*!!!!!''.!!! '!     triggering 20XX, multiplying all    
+  `.`````         !"33""""$######$$$j""*!!(!!!!!!#        damage dealt by 1.5   
+                    .#BBB$   .-. +########$$$%3$##+!         
+                     !3%3'      !###########B#######(     Life isn't all peaches being a Fox    
+                               "###############$$$$##!    though. The high gravity causes fast   
+                              "#######$############$##'   horizontal kills. In addition, many   
+                             !########$$##########$$##%   characters can deal extra damage to    
+                            !##########$##j############!  Fox due to his prevalence in the
+                           '$B#######$$##' *###########.  metagame.   
+                         !3"3#B########$'   !#B###BBB#.      
+                        !#$33"$#B#####"      !%%%3%%3!        Raw stats:   
+                       (###$%%3u%t!(!-       !%33$%3%'         
+                   '!!$$3Iz%%"!-              (###3%j           Move    Dmg   Kb     Angle    
+                   !%%$"u%I!                   %#&"%*         -------- ----- ---- ------------ 
+                   *$"!'"+`                    '#3"%3!         Attack    25   60   Vertical 
+                  !$u"!!"!                    `"I$I!!+"!`      Grab      30   50   Vertical  
+                 !&"(!!!!!                     !!$3+!!(!!!.    Shield    18   90   Horizontal     
+                !u+!!!!!!!                       '$%"!!!!!!!!  
+                (j*!!!!!!!                        '%"!!!!!'!"
+                !$"(!.!!"'                         .u"(!!'.!!
+                 ..!!!!'                            .*3"""(' 

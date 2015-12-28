@@ -1,0 +1,22 @@
+Assets/InfoPages/Fox/InfoPage.txt, Assets/CharPortraits/Fox/Left.txt, Assets/CharPortraits/Fox/Right.txt, Assets/CharPortraits/Fox/SpecLeft.txt, Assets/CharPortraits/Fox/SpecRight.txt, 1
+25, .60, 1
+30, .50, 1
+18, .90, 0
+1.2
+90
+40
+
+____
+
+Fox, the Lylat Commander is at it again. Ready to dominate the metagame with his trademarked glass cannon playstyle.
+
+Fox is an astonishingly powerful character. All of his moves deal a very high amount of damage, with his OOS moves
+doing the least at 18 damage. Out of shield shine combos, however, have ridiculous knockback, and with its 90
+knockback, Fox has few offensive flaws.
+
+In addition to this, during any of his moves, there is a 15% chance of 20XX occurring, thus increasing the damage
+output of that particular move 1.5 times, making Fox a true force to be reckoned with on the battlefield.
+
+Despite having absolutely incredible power, and a solid recovery, Fox's very high gravity will cause him to die
+quickly when knocked horizontally. While this does have the added benefit of protecting him from vertical kills,
+anything horizontal at percentages much lower than the majority of the cast.

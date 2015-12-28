@@ -1,9 +1,9 @@
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Stack;
-import org.apache.commons.io.FileUtils;
 
 public class Driver {
 
@@ -16,7 +16,7 @@ public class Driver {
     "Assets/Numbers/Three.txt", "Assets/Numbers/Four.txt", "Assets/Numbers/Five.txt", "Assets/Numbers/Six.txt",
     "Assets/Numbers/Seven.txt", "Assets/Numbers/Eight.txt", "Assets/Numbers/Nine.txt", "Assets/Numbers/Mod.txt"};
 
-    public static final Champion[] charList = {new Marth("NULL")};
+    public static final Champion[] charList = {new Marth("NULL"), new Fox("NULL")};
     public static final Stage[] stageList = {new Battlefield()};
 
     static String p1Name, p2Name;
@@ -374,8 +374,10 @@ public class Driver {
         }
     }
 
+    // Clears what is currently on the screen
+    // Should cover everything up to 4K without printing too much
     public static void clear(){
-        for (int i = 0; i < 58; ++i){
+        for (int i = 0; i < 175; ++i){
             println();
         }
     }
@@ -482,9 +484,12 @@ public class Driver {
         println(second.getCharName());
     }
 
-    // Removes temporary battle files
+    // Removes temporary battle files from tmpBattleFiles folder
     public static void cleanDir(){
-        FileUtils.cleanDirectory("TmpBattleFiles");
+        File dir = new File("TmpBattleFiles");
+        for (File file: dir.listFiles()){
+            file.delete();
+        }
     }
 
     // Makes printing easier and shorter
