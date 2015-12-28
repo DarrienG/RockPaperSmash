@@ -1,13 +1,15 @@
 Assets/InfoPages/MarthInfoPage.txt, Assets/CharPortraits/Marth/Left.txt, Assets/CharPortraits/Marth/Right.txt, Assets/CharPortraits/Marth/SpecLeft.txt, Assets/CharPortraits/Marth/SpecRight.txt, 1
-15, .80, 0
+15, .85, 0
 25, .35, 1
-10, .18, 0
+10, .70, 0
 .87
-75
+72
 38
 swordsman
 
 ____
+
+// REVISE IN ACCORDANCE WITH PATCHES
 
 The hero king makes a return! Known for his spacing, Marth is based off of grabs, and tippers in Rock Paper Smash.
 

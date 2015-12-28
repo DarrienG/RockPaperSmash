@@ -1,2 +1,3 @@
+Assets/StageInfoPages/Battlefield.txt
 100
 55

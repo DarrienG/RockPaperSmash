@@ -142,7 +142,7 @@ public class Driver {
 
             // Only go here if the player chose a valid Stage
             if (goodPick) {
-
+                animate(stageList[count].getFileLoc());
                 print("Is \"" + input + "\" good?\n> ");
                 response = sc.nextLine();
                 response = response.toLowerCase().trim();

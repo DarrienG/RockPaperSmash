@@ -6,6 +6,7 @@ import java.io.FileReader;
  */
 public abstract class Stage {
 
+    private String fileLoc;
     /*
         +---------------+-------------+
         | HoriztonalLen | VerticalLen |
@@ -16,7 +17,9 @@ public abstract class Stage {
     public Stage(String statsFile){
         stageStats = new double[2];
         try{
+
             BufferedReader br = new BufferedReader(new FileReader(statsFile));
+            fileLoc = br.readLine();
             stageStats[0] = Double.parseDouble(br.readLine());
             stageStats[1] = Double.parseDouble(br.readLine());
 
@@ -36,4 +39,8 @@ public abstract class Stage {
     }
 
     public abstract String getStageName();
+
+    public String getFileLoc() {
+        return fileLoc;
+    }
 }
