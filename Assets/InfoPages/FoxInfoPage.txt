@@ -19,7 +19,7 @@
  +#BBB#############$$$j"+3I"%$#+!**"t"(!!'.`` ``!###!     In addition, on every one of Fox's   
  !#################$""u3$#J$%%z%$$#$%t"(!!''``..!#($!     moves, there is a 15% chance of   
  `#########$u"!!'"$%I"!!!"$$$$$$$##$3"*!!!!!''.!!! '!     triggering 20XX, multiplying all    
-  `.`````         !"33""""$######$$$j""*!!(!!!!!!#        damage dealt by 1.5   
+  `.`````         !"33""""$######$$$j""*!!(!!!!!!#        damage dealt by 1.5.
                     .#BBB$   .-. +########$$$%3$##+!         
                      !3%3'      !###########B#######(     Life isn't all peaches being a Fox    
                                "###############$$$$##!    though. The high gravity causes fast   

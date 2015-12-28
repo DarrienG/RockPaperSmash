@@ -15,6 +15,8 @@ public class Driver {
     public static final String[] numberLoc = {"Assets/Numbers/Zero.txt", "Assets/Numbers/One.txt", "Assets/Numbers/Two.txt",
     "Assets/Numbers/Three.txt", "Assets/Numbers/Four.txt", "Assets/Numbers/Five.txt", "Assets/Numbers/Six.txt",
     "Assets/Numbers/Seven.txt", "Assets/Numbers/Eight.txt", "Assets/Numbers/Nine.txt", "Assets/Numbers/Mod.txt"};
+    public static final String[] actionFiles = {"Assets/Actions/Attack.txt", "Assets/Actions/Grab.txt", "Assets/Actions/Shield.txt",
+    "Assets/Actions/Mid.txt"};
 
     public static final Champion[] charList = {new Marth("NULL"), new Fox("NULL")};
     public static final Stage[] stageList = {new Battlefield()};
@@ -72,12 +74,12 @@ public class Driver {
             }
             println();
             print(player + " please choose your character: ");
-            input = sc.nextLine();
+            input = sc.nextLine().toLowerCase().trim();
 
             int count = 0;
             // Test validity of player choice for a character
             for (Champion ch : charList) {
-                if ((ch.getChampionName().toLowerCase().trim()).equals(input.toLowerCase().trim())) {
+                if ((ch.getChampionName().toLowerCase().trim()).equals(input)) {
                     goodPick = true;
                     break;
                 }
@@ -124,12 +126,12 @@ public class Driver {
             }
             println();
             print("What stage would you like to pick?\n> ");
-            input = sc.nextLine();
+            input = sc.nextLine().toLowerCase().trim();
 
             int count = 0;
             // Test validity of player choice for a character
             for (Stage st : stageList) {
-                if ((st.getStageName().toLowerCase().trim()).equals(input.toLowerCase().trim())) {
+                if ((st.getStageName().toLowerCase()).equals(input)) {
                     goodPick = true;
                     break;
                 }
@@ -148,8 +150,7 @@ public class Driver {
                 response = response.toLowerCase().trim();
                 for (String comparator : posResponses) {
                     if (response.equals(comparator)) {
-                        Stage st = stageList[count];
-                        return st;
+                        return stageList[count];
                     }
                 }
                 goodPick = false;
@@ -158,8 +159,7 @@ public class Driver {
         // Should never reach here
         // Stage becomes Battlefield if some impossible flaw in logic causes this to happen
         println("Fatal choosing error. Defaulting to Battlefield.");
-        Stage st = new Battlefield();
-        return st;
+        return new Battlefield();
     }
 
     // Decides who goes first, then calls the function that begins the battle with players in the corresponding order
@@ -203,36 +203,36 @@ public class Driver {
             animateNoJump(percentageMaker(first, second));
 
             print(first.getCharName() + ", what move do you want to make? attack, grab, shield\n> ");
-            inputFirst = sc.nextLine();
+            inputFirst = sc.nextLine().toLowerCase().trim();
 
             clear();
 
             print(second.getCharName() + ", what move do you want to make? attack, grab, shield\n> ");
-            inputSecond = sc.nextLine();
+            inputSecond = sc.nextLine().toLowerCase().trim();
             // Do the array thing with choices tomorrow
 
             first.setActionFlag(-1); second.setActionFlag(-1);
             for (String a : attackOps){
-                if (inputFirst.toLowerCase().trim().equals(a)){
+                if (inputFirst.equals(a)){
                     first.setActionFlag(0);
                 }
-                if (inputSecond.toLowerCase().trim().equals(a)){
+                if (inputSecond.equals(a)){
                     second.setActionFlag(0);
                 }
             }
             for (String g: grabOps){
-                if (inputFirst.toLowerCase().trim().equals(g)){
+                if (inputFirst.equals(g)){
                     first.setActionFlag(1);
                 }
-                if (inputSecond.toLowerCase().trim().equals(g)){
+                if (inputSecond.equals(g)){
                     second.setActionFlag(1);
                 }
             }
             for (String s: shieldOps){
-                if (inputFirst.toLowerCase().trim().equals(s)){
+                if (inputFirst.equals(s)){
                     first.setActionFlag(2);
                 }
-                if (inputSecond.toLowerCase().trim().equals(s)){
+                if (inputSecond.equals(s)){
                     second.setActionFlag(2);
                 }
             }
@@ -242,10 +242,10 @@ public class Driver {
                 // As a reminder, 0 = attack (rock), 1 = grab (scissors), 2 = shield (paper)
 
                 int p1Action = first.getActionFlag(), p2Action = second.getActionFlag();
+
+
                 if (p1Action == 0 && p2Action == 0 || p1Action == 1 && p2Action == 1 || p1Action == 2 && p2Action == 2){
                     println("Same option chosen by " + first.getCharName() + " and " + second.getCharName() + "!\nNo damage taken.");
-                    print("<ENTER> to continue ");
-                    sc.nextLine();
                 }
 
                 else if (p2Action == p1Action + 1 || p2Action == p1Action - 2){
@@ -255,13 +255,16 @@ public class Driver {
                     if (first.isSpecial()){
                         animate(first.getFileNames()[3]);
                         try{
-                            Thread.sleep(2500);
+                            Thread.sleep(1500);
                         }catch(java.lang.InterruptedException e){
                             println("Caught " + e + "\nPlease be more careful next time.");
                         }
                     }
 
-                    println(second.getCharName() + " takes " + (second.getPercentDmg() - initDmg) + "% damage!");
+                    actionDisplay(first, second);
+
+                    println(second.getCharName() + " takes: ");
+                    singlePercDisplay(second.getPercentDmg() - initDmg);
 
                     // Is knockback horizontal?
                     if (first.getStats()[first.getActionFlag()][2] == 0){
@@ -290,12 +293,17 @@ public class Driver {
                     if (second.isSpecial()){
                         animate(second.getFileNames()[4]);
                         try{
-                            Thread.sleep(2500);
+                            Thread.sleep(1500);
                         }catch(java.lang.InterruptedException e){
                             println("Caught " + e + "\nPlease be more careful next time.");
                         }
                     }
-                    println(first.getCharName() + " takes " + (first.getPercentDmg() - initDmg) + "% damage!");
+
+                    actionDisplay(first, second);
+
+                    println(first.getCharName() + " takes :");
+                    singlePercDisplay(first.getPercentDmg() - initDmg);
+
                     // Is knockback horizontal?
                     if (second.getStats()[second.getActionFlag()][2] == 0){
                         knockBack = (first.getPercentDmg() * knockBack) * first.getGravity();
@@ -328,6 +336,68 @@ public class Driver {
             // TODO: End battle, possible increment counter, champs may require extra data member to determine player number
 
         }
+    }
+
+    // Creates text output of two actions chosen by players and prints to the screen
+    public static void actionDisplay(Champion first, Champion second){
+        int action1 = first.getActionFlag(), action2 = second.getActionFlag();
+        FileCat fc = new FileCat(actionFiles[action1], actionFiles[3]);
+        String outFile = fc.LateralOp("TmpBattleFiles/tmpPerc.txt");
+
+        fc = new FileCat(outFile, actionFiles[action2]);
+        outFile = fc.LateralOp("TmpBattleFiles/PercFin.txt");
+        animateNoJump(outFile);
+    }
+
+    // Creates text output of damage in percentage form
+    public static void singlePercDisplay(double inputDmg){
+        Stack<Integer> numStack = new Stack<>();
+        String tmpLoc = "TmpBattleFiles/";
+        String fileOut;
+        int dmg = (int)inputDmg;
+
+        FileCat fc;
+
+        if (dmg > 0){
+            while (dmg > 0){
+                numStack.push(dmg % 10);
+                dmg /= 10;
+            }
+
+            // Leading zero on percentages less than 10
+            if (numStack.size() == 1){
+                fc = new FileCat(numberLoc[0], numberLoc[numStack.pop()]);
+                fileOut = fc.LateralOp(tmpLoc + "TmpDmg.txt");
+                fc = new FileCat(fileOut, numberLoc[10]);
+                fileOut = fc.LateralOp(tmpLoc + "UnspacedDmg.txt");
+            }
+
+            // Percentage greater than/equal to 9
+            else {
+                fc = new FileCat(numberLoc[numStack.pop()], numberLoc[numStack.pop()]);
+                fileOut = fc.LateralOp(tmpLoc + "TmpDmg.txt");
+                // Percentage greater than 100
+                if (numStack.size() > 0){
+                    fc = new FileCat(fileOut, numberLoc[numStack.pop()]);
+                    fileOut = fc.LateralOp(tmpLoc + "TmpDmg2.txt");
+                }
+                fc = new FileCat(fileOut, numberLoc[10]);
+                fileOut = fc.LateralOp(tmpLoc + "FinDmg.txt");
+            }
+        }
+        else{
+            fc = new FileCat(numberLoc[0], numberLoc[0]);
+            fileOut = fc.LateralOp(tmpLoc + "TmpDmg.txt");
+            fc = new FileCat(fileOut, numberLoc[10]);
+            fileOut = fc.LateralOp(tmpLoc + "FinDmg.txt");
+        }
+
+        /*fc = new FileCat(fileOut, numberLoc[9]);
+        fileOut = fc.LateralOp(tmpLoc + "modPlus.txt");*/
+        fc = new FileCat(fileOut, " ", 8);
+        fileOut = fc.LateralOp(tmpLoc + "dmgPlus.txt");
+        fc = new FileCat(fileOut, "Assets/Extras/Damage.txt");
+        animateNoJump(fc.LateralOp(tmpLoc + "outDmg.txt"));
     }
 
     // Copies values from one champion into a temporary Champion to later be returned
@@ -379,7 +449,7 @@ public class Driver {
     // Clears what is currently on the screen
     // Should cover everything up to 4K without printing too much
     public static void clear(){
-        for (int i = 0; i < 175; ++i){
+        for (int i = 0; i < 125; ++i){
             println();
         }
     }
@@ -495,9 +565,7 @@ public class Driver {
     }
 
     // Makes printing easier and shorter
-    public static void println(Object object){
-        System.out.println(object);
-    }
+    public static void println(Object object){ System.out.println(object); }
 
     public static void println() { System.out.println(); }
     public static void print(Object object) { System.out.print(object); }
