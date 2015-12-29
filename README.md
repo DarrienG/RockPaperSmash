@@ -1,12 +1,4 @@
-```
-  _____ _   _ _______ _____   ____  _____  _    _  _____ _______ _____ ____  _   _ 
- |_   _| \ | |__   __|  __ \ / __ \|  __ \| |  | |/ ____|__   __|_   _/ __ \| \ | |
-   | | |  \| |  | |  | |__) | |  | | |  | | |  | | |       | |    | || |  | |  \| |
-   | | | . ` |  | |  |  _  /| |  | | |  | | |  | | |       | |    | || |  | | . ` |
-  _| |_| |\  |  | |  | | \ \| |__| | |__| | |__| | |____   | |   _| || |__| | |\  |
- |_____|_| \_|  |_|  |_|  \_\\____/|_____/ \____/ \_____|  |_|  |_____\____/|_| \_|
-                                                                                   
-```                                                                               
+#Introduction
 
 Rock Paper Smash is a fighting game that pushes the rock, paper, scissors meta of the Super Smash Brother series to forefront.
 
@@ -16,16 +8,7 @@ Also similar in that if you win a round in the combat triangle in Smash Bros. yo
 
 In Rock Paper Smash, both of these are idealized in what would normally be the standard rock, paper, scissors metagame. Each character has different reasons to want to choose each move, and different advantages and disadvantages to each move. And when beating a foe in a single round, percentage is tacked on, but the other player does not immediately win. Your opponent could have a higher damage percent than you, and still win depending on that character's strengths and weaknesses.
 
-__
-```
-   _____ ______ _______ _    _ _____  
-  / ____|  ____|__   __| |  | |  __ \ 
- | (___ | |__     | |  | |  | | |__) |
-  \___ \|  __|    | |  | |  | |  ___/ 
-  ____) | |____   | |  | |__| | |     
- |_____/|______|  |_|   \____/|_|     
-                                      
-```                                      
+#Setup                                  
 
 To play, you need to have Java installed. Your command prompt or terminal will also need to be maximized in order to fully view the text art. Being able to fully view the art is not required to play, but makes the experience much better.
 
@@ -51,7 +34,9 @@ And you can begin the game. Please note that all of the included directories mus
 
 If you would like to move the jar file, or keep it in a directory on its own, you'll need to make a shortcut to it, and then place that elsewhere. 
 
-#Graphics not displayed properly?
+#Troubleshooting
+
+##Graphics not displayed properly?
 
 Your screen's density likely isn't high enough to display all assets normally. Unfortunately because of the nature of how blocky text is when making pictures using it, the pictures had to be a bit bigger than I initially wanted. In some cases, screens with a resolution below 1080p will erroneously display pictures.
 
@@ -72,7 +57,7 @@ For Linux and OS X -
     
 In future releases, there will be a script that does this automatically, so no configuration will need to be done by the user. 
     
-#On Windows?
+##On Windows?
 
 The default command prompt font makes the game look as if it were crushed a little bit. I guess Ganon just couldn't resist another victim.
 
