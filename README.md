@@ -29,7 +29,7 @@ __
 
 To play, you need to have Java installed. Your command prompt or terminal will also need to be maximized in order to fully view the text art. Being able to fully view the art is not required to play, but makes the experience much better.
 
-Click on releases in the top bar, and download the zip. 
+Click on *Releases* in the top bar, and download the zip. 
 
 Extract all of the files from the archive.
 
