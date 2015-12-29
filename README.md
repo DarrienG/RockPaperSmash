@@ -50,3 +50,36 @@ Finally, type this command:
 And you can begin the game. Please note that all of the included directories must be in the same place as the .jar file for the game to run. 
 
 If you would like to move the jar file, or keep it in a directory on its own, you'll need to make a shortcut to it, and then place that elsewhere. 
+
+#Graphics not displayed properly?
+
+Your screen's density likely isn't high enough to display all assets normally. Unfortunately because of the nature of how blocky text is when making pictures using it, the pictures had to be a bit bigger than I initially wanted. In some cases, screens with a resolution below 1080p will erroneously display pictures.
+
+To fix:
+
+For Windows -
+
+    1. Right click on the top bar
+    2. Click on properties
+    3. Click on Font
+    4. Choose a smaller size for your current font
+    5. Hit OK
+    
+For Linux and OS X -
+
+    1. Right click on your terminal
+    2. Click "zoom out" until the graphics are displayed correctly 
+    
+In future releases, there will be a script that does this automatically, so no configuration will need to be done by the user. 
+    
+#On Windows?
+
+The default command prompt font makes the game look as if it were crushed a little bit. I guess Ganon just couldn't resist another victim.
+
+If you want the game to look more normal, change your command prompt font to Consolas for best results. 
+
+    1. Right click on the top bar
+    2. Click on properties
+    3. Click on Font
+    4. Choose Consolas
+    5. Hit OK
