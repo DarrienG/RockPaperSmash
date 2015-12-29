@@ -16,7 +16,7 @@ Click on *Releases* in the top bar, and download the zip.
 
 Extract all of the files from the archive.
 
-If you're on Windows, open up the Command Prompt (search for cmd, press <ENTER>). If you're on OS X, or Linux, open up the terminal.
+If you're on Windows, open up the Command Prompt (search for cmd, press ENTER). If you're on OS X, or Linux, open up the terminal.
 
 Navigate to the directory you unzipped in your command prompt.
 
