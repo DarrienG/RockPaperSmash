@@ -6,7 +6,7 @@ In standard Super Smash Bros. during a match, the player has three options, to a
 
 Also similar is that if you win a round in the combat triangle in Smash Bros. you don't immediately defeat your foe. The opponent gets percentage tacked on, and the higher their percentage goes, the greater the likelihood they will be knocked out. 
 
-In Rock Paper Smash, both of these are idealized in what would normally be the standard rock, paper, scissors metagame. Each character has different reasons to want to choose each move, and there are different advantages and disadvantages to each move. And when beating a foe in a single round, percentage is tacked on, but the other player does not immediately win. Your opponent could have a higher damage percent than you, and still win depending on that character's strengths and weaknesses.
+In Rock Paper Smash, both of these are idealized in what would normally be the standard rock, paper, scissors metagame. Each character has different reasons to want to choose each move, and there are different advantages and disadvantages to each move. When beating a foe in a single round, percentage is tacked on, but the other player does not immediately win. Your opponent could have a higher damage percent than you, and still win depending on that character's strengths and weaknesses.
 
 #Setup                                  
 
