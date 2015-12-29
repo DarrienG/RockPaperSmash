@@ -20,10 +20,13 @@ If you're on Windows, open up the Command Prompt (search for cmd, press ENTER). 
 
 Navigate to the directory you unzipped in your command prompt.
 
-If you're on Windows 8.1 or older, type in 
+
+*If you're on Windows 8.1 or older, type in*
 
     wmic
-    
+
+Everyone continues from here: 
+
 Then press the maximize button on your terminal.
 
 Finally, type this command:
