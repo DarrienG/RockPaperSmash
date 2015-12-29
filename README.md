@@ -68,3 +68,7 @@ If you want the game to look more normal, change your command prompt font to Con
     3. Click on Font
     4. Choose Consolas
     5. Hit OK
+    
+If you happen to be the adventurous kind of fellow, or you know how to install fonts, Ubuntu Mono makes the game look great. Consider downloading it, and using that for the best experience.
+
+http://font.ubuntu.com/
