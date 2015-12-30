@@ -194,6 +194,7 @@ public class Driver {
         }
     }
 
+    // Begins the battle, generally called after calling battle()
     public static void battleBegin(Champion first, Champion second, Stage arena){
         Scanner sc = new Scanner(System.in);
         String inputFirst, inputSecond;
@@ -438,6 +439,7 @@ public class Driver {
         }
     }
 
+    // Takes a file name, and outputs the result to the screen (does not clear first)
     public static void animateNoJump(String fileName){
         String line;
         try{
@@ -568,6 +570,7 @@ public class Driver {
         }
     }
 
+    // Displays the title text
     public static void displayTitle(){
         Scanner sc = new Scanner(System.in);
         clear();
@@ -584,6 +587,7 @@ public class Driver {
         sc.nextLine();
     }
 
+    // Displays the main menu
     public static void menu(){
         Scanner sc = new Scanner(System.in);
         String input;
@@ -618,7 +622,8 @@ public class Driver {
                 println("I didn't recognize that input. Please enter input again.\n");
             }
 
-            if (choice == 2){
+            // Does not seem to work right now, will work on fixing later.
+            /*if (choice == 2){
                 print("Salty runback?\n> ");
                 input = sc.nextLine().toLowerCase().trim();
                 for (String s: posResponses){
@@ -626,10 +631,11 @@ public class Driver {
                         battle(p1, p2, st);
                     }
                 }
-            }
+            }*/
         }
     }
 
+    // Displays the options menu
     public static void options(){
         Scanner sc = new Scanner(System.in);
         animate("Assets/DisplayScreens/Options/Options.txt");
@@ -639,6 +645,7 @@ public class Driver {
         sc.nextLine();
     }
 
+    // Begins a player vs. player battle
     public static void pvp(){
         makeNames();
         p1 = clone(getCharacter(p1Name));

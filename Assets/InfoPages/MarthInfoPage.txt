@@ -8,7 +8,7 @@
                            %$!!!!!(            The Hero King, Marth makes a return! 
                    !! ``  33u""I*              Similar to his Smash Bros. counterpart,            
                Ju"##########$$%%(!-            in Rock Paper Smash, Marth is based off           
-               !##$###B###B#$$######%$!        of grabs, and tippers    
+               !##$###B###B#$$######%$!        of grabs, and tippers.
                 !#Q#j$$##QBB###########$".                
                  u#"+u$#3###############3.     Marth's grab deals loads of damage, and
                  u!!!("3#$I$##########$t!!     is able to rack up 25% in a single hit.
@@ -29,7 +29,7 @@
              $#%t3#B##%"!!j#$#######BBB$#!                
             !######BBBB#%"!!"#BB####B#B("+`       Move    Dmg   Kb     Angle                
             $####Q###BB$##%"!'+$#$$#Q##!!%!     -------- ----- ---- ------------             
-           !#####B##QB#$J"""""!.!I"$Q##!`$(      Attack    30   85   Horizontal
+           !#####B##QB#$J"""""!.!I"$Q##!`$(      Attack    15   85   Horizontal
            $#####Q##QB###$33$#%+!`(####! ("!     Grab      25   35   Vertical           
           (######B###BB#########%"!.+##! ."!     Shield    10   55   Horizontal
          `#######B###BB###########$*!`!`  ``              
