@@ -28,6 +28,7 @@ public class Driver {
     static Champion p1, p2;
     static Stage st;
 
+    // TODO: Add in standing and special animation assets for Falco
     public static void main(String args[]){
 
         try{

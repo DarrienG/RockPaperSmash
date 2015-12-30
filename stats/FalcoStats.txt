@@ -1,0 +1,21 @@
+Assets/InfoPages/FoxInfoPage.txt, Assets/CharPortraits/Fox/Left.txt, Assets/CharPortraits/Fox/Right.txt, Assets/CharPortraits/Fox/SpecLeft.txt, Assets/CharPortraits/Fox/SpecRight.txt, 1
+30, .65, 0
+27, .40, 0
+25, .90, 0
+1.4
+70
+80
+spacie
+
+____
+
+Falco, the ace pilot is back again, taking the glass cannon archetype, and pushing it to the limits. Dying at
+both incredibly low percentages and able to rack up percentages on foes extremely fast, Falco has a very high
+risk, high reward play style. Even a single mistake as or against a Falco at a low percent means death.
+
+Falco has the highest overall damage output of any character. Even off of basic attacks, it is a guarantee that
+if the foe is hit, they'll take at least 25 damage. The incredibly high damage output also carries over to
+knockback, in that his moves are very hard hitting, giving the opponent no chance to breathe when hit.
+
+Falco can do even more damage if gets his pillar combos. He can rack up, up to 70% damage in a single hit
+depending on the opponent's gravity. All in all, Falco is a force to be reckoned with.

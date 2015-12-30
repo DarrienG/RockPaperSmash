@@ -1,0 +1,42 @@
+               '                             ______      _      _____ ____      
+               3j!!.                        |  ____/\   | |    / ____/ __ \    
+               "$%33J""!!-                  | |__ /  \  | |   | |   | |  | |    
+               "#$%%%%33I"(!                |  __/ /\ \ | |   | |   | |  | |     
+             ."$$$$%3$$%%%J"!               | | / ____ \| |___| |___| |__| |     
+             ($#######%#&*"%3`              |_|/_/    \_\______\_____\____/    
+             "#######$%$$%I$$`                 
+             !%$$$$$$""""I3t!-`             Hands off his prey, the Ace Pilot Falco Lombardi is  
+             !$$33%$!!(((!'!!!!!'           ready for action. Coming from the same team as Fox   
+               *$#####$$$%jI""!!!           Falco's play style is similar to Fox's. However, if    
+               '"""$$##$%####$3"!           Fox is a glass cannon, Falco is a glass nuclear   
+                ``..!!I3j$#%&%#J!           warhead.   
+              !````..!*"z$$#%3&$$!             
+              (!`..`..!"u%Jjj3##$!!`        Falco's damage output is the highest of any   
+              ("!!'..!!!(""Iuju##(""""!     character. He's able to phenomenal amounts of damage   
+               (%""!!`'!!!((!!'.'!'!(t"!    even off of just his basic attacks.    
+                "$$$I"!`        '''`.!"I!      
+                !+I$#$I!.`     `..'...-""!  His special attack, pillaring is able to further   
+                '!!"%$$%"!!!!''..````. !!`  increase damage output depending on the foe's    
+                 ..(BBBBQ##$%"(!!!!!!!!`    gravity, and can deal up to 70 damage off of a   
+                 ##z############$(!!(!!     single hit.   
+                *###$#####$$$#####z            
+          .!!"3$$$$$#######$#######         Playing as an against Falco means never making a   
+     .!("%%$$$####I###############3         mistake. Falco's gravity is higher than Fox's, and    
+ `!(+"z"t""$$$$#%#########$$#####!          his recovery is shorter, making him die horizontally   
+    `.     .' ..!################           at miniscule percentages.    
+                &###############               
+                '"#B###########$            Raw Stats:    
+                  '#####$$####$!               
+                 !%##########'                Move    Dmg   Kb     Angle       
+                $#$$$$$####%'               -------- ----- ---- ------------    
+               '##$I"""%##!                  Attack    30   65   Horizontal   
+              `%#$%"+I##B'                   Grab      27   40   Horizontal   
+               $#$3("#WB(                    Shield    25   90   Horizontal   
+              !B#3""#####!.`                   
+             !##3""3$#BB@BBBB##$"`             
+            .$#########BMMMM@WBBB!             
+            .#B######B$!"$####$$".             
+            !####$%3$%!                        
+            !B#####$%$#+                       
+            !####$"Ij"u%                       
+             .!"t3zjI""!                       
