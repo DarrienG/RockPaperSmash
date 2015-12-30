@@ -31,7 +31,7 @@ Then press the maximize button on your terminal.
 
 Finally, type this command:
 
-    java -jar RPS_V1.jar
+    java -jar RPS.jar
     
 And you can begin the game. Please note that all of the included directories must be in the same place as the .jar file for the game to run. 
 
