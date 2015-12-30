@@ -7,43 +7,45 @@ import java.util.Stack;
 
 public class Driver {
 
-    public static final String[] posResponses = {"y", "yes", "1", "yup", "good", "check", "yeah", "y e s", "praise duarte", "hell yeah", "hell yes"};
+    public static final String[] posResponses = {"y", "yes", "1", "yup", "good", "check", "yeah", "y e s", "yee", "praise duarte", "hell yeah", "hell yes"};
     public static final String[] negResponses = {"n", "no", "0", "nada", "bad", "x", "never", "n o", "praise ive", "hell no"};
     public static final String[] attackOps = {"attack", "a", "1"};
     public static final String[] grabOps = {"grab", "g", "2"};
     public static final String[] shieldOps = {"shield", "s", "3"};
     public static final String[] numberLoc = {"Assets/Numbers/Zero.txt", "Assets/Numbers/One.txt", "Assets/Numbers/Two.txt",
-    "Assets/Numbers/Three.txt", "Assets/Numbers/Four.txt", "Assets/Numbers/Five.txt", "Assets/Numbers/Six.txt",
-    "Assets/Numbers/Seven.txt", "Assets/Numbers/Eight.txt", "Assets/Numbers/Nine.txt", "Assets/Numbers/Mod.txt"};
+            "Assets/Numbers/Three.txt", "Assets/Numbers/Four.txt", "Assets/Numbers/Five.txt", "Assets/Numbers/Six.txt",
+            "Assets/Numbers/Seven.txt", "Assets/Numbers/Eight.txt", "Assets/Numbers/Nine.txt", "Assets/Numbers/Mod.txt"};
     public static final String[] actionFiles = {"Assets/Actions/Attack.txt", "Assets/Actions/Grab.txt", "Assets/Actions/Shield.txt",
-    "Assets/Actions/Mid.txt"};
+            "Assets/Actions/Mid.txt"};
+
+    public static final String[] titleLoc = {"Assets/DisplayScreens/Title/Title1.txt", "Assets/DisplayScreens/Title/Title2.txt",
+            "Assets/DisplayScreens/Title/Title3.txt"};
 
     public static final Champion[] charList = {new Marth("NULL"), new Fox("NULL")};
     public static final Stage[] stageList = {new Battlefield()};
 
     static String p1Name, p2Name;
+    static Champion p1, p2;
+    static Stage st;
 
     public static void main(String args[]){
-        // Change to incorporate negative responses, and quit when given negative response
-        makeNames();
-        while (true){
-            cleanDir();
-            clear();
-            Champion p1 = clone(getCharacter(p1Name));
-            clear();
-            Champion p2 = clone(getCharacter(p2Name));
-            clear();
-            Stage st = getField();
-            battle(p1, p2, st);
+
+        try{
+            menu();
+        }catch (Exception e){
+            println("Program prematurely killed. Cleaning up before exiting.");
             cleanDir();
         }
     }
 
+    // Gets the tags of two players by calling getName twice
     public static void makeNames(){
+        animate("Assets/DisplayScreens/TagSelect/TagS.txt");
         p1Name = getName("Player 1");
         p2Name = getName("Player 2");
     }
 
+    // Gets a player's tag
     public static String getName(String player){
         String input, response;
         Scanner sc = new Scanner(System.in);
@@ -62,11 +64,13 @@ public class Driver {
         }
     }
 
+    // Has one player select the character they would like to play
     public static Champion getCharacter(String player){
         String input, response;
         boolean goodPick = false;
         Scanner sc = new Scanner(System.in);
-        println();
+        animate("Assets/DisplayScreens/CharSelect/Select.txt");
+
         while (!goodPick) {
             print("Character list: ");
             for (Champion ch : charList) {
@@ -564,9 +568,90 @@ public class Driver {
         }
     }
 
+    public static void displayTitle(){
+        Scanner sc = new Scanner(System.in);
+        clear();
+        for (String titleScreen: titleLoc){
+            animateNoJump(titleScreen);
+            try{
+                Thread.sleep(500);
+            }catch(java.lang.InterruptedException e){
+                println("Program killed prematurely.");
+            }
+        }
+
+        println("Press Start to begin ");
+        sc.nextLine();
+    }
+
+    public static void menu(){
+        Scanner sc = new Scanner(System.in);
+        String input;
+        displayTitle();
+        int choice = -1;
+
+        while(true){
+            clear();
+            println("~~~~~~~~~~~~~~~~~~");
+            println("Main menu");
+            println("1. Options");
+            println("2. Player vs. Player");
+            print("3. Quit\n> ");
+            // Add i"n when implemented
+            // println("3. Player vs. CPU");
+
+            input = sc.nextLine().trim().toLowerCase();
+
+            if (input.equals("options") || input.equals("1") || input.equals("1.")){
+                choice = 1;
+                options();
+            }
+            else if (input.equals("2") || input.equals("2.") || input.equals("pvp") || input.equals("player vs. player")
+                    || input.equals("player vs player")){
+                choice = 2;
+                pvp();
+            }
+            else if (input.equals("3.") || input.equals("3") || input.equals("quit") || input.equals("q")){
+                return;
+            }
+            else{
+                println("I didn't recognize that input. Please enter input again.\n");
+            }
+
+            if (choice == 2){
+                print("Salty runback?\n> ");
+                input = sc.nextLine().toLowerCase().trim();
+                for (String s: posResponses){
+                    if (s.equals(input)){
+                        battle(p1, p2, st);
+                    }
+                }
+            }
+        }
+    }
+
+    public static void options(){
+        Scanner sc = new Scanner(System.in);
+        animate("Assets/DisplayScreens/Options/Options.txt");
+        println("Ladies and gentlemen, this is an empty options menu.");
+        println("I'll fill it with good stuff later.");
+        println("<ENTER> to return to the main menu");
+        sc.nextLine();
+    }
+
+    public static void pvp(){
+        makeNames();
+        p1 = clone(getCharacter(p1Name));
+        clear();
+        p2 = clone(getCharacter(p2Name));
+        clear();
+        st = getField();
+        battle(p1, p2, st);
+        cleanDir();
+    }
+
     // Makes printing easier and shorter
     public static void println(Object object){ System.out.println(object); }
-
     public static void println() { System.out.println(); }
     public static void print(Object object) { System.out.print(object); }
 
