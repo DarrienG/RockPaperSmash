@@ -1,19 +1,22 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 
-/**
- * Created by darrien on 12/19/15.
- */
 public abstract class Stage {
 
     private String fileLoc;
-    /*
-        +---------------+-------------+
-        | HoriztonalLen | VerticalLen |
-        +---------------+-------------+
+    /**
+     * Length and width of the stage.
+     *  +---------------+-------------+
+     *  | HoriztonalLen | VerticalLen |
+     *  +---------------+-------------+
      */
     private double[] stageStats;
 
+    /**
+     * Basic constructor. Takes string file containing stage's stats.
+     *
+     * @param statsFile String containing stage's tats,
+     */
     public Stage(String statsFile){
         stageStats = new double[2];
         try{
