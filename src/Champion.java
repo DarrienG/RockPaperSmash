@@ -177,7 +177,7 @@ public abstract class Champion {
             spacer = Integer.parseInt(br.readLine());
             attribute = br.readLine();
 
-        }catch (java.io.IOException e) {
+        } catch (java.io.IOException e) {
             throw new RuntimeException("Invalid or corrupted file data. Failing");
         }
     }

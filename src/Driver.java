@@ -38,8 +38,8 @@ public class Driver {
             "Assets/Actions/Shield.txt", "Assets/Actions/Mid.txt"};
 
     /** Directories for all titles. */
-    private static final String[] TITLE_LOC = {"Assets/DisplayScreens/Title/Title1.txt", "Assets/DisplayScreens/Title/Title2.txt",
-            "Assets/DisplayScreens/Title/Title3.txt"};
+    private static final String[] TITLE_LOC = {"Assets/DisplayScreens/Title/Title1.txt",
+            "Assets/DisplayScreens/Title/Title2.txt", "Assets/DisplayScreens/Title/Title3.txt"};
 
     /** Copies of every character for easy selection. Likely to be replaced by strings later. */
     private static final Champion[] CHAR_LIST = {new Marth("NULL"), new Fox("NULL")};
@@ -54,7 +54,7 @@ public class Driver {
 
         try{
             menu();
-        }catch (Exception e) {
+        } catch (Exception e) {
             println("Program prematurely killed. Cleaning up before exiting.");
             cleanDir();
         }
@@ -115,8 +115,7 @@ public class Driver {
         // Should never reach here
         // Player becomes a Marth if some impossible flaw in logic causes this to happen
         println("Fatal choosing error. Defaulting to Marth.");
-        Champion ch = new Marth(player);
-        return ch;
+        return new Marth(player);
     }
 
     /**
@@ -172,8 +171,6 @@ public class Driver {
         return new Battlefield();
     }
 
-    // Decides who goes first, then calls the function that begins the battle with players in the corresponding order
-
     /**
      * Decides which player gets to go first based off of a coin flip, then begins the battle.
      *
@@ -208,15 +205,13 @@ public class Driver {
         }
     }
 
-    // Begins the battle, generally called after calling battle()
-
     /**
      * Potential helper method. Can be called after after battle() for randomized start, or called on its own so
      * players get to pick who goes first.
      *
-     * @param first The first {@link Champion}Champion in the battle.
-     * @param second The second {@link Champion}Champion in the battle.
-     * @param arena The chosen {@link Stage}Stage where the players will be battling.
+     * @param first The first {@link Champion} in the battle.
+     * @param second The second {@link Champion} in the battle.
+     * @param arena The chosen {@link Stage} where the players will be battling.
      */
     public static void battleBegin(Champion first, Champion second, Stage arena) {
         Scanner sc = new Scanner(System.in);
@@ -284,7 +279,7 @@ public class Driver {
                         animate(first.getFileNames()[3]);
                         try{
                             Thread.sleep(1500);
-                        }catch(java.lang.InterruptedException e) {
+                        } catch(java.lang.InterruptedException e) {
                             println("Caught " + e + "\nPlease be more careful next time.");
                         }
                     }
@@ -322,7 +317,7 @@ public class Driver {
                         animate(second.getFileNames()[4]);
                         try{
                             Thread.sleep(1500);
-                        }catch(java.lang.InterruptedException e) {
+                        } catch(java.lang.InterruptedException e) {
                             println("Caught " + e + "\nPlease be more careful next time.");
                         }
                     }
@@ -472,7 +467,7 @@ public class Driver {
             while ((line = br.readLine()) != null) {
                 println(line);
             }
-        }catch (java.io.IOException e) {
+        } catch (java.io.IOException e) {
             println("Info page not found.");
         }
     }
@@ -489,7 +484,7 @@ public class Driver {
             while ((line = br.readLine()) != null) {
                 println(line);
             }
-        }catch (java.io.IOException e) {
+        } catch (java.io.IOException e) {
             println("Info page not found.");
         }
     }
@@ -632,7 +627,7 @@ public class Driver {
             animateNoJump(titleScreen);
             try{
                 Thread.sleep(500);
-            }catch(java.lang.InterruptedException e) {
+            } catch(java.lang.InterruptedException e) {
                 println("Program killed prematurely.");
             }
         }
