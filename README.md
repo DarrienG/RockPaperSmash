@@ -55,8 +55,7 @@ For Windows -
     
 For Linux and OS X -
 
-    1. Right click on your terminal
-    2. Click "zoom out" until the graphics are displayed correctly 
+    Instructions on how to zoom out differ based on Linux distribution. You'll want to Google this.
     
 In future releases, there will be a script that does this automatically, so no configuration will need to be done by the user. 
     
