@@ -4,7 +4,7 @@ I don't care how it works, just let me play the damn game.
 
 Make sure you have Java installed.
 
-Download [RPS](https://github.com/DarrienG/RockPaperSmash/releases/download/V1.1/RPS_1.1.zip). Open a terminal full screen. Unzip RPS and then type:
+Download [RPS](https://github.com/DarrienG/RockPaperSmash/releases/download/V1.2/RPS.zip). Open a terminal full screen. Unzip RPS and then type:
 
 ```
 java -jar RPS.java
