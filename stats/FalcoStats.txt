@@ -1,0 +1,20 @@
+Assets/InfoPages/FalcoInfoPage.txt, Assets/CharPortraits/Falco/Left.txt, Assets/CharPortraits/Falco/Right.txt, Assets/CharPortraits/Falco/SpecLeft.txt, Assets/CharPortraits/Falco/SpecRight.txt, 1
+12, .45, 1
+10, .35, 0
+14, .50, 1
+1.5
+67
+38
+spacie
+
+____
+
+Falco, the ace pilot epitomizes a glass cannon more than any other character. With the weakest recovery in the game,
+and a gravity that make horizontal kills happen at extremely low percents, Falco is dead off of a couple of hits.
+
+Anybody who has played Falco in Melee though knows that he has devastating offensive power once he gets something going.
+Falco in Rock Paper Smash is no different. His moves begin weak, and with every consecutive hit, they become 2.0 times
+more powerful than their last hit. Falco's power skyrockets the more hits he gets.
+
+Once a Falco combo ends though, he becomes weak and vulnerable again. Falco is a scary character to face once he gets
+something going.

@@ -60,7 +60,7 @@ public abstract class Champion {
      * Sets status of attack using pseudo-C enumeration.
      * Attack, Grab, or Shield respectively as 0, 1, or 2.
      */
-    private int actionFlag;
+    protected int actionFlag;
 
     /**
      * ASCII formatting spacer.

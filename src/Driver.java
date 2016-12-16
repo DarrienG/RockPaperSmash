@@ -42,7 +42,8 @@ public class Driver {
             "Assets/DisplayScreens/Title/Title2.txt", "Assets/DisplayScreens/Title/Title3.txt"};
 
     /** Copies of every character for easy selection. Likely to be replaced by strings later. */
-    private static final Champion[] CHAR_LIST = {new Marth("NULL"), new Fox("NULL")};
+    private static final Champion[] CHAR_LIST = {
+            new Marth("NULL"), new Fox("NULL"), new Falco("NULL")};
 
     /** Copies of every stage, likely to be replaced later. */
     private static final Stage[] STAGE_LIST = {new Battlefield()};
@@ -446,6 +447,8 @@ public class Driver {
         }
         else if (selected.equals("fox")) {
             return new Fox(ch.getCharName());
+        } else if (selected.equals("falco")) {
+            return new Falco(ch.getCharName());
         }
 
         // Default to Marth if there is some impossible logic flaw that allows this to slip through the cracks

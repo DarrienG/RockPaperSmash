@@ -1,0 +1,46 @@
+                 "
+                *$"                             ______      _      _____ ____
+            !  `#$$". !!                       |  ____/\   | |    / ____/ __ \
+           `#! !$%%%$I$$%!                     | |__ /  \  | |   | |   | |  | |
+           !$$$$$$%%%%$%3%%!                   |  __/ /\ \ | |   | |   | |  | |
+           !$$$%Ju$####$J"j$"                  | | / ____ \| |___| |___| |__| |
+         .!+#$%I""I###$$333$$!                 |_|/_/    \_\______\_____\____/
+         "##$%3"(!($##! 3#$$#+
+         !##$$%I(!!"$##z$Q#$$.                 The Ace Pilot Falco Lombardi pulls no
+          $##$$%%""(!!(*+""!!!!!.              punches. As the ultimate prototype of a
+          (#######$#$"(!!!!!''''!!             glass cannon, Falco combos eliminate
+          %##B#####%$$##%(!!-...'!             opponents with unrivaled speed. It comes
+        !$BBBQ######%"!"$##&(!!!!.             at great cost of recovery.
+      !#BBBQ##########$"""!("""(!.!'!((!"$##"
+    (#BBBBQ##############$j!. `*t###$$#####!   Falco's moves start off weak, and with
+  !#BBBBBB#################I!  %############"  little knockback. Every consecutive hit
+ !WBBBBB#####################%!BB##BBBQ#####!  increases damage by 2.0, with power
+  `.'!###########BBQ##########$####BBBBBBBB#*  growing at an exponential rate, giving
+    (3Q#########BBBBBQ##########BQQBBBBBB#j!'  Falco the abillity to overpower his foes
+   !B#######BBBBBBBBBQ####BB#QQQ#BBBB#$('      at an unprecedented rate.
+  '######BBBBBWWBBBBBQBBBBB###QBB#%('
+  #B############QBBQ#######QB3                 In return for selling his soul for pure
+  %B################$%%$$$$%$u++!              power, Falco dies at astonishingly low
+   (BB##############3!""33%$$$3(.              percents. Horizontal attacks will knock
+    ."#B############%u3%%$$$$#!                Falco out very fast, with his super high
+      .#B###########%$$$$$$$$#!                gravity, and weak recovery.
+        $BBBQ######$$$$$$$####%
+     !"$####BBB#####$$$####$###$.              Falco is a force to be reckoned with, but
+  '*$#$$$$$$##B##$$$####$$$$#####!             only in the hands of someone who knows
+'$$$$$$%%$$$%!$$$$%%%$$$$$$$#####$!            what they are doing.
+(""$%%%%%&3(``#%u%$$$$$$$$########$
+ !$%3$%%%"'  !#$$$##$$$$$#########$            Raw Stats:
+ "3"$%%3!    .############"!!"###%-
+   I%%+.     .(""%########I"%##"`                Move    Dmg   Kb     Angle
+  "$J!      !"!``!"$###""$##$!                 -------- ----- ---- ------------
+  !!       !$(!!!t%##$%$##u'                    Attack    12   45   Vertical
+           !#""tI%#####$(`                      Grab      10   35   Horizontal
+           .#$%$$######.                        Shield    14   55   Vertical
+           "%t+t$#$###j
+          !#!!"$##$$##!
+         !$J((tJ$######"
+        z#!"*("'!+$$####(
+       !##+`.. `.!!!!!!"""('
+       !J$$t"!'.````!!!!!-!3!
+          `'!!`'!!*"J""j"I%$!
+
