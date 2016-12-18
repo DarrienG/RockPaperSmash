@@ -7,10 +7,9 @@
          .!+#$%I""I###$$333$$!                 |_|/_/    \_\______\_____\____/
          "##$%3"(!($##! 3#$$#+
          !##$$%I(!!"$##z$Q#$$.                 The Ace Pilot Falco Lombardi pulls no
-          $##$$%%""(!!(*+""!!!!!.              punches. As the ultimate prototype of a
-          (#######$#$"(!!!!!''''!!             glass cannon, Falco combos eliminate
-          %##B#####%$$##%(!!-...'!             opponents with unrivaled speed. It comes
-        !$BBBQ######%"!"$##&(!!!!.             at great cost of recovery.
+          $##$$%%""(!!(*+""!!!!!.              punches. If Fox is a glass cannon, Falco
+          (#######$#$"(!!!!!''''!!             is a nuclear warhead. Falco has tremendous 
+        !$BBBQ######%"!"$##&(!!!!.             power at the cost of horizontal recovery.
       !#BBBQ##########$"""!("""(!.!'!((!"$##"
     (#BBBBQ##############$j!. `*t###$$#####!   Falco's moves start off weak, and with
   !#BBBBBB#################I!  %############"  little knockback. Every consecutive hit
@@ -19,11 +18,11 @@
     (3Q#########BBBBBQ##########BQQBBBBBB#j!'  Falco the abillity to overpower his foes
    !B#######BBBBBBBBBQ####BB#QQQ#BBBB#$('      at an unprecedented rate.
   '######BBBBBWWBBBBBQBBBBB###QBB#%('
-  #B############QBBQ#######QB3                 In return for selling his soul for pure
-  %B################$%%$$$$%$u++!              power, Falco dies at astonishingly low
-   (BB##############3!""33%$$$3(.              percents. Horizontal attacks will knock
-    ."#B############%u3%%$$$$#!                Falco out very fast, with his super high
-      .#B###########%$$$$$$$$#!                gravity, and weak recovery.
+  #B############QBBQ#######QB3                 Playing as and against a Falco means never
+  %B################$%%$$$$%$u++!              making a mistake. His compounding damage
+   (BB##############3!""33%$$$3(.              makes him an unrivaled threat, while his
+    ."#B############%u3%%$$$$#!                incredibly weak recovery makes him a foe
+      .#B###########%$$$$$$$$#!                that is fast to pick off.
         $BBBQ######$$$$$$$####%
      !"$####BBB#####$$$####$###$.              Falco is a force to be reckoned with, but
   '*$#$$$$$$##B##$$$####$$$$#####!             only in the hands of someone who knows
