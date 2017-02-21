@@ -1,3 +1,7 @@
+#ROCK PAPER SMASH
+
+![RPS-IMAGE](Assets/Screenshots/genesis_3.png?raw=true)
+
 #FAST STARTUP
 
 I don't care how it works, just let me play the damn game.
@@ -17,75 +21,44 @@ java -jar RPS.java
 
 Rock Paper Smash is a fighting game that pushes the rock, paper, scissors meta of the Super Smash Brother series to forefront.
 
-In standard Super Smash Bros. during a match, the player has three options, to attack, to grab, or to shield. Attack beats grab, grab beats shield, and shield beats attack. However, unlike standard rock, paper, scissors, in Smash Bros. picking a move is not as cut and dry as picking any of the three options. Each character has different reasons to want to choose to attack, or grab, or shield. For example, Falco's raw attack game is incredibly powerful in Smash Bros. and as such, it is often in a Falco player's best interests to choose jump in and attack, as they know it is their strongest option, even if it isn't necessarily the best option for them to choose in that situation. In short, while each player has the same moves, each character has their own strengths and weaknesses when it comes to each move.
+In standard Smash Bros. a player has three main options: attack, shield, and grab. While there are lots of other things you can do, these are the three main categories.
 
-Also similar is that if you win a round in the combat triangle in Smash Bros. you don't immediately defeat your foe. The opponent gets percentage tacked on, and the higher their percentage goes, the greater the likelihood they will be knocked out. 
+In Rock Paper Smash the idea is the same, you have the three same options: attack, shield, and grab. Attack when the opponent shields, and you get punished, shield when your opponent grabs and get grabbed, grab when your opponent attacks, and you get hit. Simple, right?
 
-In Rock Paper Smash, both of these are idealized in what would normally be the standard rock, paper, scissors metagame. Each character has different reasons to want to choose each move, and there are different advantages and disadvantages to each move. When beating a foe in a single round, percentage is tacked on, but the other player does not immediately win. Your opponent could have a higher damage percent than you, and still win depending on that character's strengths and weaknesses.
+![OP](Assets/Screenshots/20xx_shot.png)
 
 #Setup                                  
 
-To play, you need to have Java installed. Your command prompt or terminal will also need to be maximized in order to fully view the text art. Being able to fully view the art is not required to play, but makes the experience much better.
+Got Java? No? Then go get it and come back.
 
-Click on *Releases* in the top bar, and download the zip. 
+Click on *Releases* in the top bar, and download the zip that'll probably be called RPS.zip.
 
 Extract all of the files from the archive.
 
-If you're on Windows, open up the Command Prompt (search for cmd, press ENTER). If you're on OS X, or Linux, open up the terminal.
+Since I wrote this when I didn't know how to make a GUI and UMass Lowell only teaches commandline programs, this only works in a commandline. Welcome back to the 1980s. Open terminal if you're on Linux or OS X, or Command if you're on Windows.
 
 Navigate to the directory you unzipped in your command prompt.
 
-
-*If you're on Windows 8.1 or older, type in*
-
-    wmic
-
-Everyone continues from here: 
-
-Then press the maximize button on your terminal.
+Maximize your terminal to get the full viewing experience 😎
 
 Finally, type this command:
 
     java -jar RPS.jar
     
-And you can begin the game. Please note that all of the included directories must be in the same place as the .jar file for the game to run. 
-
-If you would like to move the jar file, or keep it in a directory on its own, you'll need to make a shortcut to it, and then place that elsewhere. 
+![Fox for life](Assets/Screenshots/fox_char_select.png)
 
 #Troubleshooting
 
-##Graphics not displayed properly?
+##I'm on Windows, why does everything look weird?
 
-Your screen's density likely isn't high enough to display all assets normally. Unfortunately because of the nature of how blocky text is when making pictures using it, the pictures had to be a bit bigger than I initially wanted. In some cases, screens with a resolution below 1080p will erroneously display pictures.
-
-To fix:
-
-For Windows -
+Fight me Bill Gates. Windows uses a weird font for the terminal. Change it to something more standard to make it look better.
 
     1. Right click on the top bar
     2. Click on properties
     3. Click on Font
     4. Choose a smaller size for your current font
     5. Hit OK
-    
-For Linux and OS X -
+  
+##Heeeelp everything doesn't fit on my screen
 
-    Instructions on how to zoom out differ based on Linux distribution. You'll want to Google this.
-    
-In future releases, there will be a script that does this automatically, so no configuration will need to be done by the user. 
-    
-##On Windows?
-
-The default command prompt font makes the game look as if it were crushed a little bit. I guess Ganon just couldn't resist another victim.
-
-If you want the game to look more normal, change your command prompt font to Consolas for best results. 
-
-    1. Right click on the top bar
-    2. Click on properties
-    3. Click on Font
-    4. Choose Consolas
-    5. Hit OK
-    
-If you happen to be the adventurous kind of fellow, or you know how to install fonts, Ubuntu Mono makes the game look great. Consider downloading it, and using that for the best experience.
-
-http://font.ubuntu.com/
+Go to your terminal settings, and make the font smaller. ✅
