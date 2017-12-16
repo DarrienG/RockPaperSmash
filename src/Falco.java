@@ -9,8 +9,12 @@ public class Falco extends Champion {
     // Falco is special in that every consecutive hit he gets doubles the power of his next hit.
     @Override
     public double attack(Champion rhs) {
+        isSpecial = false;
         damageModifier *= 2;
         rhs.takeDamage(stats[actionFlag][0] * (damageModifier / 2));
+        if (damageModifier > 2) {
+            isSpecial = true;
+        }
         return stats[actionFlag][1] * (damageModifier / 2);
     }
 

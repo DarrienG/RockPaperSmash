@@ -34,7 +34,7 @@
           (######B###BB#########%"!.+##! ."!     Shield    10   55   Horizontal
          `#######B###BB###########$*!`!`  ``              
          "#######B##BBB#####B#####BQ$"!`
-        -########Q##BBBQ####B#####BB##%!!`     Strengths: Spacie killer
+        -########Q##BBBQ####B#####BB##%!!`      Spacie killer/Low risk, medium power
         +%$$########BBB###########3%$$u ` ``              
               `'!!*"""3##########"                        
                       `#####BBB##%(!`                     

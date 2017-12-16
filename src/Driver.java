@@ -10,50 +10,72 @@ import java.util.Stack;
  */
 public class Driver {
 
-    /** Positive responses that can be used to answer dialogs.*/
+    /**
+     * Positive responses that can be used to answer dialogs.
+     */
     private static final String[] POS_RESPONSES = {"y", "yes", "1", "yup", "good", "check", "yeah", "y e s", "yee",
-            "praise duarte", "hell yeah", "hell yes"};
+        "praise duarte", "hell yeah", "hell yes"};
 
     // /** Negative responses used to answer dialogs. Not implemented anywhere yet. */
     // public static final String[] negResponses = {"n", "no", "0", "nada", "bad", "x", "never", "n o", "praise ive",
     // "hell no"};
 
-    /** Options for choosing attack option. */
+    /**
+     * Options for choosing attack option.
+     */
     private static final String[] ATTACK_OPS = {"attack", "a", "1"};
 
-    /** Options for choosing grab option. */
+    /**
+     * Options for choosing grab option.
+     */
     private static final String[] GRAB_OPS = {"grab", "g", "2"};
 
-    /** Options for choosing shield option. */
+    /**
+     * Options for choosing shield option.
+     */
     private static final String[] SHIELD_OPS = {"shield", "s", "3"};
 
-    /** Directories for all of the number files. */
+    /**
+     * Directories for all of the number files.
+     */
     private static final String[] NUM_LOC = {"Assets/Numbers/Zero.txt", "Assets/Numbers/One.txt",
-            "Assets/Numbers/Two.txt", "Assets/Numbers/Three.txt", "Assets/Numbers/Four.txt", "Assets/Numbers/Five.txt",
-            "Assets/Numbers/Six.txt", "Assets/Numbers/Seven.txt", "Assets/Numbers/Eight.txt", "Assets/Numbers/Nine.txt",
-            "Assets/Numbers/Mod.txt"};
+        "Assets/Numbers/Two.txt", "Assets/Numbers/Three.txt", "Assets/Numbers/Four.txt", "Assets/Numbers/Five.txt",
+        "Assets/Numbers/Six.txt", "Assets/Numbers/Seven.txt", "Assets/Numbers/Eight.txt", "Assets/Numbers/Nine.txt",
+        "Assets/Numbers/Mod.txt"};
 
-    /** Directories for all action text. */
+    /**
+     * Directories for all action text.
+     */
     private static final String[] ACTION_FILES = {"Assets/Actions/Attack.txt", "Assets/Actions/Grab.txt",
-            "Assets/Actions/Shield.txt", "Assets/Actions/Mid.txt"};
+        "Assets/Actions/Shield.txt", "Assets/Actions/Mid.txt"};
 
-    /** Directories for all titles. */
+    /**
+     * Directories for all titles.
+     */
     private static final String[] TITLE_LOC = {"Assets/DisplayScreens/Title/Title1.txt",
-            "Assets/DisplayScreens/Title/Title2.txt", "Assets/DisplayScreens/Title/Title3.txt"};
+        "Assets/DisplayScreens/Title/Title2.txt", "Assets/DisplayScreens/Title/Title3.txt"};
 
-    /** Copies of every character for easy selection. Likely to be replaced by strings later. */
+    /**
+     * Copies of every character for easy selection. Likely to be replaced by strings later.
+     */
     private static final Champion[] CHAR_LIST = {
-            new Marth("NULL"), new Fox("NULL"), new Falco("NULL")};
+        new Marth("NULL"),
+        new Fox("NULL"),
+        new Falco("NULL"),
+        new CaptainFalcon("NULL")};
 
-    /** Copies of every stage, likely to be replaced later. */
+    /**
+     * Copies of every stage, likely to be replaced later.
+     */
     private static final Stage[] STAGE_LIST = {new Battlefield()};
 
-    /** Names of player 1 and player 2. */
+    /**
+     * Names of player 1 and player 2.
+     */
     private static String mP1Name, mP2Name;
 
     public static void main(String args[]) {
-
-        try{
+        try {
             menu();
         } catch (Exception e) {
             println("Program prematurely killed. Cleaning up before exiting.");
@@ -177,7 +199,7 @@ public class Driver {
      *
      * @param player1 Player 1, the first {@link Champion} in the battle.
      * @param player2 Player 2, the second {@link Champion} in the battle.
-     * @param arena The chosen {@link Stage} where the players will be battling.
+     * @param arena   The chosen {@link Stage} where the players will be battling.
      */
     public static void battle(Champion player1, Champion player2, Stage arena) {
         Random rand = new Random();
@@ -187,18 +209,18 @@ public class Driver {
         clear();
 
         println("Today on " + arena.getStageName() + " we have \n" + player1.getCharName() + ": " + player1.getChampionName() +
-        "\n\tvs.\n" + player2.getCharName() + ": " + player2.getChampionName());
+            "\n\tvs.\n" + player2.getCharName() + ": " + player2.getChampionName());
 
 
         // Player 1 goes first
-        if(coinFlip > .5) {
+        if (coinFlip > .5) {
             println(player1.getCharName() + " (Player 1) goes first!");
             print("<ENTER> to begin");
             sc.nextLine();
             battleBegin(player1, player2, arena);
         }
         // Player 2 goes first
-        else{
+        else {
             println(player2.getCharName() + " (Player 2) goes first!");
             print("\n\n<ENTER> to begin ");
             sc.nextLine();
@@ -210,9 +232,9 @@ public class Driver {
      * Potential helper method. Can be called after after battle() for randomized start, or called on its own so
      * players get to pick who goes first.
      *
-     * @param first The first {@link Champion} in the battle.
+     * @param first  The first {@link Champion} in the battle.
      * @param second The second {@link Champion} in the battle.
-     * @param arena The chosen {@link Stage} where the players will be battling.
+     * @param arena  The chosen {@link Stage} where the players will be battling.
      */
     public static void battleBegin(Champion first, Champion second, Stage arena) {
         Scanner sc = new Scanner(System.in);
@@ -221,7 +243,7 @@ public class Driver {
         String partBattle = fc.LateralOp("TmpBattleFiles/PartBattleFile.txt");
 
         double knockBack;
-        while(!first.isKO() && !second.isKO()) {
+        while (!first.isKO() && !second.isKO()) {
             animate(partBattle);
             formatNames(first, second);
             animateNoJump(percentageMaker(first, second));
@@ -235,7 +257,8 @@ public class Driver {
             inputSecond = sc.nextLine().toLowerCase().trim();
             // Do the array thing with choices tomorrow
 
-            first.setActionFlag(-1); second.setActionFlag(-1);
+            first.setActionFlag(-1);
+            second.setActionFlag(-1);
             for (String a : ATTACK_OPS) {
                 if (inputFirst.equals(a)) {
                     first.setActionFlag(0);
@@ -244,7 +267,7 @@ public class Driver {
                     second.setActionFlag(0);
                 }
             }
-            for (String g: GRAB_OPS) {
+            for (String g : GRAB_OPS) {
                 if (inputFirst.equals(g)) {
                     first.setActionFlag(1);
                 }
@@ -252,7 +275,7 @@ public class Driver {
                     second.setActionFlag(1);
                 }
             }
-            for (String s: SHIELD_OPS) {
+            for (String s : SHIELD_OPS) {
                 if (inputFirst.equals(s)) {
                     first.setActionFlag(2);
                 }
@@ -270,17 +293,15 @@ public class Driver {
 
                 if (p1Action == 0 && p2Action == 0 || p1Action == 1 && p2Action == 1 || p1Action == 2 && p2Action == 2) {
                     println("Same option chosen by " + first.getCharName() + " and " + second.getCharName() + "!\nNo damage taken.");
-                }
-
-                else if (p2Action == p1Action + 1 || p2Action == p1Action - 2) {
+                } else if (p2Action == p1Action + 1 || p2Action == p1Action - 2) {
                     double initDmg = second.getPercentDmg();
                     knockBack = first.attack(second);
 
                     if (first.isSpecial()) {
                         animate(first.getFileNames()[3]);
-                        try{
+                        try {
                             Thread.sleep(1500);
-                        } catch(java.lang.InterruptedException e) {
+                        } catch (java.lang.InterruptedException e) {
                             println("Caught " + e + "\nPlease be more careful next time.");
                         }
                     }
@@ -301,7 +322,7 @@ public class Driver {
                     }
 
                     // Or is is vertical?
-                    else{
+                    else {
                         knockBack = (second.getPercentDmg() * knockBack) / second.getGravity();
 
                         if (knockBack > arena.getVerticalLen() || knockBack > second.getRecovery()) {
@@ -310,15 +331,15 @@ public class Driver {
                         }
                     }
 
-                }else{
+                } else {
                     double initDmg = first.getPercentDmg();
                     knockBack = second.attack(first);
 
                     if (second.isSpecial()) {
                         animate(second.getFileNames()[4]);
-                        try{
+                        try {
                             Thread.sleep(1500);
-                        } catch(java.lang.InterruptedException e) {
+                        } catch (java.lang.InterruptedException e) {
                             println("Caught " + e + "\nPlease be more careful next time.");
                         }
                     }
@@ -339,7 +360,7 @@ public class Driver {
                     }
 
                     // Or is is vertical?
-                    else{
+                    else {
                         knockBack = (first.getPercentDmg() * knockBack) / first.getGravity();
 
                         if (knockBack > arena.getVerticalLen()) {
@@ -353,7 +374,7 @@ public class Driver {
             }
 
             // Invalid action entered by one of the two players
-            else{
+            else {
                 String misMatch = first.getActionFlag() == -1 ? first.getCharName() : second.getCharName();
                 println("Invalid action entered by " + misMatch + " please re-enter commands.");
             }
@@ -366,7 +387,7 @@ public class Driver {
     /**
      * Takes actions by two players, and outputs them to a unicode art version of the move.
      *
-     * @param first The first player.
+     * @param first  The first player.
      * @param second The second player.
      */
     public static void actionDisplay(Champion first, Champion second) {
@@ -388,7 +409,7 @@ public class Driver {
         Stack<Integer> numStack = new Stack<>();
         String tmpLoc = "TmpBattleFiles/";
         String fileOut;
-        int dmg = (int)inputDmg;
+        int dmg = (int) inputDmg;
 
         FileCat fc;
 
@@ -418,8 +439,7 @@ public class Driver {
                 fc = new FileCat(fileOut, NUM_LOC[10]);
                 fileOut = fc.LateralOp(tmpLoc + "FinDmg.txt");
             }
-        }
-        else{
+        } else {
             fc = new FileCat(NUM_LOC[0], NUM_LOC[0]);
             fileOut = fc.LateralOp(tmpLoc + "TmpDmg.txt");
             fc = new FileCat(fileOut, NUM_LOC[10]);
@@ -444,11 +464,12 @@ public class Driver {
         String selected = ch.getChampionName().toLowerCase();
         if (selected.equals("marth")) {
             return new Marth(ch.getCharName());
-        }
-        else if (selected.equals("fox")) {
+        } else if (selected.equals("fox")) {
             return new Fox(ch.getCharName());
         } else if (selected.equals("falco")) {
             return new Falco(ch.getCharName());
+        } else if (selected.equals("captain falcon")) {
+            return new CaptainFalcon(ch.getCharName());
         }
 
         // Default to Marth if there is some impossible logic flaw that allows this to slip through the cracks
@@ -465,7 +486,7 @@ public class Driver {
         String line;
         // The length of my terminal in lines, may or may not correspond to your terminal size
         clear();
-        try{
+        try {
             BufferedReader br = new BufferedReader(new FileReader(fileName));
             while ((line = br.readLine()) != null) {
                 println(line);
@@ -482,7 +503,7 @@ public class Driver {
      */
     public static void animateNoJump(String fileName) {
         String line;
-        try{
+        try {
             BufferedReader br = new BufferedReader(new FileReader(fileName));
             while ((line = br.readLine()) != null) {
                 println(line);
@@ -498,14 +519,14 @@ public class Driver {
      * Creates ASCII art of player percentages, and places them next to each other. Returns newly created file name.
      * Damage display is capped at 999%.
      *
-     * @param first Player 1.
+     * @param first  Player 1.
      * @param second Player 2.
      * @return File name of created file.
      */
     public static String percentageMaker(Champion first, Champion second) {
         Stack<Integer> numStack = new Stack<>();
-        int firstPercent = (int)first.getPercentDmg();
-        int secondPercent = (int)second.getPercentDmg();
+        int firstPercent = (int) first.getPercentDmg();
+        int secondPercent = (int) second.getPercentDmg();
         int spacer = first.getSpacer();
         String tmpLoc = "TmpBattleFiles/";
         String firstLoc, secondLoc;
@@ -540,8 +561,7 @@ public class Driver {
                 fc = new FileCat(firstLoc, NUM_LOC[10]);
                 firstLoc = fc.LateralOp(tmpLoc + "unspacedFirstPercent.txt");
             }
-        }
-        else{
+        } else {
             fc = new FileCat(NUM_LOC[0], NUM_LOC[0]);
             firstLoc = fc.LateralOp(tmpLoc + "tmpFirstPercent.txt");
             fc = new FileCat(firstLoc, NUM_LOC[10]);
@@ -579,8 +599,7 @@ public class Driver {
                 fc = new FileCat(secondLoc, NUM_LOC[10]);
                 secondLoc = fc.LateralOp(tmpLoc + "secondPercent.txt");
             }
-        }
-        else{
+        } else {
             fc = new FileCat(NUM_LOC[0], NUM_LOC[0]);
             secondLoc = fc.LateralOp(tmpLoc + "tmpSecondPercent.txt");
             fc = new FileCat(secondLoc, NUM_LOC[10]);
@@ -593,7 +612,7 @@ public class Driver {
     /**
      * Formats spacing of player names, so they are aligned correctly regardless of character choice.
      *
-     * @param first Player 1.
+     * @param first  Player 1.
      * @param second Player 2.
      */
     public static void formatNames(Champion first, Champion second) {
@@ -615,7 +634,7 @@ public class Driver {
      */
     public static void cleanDir() {
         File dir = new File("TmpBattleFiles");
-        for (File file: dir.listFiles()) {
+        for (File file : dir.listFiles()) {
             file.delete();
         }
     }
@@ -626,11 +645,11 @@ public class Driver {
     public static void displayTitle() {
         Scanner sc = new Scanner(System.in);
         clear();
-        for (String titleScreen: TITLE_LOC) {
+        for (String titleScreen : TITLE_LOC) {
             animateNoJump(titleScreen);
-            try{
+            try {
                 Thread.sleep(500);
-            } catch(java.lang.InterruptedException e) {
+            } catch (java.lang.InterruptedException e) {
                 println("Program killed prematurely.");
             }
         }
@@ -648,7 +667,7 @@ public class Driver {
         displayTitle();
         int choice = -1;
 
-        while(true) {
+        while (true) {
             clear();
             println("~~~~~~~~~~~~~~~~~~");
             println("Main menu");
@@ -775,7 +794,8 @@ public class Driver {
      * @param object Item to be printed.
      */
     private static void println(Object object) {
-        System.out.println(object); }
+        System.out.println(object);
+    }
 
     /**
      * Helper method, allows for newline to be printed quickly.

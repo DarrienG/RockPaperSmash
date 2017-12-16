@@ -1,0 +1,13 @@
+Assets/InfoPages/CaptainFalconInfoPage.txt, Assets/CharPortraits/CaptainFalcon/Left.txt, Assets/CharPortraits/CaptainFalcon/Right.txt, Assets/CharPortraits/CaptainFalcon/SpecLeft.txt, Assets/CharPortraits/CaptainFalcon/SpecRight.txt, 1
+13, .60, 0
+15, .40, 0
+12, .50, 1
+1.4
+85
+70
+fastfaller
+
+____
+
+Captain Falcon is here. Cool description will be added later
+

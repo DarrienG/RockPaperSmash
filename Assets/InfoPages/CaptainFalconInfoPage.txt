@@ -1,0 +1,41 @@
+
+                            !+.                 _____ _____ _______   ______
+                            !""-               / ____|  __ \__   __| |  ____|
+                             !"+!             | |    | |__) | | |    | |__
+               .-!("("!  `(!'""""".           | |    |  ___/  | |    |  __|
+              '#3t+%###t  .!+3$uI3&!          | |____| |      | |    | |_
+              "###BB#BB#!    .!!3%%$!          \_____|_|      |_|    |_(_)
+              u#$%I33$##!   ``` -"""z('.`
+            (I"$u""I$$$"j%z3%$$#$%%%$$%!`    The renowned bounty hunter Captain Falcon
+      .''!!+t$$j""$$uJ$########zt%%$$##$-    is ready to race. Dispatching foes with a
+     !"""3$$$##%"!""$##QBBB######3%%$####!   lightning fast combos, Falcon is no joke.
+    !$##"(""z############QBBBB####$$####$$z!
+   !####$#######$#########B#B#!j##$"%$$%3j"! It may not be true, but Falcon's grab to
+  !#######$##$#$$########BB##.       .'!'-   knee is devastating, and will probably
+  J######$$#############BB#!                 work. Even if it doesn't, you'll still
+'"*!"$##& '##############$.                  look pretty damn cool.
+!%z"!!%$$*I###$##########`
+   *3I%I""3$$$%$BBBBBBBBB                    Captain Falcon does a reasonable
+    !3j""$###############"                   amount of damage on his own, but it is
+    `!!((3###$$###########!                  when he gets his grab -> knee (attack),
+         z#################`                 he will deal double damage, and double
+        `###################'                knockback.
+        !######BBB###########
+        !$$#####BB####$######(               Be careful though! Grab -> knee isn't
+        !$$$#####B#j##$#######               guaranteed! There is a chance it will miss
+         I$$$####B% "#$$#####$               even if you get both attacks off and just
+         .$$$####B"  !$$$#####!              do a regular attack.
+          .#####BB#'  !$#####QB!
+           $$######!   !##$$##B$             Raw stats:
+           `"####$$$!   "######$"`
+            `j""3%$##`   u"""z3$#3             Move    Dmg   Kb     Angle
+             !$$$$###.   (%$%%$$##           -------- ----- ---- ------------
+              "$$###(     3$%j$$#"            Attack    13   60   Horizontal
+               "$###.      "$%%##.            Grab      15   40   Horizontal
+               .%$##!       !%"$#             Shield    12   50   Vertical
+               !"%##$        %j3#!
+            .!!!(j$##u       !$u3$"           High risk, high reward
+        '!!!("I3$#####        %*!!"u`
+       `3!!(j%$#$"(*!!        $j(!"j%.
+         .'--.`               %"!!!!+"!
+                              't"!!"%$!
