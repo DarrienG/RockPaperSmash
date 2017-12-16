@@ -11,6 +11,7 @@ Make sure you have Java installed.
 Download [RPS](https://github.com/DarrienG/RockPaperSmash/releases/download/V1.2/RPS.zip). Open a terminal full screen. Unzip RPS and then type:
 
 ```
+cd RPS
 java -jar RPS.java
 ```
 
