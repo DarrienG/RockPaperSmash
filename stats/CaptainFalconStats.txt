@@ -9,5 +9,36 @@ fastfaller
 
 ____
 
-Captain Falcon is here. Cool description will be added later
+The renowned bounty hunter Captain Falcon
+is ready to race. Dispatching foes with a
+lightning fast combos, Falcon is no joke.
+
+It may not be true, but Falcon's grab to
+knee is devastating, and will probably
+work. Even if it doesn't, you'll still
+look pretty damn cool.
+
+Captain Falcon does a reasonable
+amount of damage on his own, but it is
+when he gets his grab -> knee (attack),
+he will deal double damage, and double
+knockback.
+
+Be careful though! Grab -> knee isn't
+guaranteed! There is a chance it will miss
+even if you get both attacks off and just
+do a regular attack.
+
+Raw stats:
+
+  Move    Dmg   Kb     Angle
+-------- ----- ---- ------------
+ Attack    13   60   Horizontal
+ Grab      15   40   Horizontal
+ Shield    12   50   Vertical
+
+ High risk, high reward
+
+
+
 

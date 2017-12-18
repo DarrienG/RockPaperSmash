@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Stack;
@@ -673,7 +674,8 @@ public class Driver {
             println("Main menu");
             println("1. Options");
             println("2. Player vs. Player");
-            print("3. Quit\n> ");
+            println("3. Show Characters");
+            print("4. Quit\n> ");
             // Add i"n when implemented
             // println("3. Player vs. CPU");
 
@@ -696,9 +698,14 @@ public class Driver {
                     break;
                 case "3.":
                 case "3":
+                    showChars();
+                    break;
+                case "4":
+                case "4.":
                 case "quit":
                 case "q":
                     return;
+
                 default:
                     println("I didn't recognize that input. Please enter input again.\n");
                     break;
@@ -717,7 +724,19 @@ public class Driver {
         }
     }
 
-    // Displays the options menu
+    public static void showChars() {
+        final Scanner sc = new Scanner(System.in);
+        Champion c;
+        for (int i = 0; i < CHAR_LIST.length; ++i) {
+            c = CHAR_LIST[i];
+            animate(c.getFileNames()[0]);
+            print(i + 1 + "/" + CHAR_LIST.length + " Enter for next, q to quit\n> ");
+            String input = sc.nextLine();
+            if (input.equals("q")) {
+                return;
+            }
+        }
+    }
 
     /**
      * Displays the options menu.
