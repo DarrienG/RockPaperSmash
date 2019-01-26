@@ -1,6 +1,6 @@
 # ROCK PAPER SMASH
 
-![RPS-IMAGE](Assets/Screenshots/genesis_3.png?raw=true)
+![RPS-IMAGE](src/main/resources/Assets/Screenshots/genesis_3.png?raw=true)
 
 # FAST STARTUP
 
@@ -26,7 +26,7 @@ In standard Smash Bros. a player has three main options: attack, shield, and gra
 
 In Rock Paper Smash the idea is the same, you have the three same options: attack, shield, and grab. Attack when the opponent shields, and you get punished, shield when your opponent grabs and get grabbed, grab when your opponent attacks, and you get hit. Simple, right?
 
-![OP](Assets/Screenshots/20xx_shot.png)
+![OP](src/main/resources/Assets/Screenshots/20xx_shot.png)
 
 # Setup                                  
 
@@ -46,7 +46,7 @@ Finally, type this command:
 
     java -jar RPS.jar
 
-![Fox for life](Assets/Screenshots/fox_char_select.png)
+![Fox for life](src/main/resources/Assets/Screenshots/fox_char_select.png)
 
 # Troubleshooting
 
