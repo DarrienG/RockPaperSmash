@@ -1,3 +1,5 @@
+package RockPaperSmash;
+
 import java.util.Random;
 
 class CaptainFalcon extends Champion {

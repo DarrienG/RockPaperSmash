@@ -1,5 +1,8 @@
+package RockPaperSmash;
+
 import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 public abstract class Stage {
 
@@ -20,8 +23,7 @@ public abstract class Stage {
     public Stage(String statsFile){
         stageStats = new double[2];
         try{
-
-            BufferedReader br = new BufferedReader(new FileReader(statsFile));
+            BufferedReader br = FileReader.loadFile(new FileResource(statsFile, true));
             fileLoc = br.readLine();
             stageStats[0] = Double.parseDouble(br.readLine());
             stageStats[1] = Double.parseDouble(br.readLine());

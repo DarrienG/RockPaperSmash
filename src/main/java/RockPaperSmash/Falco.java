@@ -1,3 +1,5 @@
+package RockPaperSmash;
+
 public class Falco extends Champion {
     private double damageModifier = 1;
 

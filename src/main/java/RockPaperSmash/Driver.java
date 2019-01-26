@@ -1,6 +1,8 @@
+package RockPaperSmash;
+
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
@@ -39,16 +41,29 @@ public class Driver {
     /**
      * Directories for all of the number files.
      */
-    private static final String[] NUM_LOC = {"Assets/Numbers/Zero.txt", "Assets/Numbers/One.txt",
-        "Assets/Numbers/Two.txt", "Assets/Numbers/Three.txt", "Assets/Numbers/Four.txt", "Assets/Numbers/Five.txt",
-        "Assets/Numbers/Six.txt", "Assets/Numbers/Seven.txt", "Assets/Numbers/Eight.txt", "Assets/Numbers/Nine.txt",
-        "Assets/Numbers/Mod.txt"};
+    private static final FileResource[] NUM_LOC = {
+        new FileResource("Assets/Numbers/Zero.txt"),
+        new FileResource("Assets/Numbers/One.txt"),
+        new FileResource("Assets/Numbers/Two.txt"),
+        new FileResource("Assets/Numbers/Three.txt"),
+        new FileResource("Assets/Numbers/Four.txt"),
+        new FileResource("Assets/Numbers/Five.txt"),
+        new FileResource("Assets/Numbers/Six.txt"),
+        new FileResource("Assets/Numbers/Seven.txt"),
+        new FileResource("Assets/Numbers/Eight.txt"),
+        new FileResource("Assets/Numbers/Nine.txt"),
+        new FileResource("Assets/Numbers/Mod.txt")
+    };
 
     /**
      * Directories for all action text.
      */
-    private static final String[] ACTION_FILES = {"Assets/Actions/Attack.txt", "Assets/Actions/Grab.txt",
-        "Assets/Actions/Shield.txt", "Assets/Actions/Mid.txt"};
+    private static final FileResource[] ACTION_FILES = {
+        new FileResource("Assets/Actions/Attack.txt"),
+        new FileResource("Assets/Actions/Grab.txt"),
+        new FileResource("Assets/Actions/Shield.txt"),
+        new FileResource("Assets/Actions/Mid.txt")
+    };
 
     /**
      * Directories for all titles.
@@ -80,9 +95,12 @@ public class Driver {
             menu();
         } catch (Exception e) {
             println("Program prematurely killed. Cleaning up before exiting.");
+            e.printStackTrace();
             cleanDir();
         }
     }
+
+    private static final File TMP_DIR = FileReader.getTmpDir();
 
     /**
      * Has one player choose the {@link Champion} they would like to play.
@@ -94,7 +112,7 @@ public class Driver {
         String input, response;
         boolean goodPick = false;
         Scanner sc = new Scanner(System.in);
-        animate("Assets/DisplayScreens/CharSelect/Select.txt");
+        animate(new FileResource("Assets/DisplayScreens/CharSelect/Select.txt", true));
 
         while (!goodPick) {
             print("Character list: ");
@@ -177,7 +195,7 @@ public class Driver {
 
             // Only go here if the player chose a valid Stage
             if (goodPick) {
-                animate(STAGE_LIST[count].getFileLoc());
+                animate(new FileResource(STAGE_LIST[count].getFileLoc()));
                 print("Is \"" + input + "\" good?\n> ");
                 response = sc.nextLine();
                 response = response.toLowerCase().trim();
@@ -241,13 +259,13 @@ public class Driver {
         Scanner sc = new Scanner(System.in);
         String inputFirst, inputSecond;
         FileCat fc = new FileCat(first.getFileNames()[1], second.getFileNames()[2]);
-        String partBattle = fc.LateralOp("TmpBattleFiles/PartBattleFile.txt");
+        String partBattle = fc.LateralOp(TMP_DIR.getAbsolutePath() + "/PartBattleFile.txt");
 
         double knockBack;
         while (!first.isKO() && !second.isKO()) {
-            animate(partBattle);
+            animate(new FileResource(partBattle, false));
             formatNames(first, second);
-            animateNoJump(percentageMaker(first, second));
+            animateNoJump(new FileResource(percentageMaker(first, second), false));
 
             print(first.getCharName() + ", what move do you want to make? attack, grab, shield\n> ");
             inputFirst = sc.nextLine().toLowerCase().trim();
@@ -394,11 +412,12 @@ public class Driver {
     public static void actionDisplay(Champion first, Champion second) {
         int action1 = first.getActionFlag(), action2 = second.getActionFlag();
         FileCat fc = new FileCat(ACTION_FILES[action1], ACTION_FILES[3]);
-        String outFile = fc.LateralOp("TmpBattleFiles/tmpPerc.txt");
+        String outFile = fc.LateralOp(TMP_DIR.getAbsolutePath() + "/tmpPerc.txt");
 
-        fc = new FileCat(outFile, ACTION_FILES[action2]);
-        outFile = fc.LateralOp("TmpBattleFiles/PercFin.txt");
-        animateNoJump(outFile);
+        FileResource resourceOutFile = new FileResource(outFile, false);
+        fc = new FileCat(resourceOutFile, ACTION_FILES[action2]);
+        outFile = fc.LateralOp(TMP_DIR.getAbsolutePath() + "/PercFin.txt");
+        animateNoJump(new FileResource(outFile, false));
     }
 
     /**
@@ -408,7 +427,7 @@ public class Driver {
      */
     public static void singlePercDisplay(double inputDmg) {
         Stack<Integer> numStack = new Stack<>();
-        String tmpLoc = "TmpBattleFiles/";
+        String tmpLoc = TMP_DIR.getAbsolutePath() + "/";
         String fileOut;
         int dmg = (int) inputDmg;
 
@@ -424,7 +443,7 @@ public class Driver {
             if (numStack.size() == 1) {
                 fc = new FileCat(NUM_LOC[0], NUM_LOC[numStack.pop()]);
                 fileOut = fc.LateralOp(tmpLoc + "TmpDmg.txt");
-                fc = new FileCat(fileOut, NUM_LOC[10]);
+                fc = new FileCat(new FileResource(fileOut, false), NUM_LOC[10]);
                 fileOut = fc.LateralOp(tmpLoc + "UnspacedDmg.txt");
             }
 
@@ -434,25 +453,25 @@ public class Driver {
                 fileOut = fc.LateralOp(tmpLoc + "TmpDmg.txt");
                 // Percentage greater than 100
                 if (numStack.size() > 0) {
-                    fc = new FileCat(fileOut, NUM_LOC[numStack.pop()]);
+                    fc = new FileCat(new FileResource(fileOut, false), NUM_LOC[numStack.pop()]);
                     fileOut = fc.LateralOp(tmpLoc + "TmpDmg2.txt");
                 }
-                fc = new FileCat(fileOut, NUM_LOC[10]);
+                fc = new FileCat(new FileResource(fileOut, false), NUM_LOC[10]);
                 fileOut = fc.LateralOp(tmpLoc + "FinDmg.txt");
             }
         } else {
             fc = new FileCat(NUM_LOC[0], NUM_LOC[0]);
             fileOut = fc.LateralOp(tmpLoc + "TmpDmg.txt");
-            fc = new FileCat(fileOut, NUM_LOC[10]);
+            fc = new FileCat(new FileResource(fileOut, false), NUM_LOC[10]);
             fileOut = fc.LateralOp(tmpLoc + "FinDmg.txt");
         }
 
         /*fc = new FileCat(fileOut, NUM_LOC[9]);
         fileOut = fc.LateralOp(tmpLoc + "modPlus.txt");*/
-        fc = new FileCat(fileOut, " ", 8);
+        fc = new FileCat(new FileResource(fileOut, false), " ", 8);
         fileOut = fc.LateralOp(tmpLoc + "dmgPlus.txt");
-        fc = new FileCat(fileOut, "Assets/Extras/Damage.txt");
-        animateNoJump(fc.LateralOp(tmpLoc + "outDmg.txt"));
+        fc = new FileCat(new FileResource(fileOut, false), new FileResource("Assets/Extras/Damage.txt"));
+        animateNoJump(new FileResource(fc.LateralOp(tmpLoc + "outDmg.txt"), false));
     }
 
     /**
@@ -483,17 +502,18 @@ public class Driver {
      *
      * @param fileName Name of file to be opened and output.
      */
-    public static void animate(String fileName) {
+    public static void animate(FileResource file) {
         String line;
         // The length of my terminal in lines, may or may not correspond to your terminal size
         clear();
         try {
-            BufferedReader br = new BufferedReader(new FileReader(fileName));
+            BufferedReader br = FileReader.loadFile(file);
             while ((line = br.readLine()) != null) {
                 println(line);
             }
         } catch (java.io.IOException e) {
             println("Info page not found.");
+            e.printStackTrace();
         }
     }
 
@@ -502,10 +522,10 @@ public class Driver {
      *
      * @param fileName Name of file to be opened and output.
      */
-    public static void animateNoJump(String fileName) {
+    public static void animateNoJump(FileResource file) {
         String line;
         try {
-            BufferedReader br = new BufferedReader(new FileReader(fileName));
+            BufferedReader br = FileReader.loadFile(file);
             while ((line = br.readLine()) != null) {
                 println(line);
             }
@@ -529,7 +549,7 @@ public class Driver {
         int firstPercent = (int) first.getPercentDmg();
         int secondPercent = (int) second.getPercentDmg();
         int spacer = first.getSpacer();
-        String tmpLoc = "TmpBattleFiles/";
+        String tmpLoc = TMP_DIR.getAbsolutePath() + "/";
         String firstLoc, secondLoc;
         boolean hundredPlusFlag = false;
 
@@ -545,7 +565,7 @@ public class Driver {
             if (numStack.size() == 1) {
                 fc = new FileCat(NUM_LOC[0], NUM_LOC[numStack.pop()]);
                 firstLoc = fc.LateralOp(tmpLoc + "tmpFirstPercent.txt");
-                fc = new FileCat(firstLoc, NUM_LOC[10]);
+                fc = new FileCat(new FileResource(firstLoc, false), NUM_LOC[10]);
                 firstLoc = fc.LateralOp(tmpLoc + "unspacedFirstPercent.txt");
             }
 
@@ -555,22 +575,22 @@ public class Driver {
                 firstLoc = fc.LateralOp(tmpLoc + "tmpFirstPercent.txt");
                 // Percentage greater than 100
                 if (numStack.size() > 0) {
-                    fc = new FileCat(firstLoc, NUM_LOC[numStack.pop()]);
+                    fc = new FileCat(new FileResource(firstLoc, false), NUM_LOC[numStack.pop()]);
                     firstLoc = fc.LateralOp(tmpLoc + "tmpFirstPercent2.txt");
                     hundredPlusFlag = true;
                 }
-                fc = new FileCat(firstLoc, NUM_LOC[10]);
+                fc = new FileCat(new FileResource(firstLoc, false), NUM_LOC[10]);
                 firstLoc = fc.LateralOp(tmpLoc + "unspacedFirstPercent.txt");
             }
         } else {
             fc = new FileCat(NUM_LOC[0], NUM_LOC[0]);
             firstLoc = fc.LateralOp(tmpLoc + "tmpFirstPercent.txt");
-            fc = new FileCat(firstLoc, NUM_LOC[10]);
+            fc = new FileCat(new FileResource(firstLoc, false), NUM_LOC[10]);
             firstLoc = fc.LateralOp(tmpLoc + "unspacedFirstPercent.txt");
         }
 
         spacer = hundredPlusFlag ? spacer - 8 : spacer;
-        fc = new FileCat(firstLoc, " ", spacer);
+        fc = new FileCat(new FileResource(firstLoc, false), " ", spacer);
         firstLoc = fc.LateralOp(tmpLoc + "firstPercent.txt");
 
         // Second player's percentage
@@ -584,7 +604,7 @@ public class Driver {
             if (numStack.size() == 1) {
                 fc = new FileCat(NUM_LOC[0], NUM_LOC[numStack.pop()]);
                 secondLoc = fc.LateralOp(tmpLoc + "tmpSecondPercent.txt");
-                fc = new FileCat(secondLoc, NUM_LOC[10]);
+                fc = new FileCat(new FileResource(secondLoc, false), NUM_LOC[10]);
                 secondLoc = fc.LateralOp(tmpLoc + "secondPercent.txt");
             }
 
@@ -594,19 +614,19 @@ public class Driver {
                 secondLoc = fc.LateralOp(tmpLoc + "tmpSecondPercent.txt");
                 // Percentage greater than 100
                 if (numStack.size() > 0) {
-                    fc = new FileCat(secondLoc, NUM_LOC[numStack.pop()]);
+                    fc = new FileCat(new FileResource(secondLoc, false), NUM_LOC[numStack.pop()]);
                     secondLoc = fc.LateralOp(tmpLoc + "tmpSecondPercent2.txt");
                 }
-                fc = new FileCat(secondLoc, NUM_LOC[10]);
+                fc = new FileCat(new FileResource(secondLoc, false), NUM_LOC[10]);
                 secondLoc = fc.LateralOp(tmpLoc + "secondPercent.txt");
             }
         } else {
             fc = new FileCat(NUM_LOC[0], NUM_LOC[0]);
             secondLoc = fc.LateralOp(tmpLoc + "tmpSecondPercent.txt");
-            fc = new FileCat(secondLoc, NUM_LOC[10]);
+            fc = new FileCat(new FileResource(secondLoc, false), NUM_LOC[10]);
             secondLoc = fc.LateralOp(tmpLoc + "secondPercent.txt");
         }
-        fc = new FileCat(firstLoc, secondLoc);
+        fc = new FileCat(new FileResource(firstLoc, false), new FileResource(secondLoc, false));
         return fc.LateralOp(tmpLoc + "finalPercents.txt");
     }
 
@@ -634,8 +654,7 @@ public class Driver {
      * Removes temporary battle files from tmpBattleFiles folder.
      */
     public static void cleanDir() {
-        File dir = new File("TmpBattleFiles");
-        for (File file : dir.listFiles()) {
+        for (File file : TMP_DIR.listFiles()) {
             file.delete();
         }
     }
@@ -647,11 +666,11 @@ public class Driver {
         Scanner sc = new Scanner(System.in);
         clear();
         for (String titleScreen : TITLE_LOC) {
-            animateNoJump(titleScreen);
+            animateNoJump(new FileResource(titleScreen));
             try {
                 Thread.sleep(500);
             } catch (java.lang.InterruptedException e) {
-                println("Program killed prematurely.");
+                println("Program killed prematurely." + e);
             }
         }
 
@@ -743,7 +762,7 @@ public class Driver {
      */
     public static void options() {
         Scanner sc = new Scanner(System.in);
-        animate("Assets/DisplayScreens/Options/Options.txt");
+        animate(new FileResource("Assets/DisplayScreens/Options/Options.txt", true));
         println("Ladies and gentlemen, this is an empty options menu.");
         println("I'll fill it with good stuff later.");
         println("<ENTER> to return to the main menu");
@@ -754,6 +773,7 @@ public class Driver {
      * Begins a player vs. player battle.
      */
     public static void pvp() {
+        println(TMP_DIR.getAbsolutePath());
         makeNames();
         Champion p1 = clone(getCharacter(mP1Name));
         clear();
@@ -769,7 +789,7 @@ public class Driver {
      * Helper method, gets the tags of two players by calling getName twice
      */
     private static void makeNames() {
-        animate("Assets/DisplayScreens/TagSelect/TagS.txt");
+        animate(new FileResource("Assets/DisplayScreens/TagSelect/TagS.txt", true));
         mP1Name = getName("Player 1");
         mP2Name = getName("Player 2");
     }

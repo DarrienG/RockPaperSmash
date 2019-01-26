@@ -1,10 +1,13 @@
+package RockPaperSmash;
 
+import java.lang.RuntimeException;
 import java.io.*;
 import java.nio.Buffer;
+import java.io.InputStream;
 
 public class FileCat {
-    private String file1;
-    private String file2;
+    private FileResource file1;
+    private FileResource file2;
     private String extension;
     private String spacer;
     private int spaceCount;
@@ -16,7 +19,7 @@ public class FileCat {
      * @param file1 First file name.
      * @param file2 Second file name.
      */
-    public FileCat(String file1, String file2) {
+    public FileCat(FileResource file1, FileResource file2) {
         this.file1 = file1;
         this.file2 = file2;
         extension = ".txt";
@@ -29,7 +32,7 @@ public class FileCat {
      * @param file2 Second file name.
      * @param extension Extension of output file.
      */
-    public FileCat(String file1, String file2, String extension) {
+    public FileCat(FileResource file1, FileResource file2, String extension) {
         this.file1 = file1;
         this.file2 = file2;
         this.extension = "." + extension;
@@ -42,7 +45,7 @@ public class FileCat {
      * @param spacer String String containing characters to be spaced with.
      * @param spaceCount Number of spaces desired.
      */
-    public FileCat(String file1, String spacer, int spaceCount) {
+    public FileCat(FileResource file1, String spacer, int spaceCount) {
         this.file1 = file1;
         this.file2 = null;
         this.spacer = spacer;
@@ -59,7 +62,7 @@ public class FileCat {
      * @param spaceCount Number of spaces desired.
      * @param extension Extension of output file.
      */
-    public FileCat(String file1, String spacer, int spaceCount, String extension) {
+    public FileCat(FileResource file1, String spacer, int spaceCount, String extension) {
         this.file1 = file1;
         this.file2 = null;
         this.spacer = spacer;
@@ -75,21 +78,21 @@ public class FileCat {
         String line1, line2, tmpBuf1, tmpBuf2;
 
         try {
-            BufferedReader br = new BufferedReader(new FileReader(file1));
+            BufferedReader br = FileReader.loadFile(file1);
             BufferedWriter bw = new BufferedWriter(new FileWriter("output" + mProcCount +  extension));
 
             // Working with two files
             if (file2 != null) {
-                BufferedReader br2 = new BufferedReader(new FileReader(file2));
+                BufferedReader br2 = FileReader.loadFile(file2);
 
-                do{
+                do {
                     line1 = br.readLine(); line2 = br2.readLine();
                     tmpBuf1 = line1 == null ? "" : line1;
                     tmpBuf2 = line2 == null ? "" : line2;
 
                     bw.write(tmpBuf1 + tmpBuf2);
                     bw.newLine();
-                }while (line1!= null || line2 != null);
+                } while (line1!= null || line2 != null);
                 bw.flush();
             }
             // Working with spacers
@@ -110,7 +113,7 @@ public class FileCat {
             System.err.println("ERROR: File does not exist. Please input a valid file.");
         }
         catch (IOException e) {
-            System.err.println("ERROR: Failure while reading from file.");
+            System.err.println("ERROR: Failure while reading from file." + e);
         }
         ++mProcCount;
         return "output" + mProcCount + extension;
@@ -126,12 +129,12 @@ public class FileCat {
     public String LateralOp(String name) {
         String line1, line2, tmpBuf1, tmpBuf2;
         try {
-            BufferedReader br = new BufferedReader(new FileReader(file1));
+            BufferedReader br = FileReader.loadFile(file1);
             BufferedWriter bw = new BufferedWriter(new FileWriter(name));
 
             // Working with two files
             if (file2 != null) {
-                BufferedReader br2 = new BufferedReader(new FileReader(file2));
+                BufferedReader br2 = FileReader.loadFile(file2);
 
                 do{
                     line1 = br.readLine(); line2 = br2.readLine();
@@ -157,10 +160,12 @@ public class FileCat {
             }
         }
         catch (FileNotFoundException e) {
-            System.err.println("ERROR: File does not exist. Please input a valid file.");
+            System.err.println("ERROR: File does not exist. Please input a valid file." + e);
+            e.printStackTrace();
+            throw new RuntimeException(":(");
         }
         catch (IOException e) {
-            System.err.println("ERROR: Failure while reading from file.");
+            System.err.println("ERROR: Failure while reading from file." + e);
         }
         return name;
     }
@@ -174,8 +179,8 @@ public class FileCat {
     public String VerticalOp() {
         String line;
         try {
-            BufferedReader br = new BufferedReader(new FileReader(file1));
-            BufferedReader br2 = new BufferedReader(new FileReader(file2));
+            BufferedReader br = FileReader.loadFile(file1);
+            BufferedReader br2 = FileReader.loadFile(file2);
             BufferedWriter bw = new BufferedWriter(new FileWriter("output" + mProcCount +  extension));
 
             do{
@@ -191,10 +196,10 @@ public class FileCat {
             bw.flush();
         }
         catch(FileNotFoundException e) {
-            System.out.println("ERROR: File does not exist. Please input a valid input file.");
+            System.out.println("ERROR: File does not exist. Please input a valid input file." + e);
         }
         catch(IOException e) {
-            System.out.println("ERROR: Failure while reading from file.");
+            System.out.println("ERROR: Failure while reading from file." + e);
         }
         ++mProcCount;
         return "output" + mProcCount + extension;
@@ -211,8 +216,8 @@ public class FileCat {
     public String VerticalOp(String name) {
         String line;
         try {
-            BufferedReader br = new BufferedReader(new FileReader(file1));
-            BufferedReader br2 = new BufferedReader(new FileReader(file2));
+            BufferedReader br = FileReader.loadFile(file1);
+            BufferedReader br2 = FileReader.loadFile(file2);
             BufferedWriter bw = new BufferedWriter(new FileWriter(name));
 
             do{
@@ -227,10 +232,10 @@ public class FileCat {
             bw.flush();
         }
         catch(FileNotFoundException e) {
-            System.out.println("ERROR: File does not exist. Please input a valid input file.");
+            System.out.println("ERROR: File does not exist. Please input a valid input file." + e);
         }
         catch(IOException e) {
-            System.out.println("ERROR: Failure while reading from file.");
+            System.out.println("ERROR: Failure while reading from file." + e);
         }
         ++mProcCount;
         return name;

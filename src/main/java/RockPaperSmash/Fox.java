@@ -1,3 +1,5 @@
+package RockPaperSmash;
+
 import java.util.Random;
 
 public class Fox extends Champion {

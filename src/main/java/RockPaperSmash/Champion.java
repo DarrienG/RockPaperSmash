@@ -1,5 +1,8 @@
+package RockPaperSmash;
+
 import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 /**
  * Champion class. Characters, and their stats are stored here.
@@ -22,7 +25,7 @@ public abstract class Champion {
     protected String charName;
 
     /** Possible array of strings containing all file names needed to access. */
-    private String[] fileNames;
+    private FileResource[] fileNames;
 
     /** Where we store the power statistics for each character, for atkDir, 0 means horizontal, 1 means vertical.
      *
@@ -130,8 +133,6 @@ public abstract class Champion {
         charName = name;
     }
 
-    //
-
     /**
      * Reads in data for a character based off of given file name, and puts in {@link Champion Champion's}stats.
      *
@@ -144,11 +145,11 @@ public abstract class Champion {
         int numArgs = 3;
 
         try{
-            BufferedReader br = new BufferedReader(new FileReader(file));
+            BufferedReader br = FileReader.loadFile(new FileResource(file, true));
             String[] tokens;
 
             // Set file information immediately to raw data in file
-            fileNames = br.readLine().split(DELIMITER);
+            fileNames = resourceToFileResource(br.readLine().split(DELIMITER));
 
             if (fileNames.length != 6) {
                 // Make real exceptions when class is finished
@@ -178,11 +179,11 @@ public abstract class Champion {
             attribute = br.readLine();
 
         } catch (java.io.IOException e) {
-            throw new RuntimeException("Invalid or corrupted file data. Failing");
+            throw new RuntimeException("Invalid or corrupted file data. Failing" + e);
         }
     }
 
-    public String[] getFileNames() {
+    public FileResource[] getFileNames() {
         return fileNames;
     }
 
@@ -259,4 +260,21 @@ public abstract class Champion {
     public String getAttribute() {
         return attribute;
     }
+
+    /**
+     * Maps array of Strings to array of FileResource.
+     * Why can't this be Kotlin :(
+     * Gimme my map :(
+     *
+     * @param rawResources Array of String to be converted.
+     * @return resources converted to FileResources.
+     */
+    private FileResource[] resourceToFileResource(String[] rawResources) {
+        FileResource[] resources = new FileResource[rawResources.length];
+        for (int i = 0; i < rawResources.length; ++i) {
+            resources[i] = new FileResource(rawResources[i]);
+        }
+        return resources;
+    }
+
 }
