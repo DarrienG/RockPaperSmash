@@ -1,8 +1,8 @@
-#ROCK PAPER SMASH
+# ROCK PAPER SMASH
 
 ![RPS-IMAGE](Assets/Screenshots/genesis_3.png?raw=true)
 
-#FAST STARTUP
+# FAST STARTUP
 
 I don't care how it works, just let me play the damn game.
 
@@ -18,7 +18,7 @@ java -jar RPS.java
 
 
 
-#Introduction
+# Introduction
 
 Rock Paper Smash is a fighting game that pushes the rock, paper, scissors meta of the Super Smash Brother series to forefront.
 
@@ -28,7 +28,7 @@ In Rock Paper Smash the idea is the same, you have the three same options: attac
 
 ![OP](Assets/Screenshots/20xx_shot.png)
 
-#Setup                                  
+# Setup                                  
 
 Got Java? No? Then go get it and come back.
 
@@ -45,12 +45,12 @@ Maximize your terminal to get the full viewing experience 😎
 Finally, type this command:
 
     java -jar RPS.jar
-    
+
 ![Fox for life](Assets/Screenshots/fox_char_select.png)
 
-#Troubleshooting
+# Troubleshooting
 
-##I'm on Windows, why does everything look weird?
+## I'm on Windows, why does everything look weird?
 
 Fight me Bill Gates. Windows uses a weird font for the terminal. Change it to something more standard to make it look better.
 
@@ -59,8 +59,8 @@ Fight me Bill Gates. Windows uses a weird font for the terminal. Change it to so
     3. Click on Font
     4. Choose a smaller size for your current font
     5. Hit OK
-  
-##Heeeelp everything doesn't fit on my screen
+
+## Heeeelp everything doesn't fit on my screen
 
 Go to your terminal settings, and make the font smaller. ✅
 
