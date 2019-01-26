@@ -14,7 +14,12 @@ Open a terminal full screen. Unzip RPS and run the binary in the bin folder.
 
 ```
 $ cd RockPaperSmash/bin
+
+# If on Linux or macOS
 $ ./RockPaperSmash
+
+# If on Windows:
+$ ./RockPaperSmash.bat
 ```
 
 # Introduction
@@ -26,6 +31,14 @@ In standard Smash Bros. a player has three main options: attack, shield, and gra
 In Rock Paper Smash the idea is the same, you have the three same options: attack, shield, and grab. Attack when the opponent shields, and you get punished, shield when your opponent grabs and get grabbed, grab when your opponent attacks, and you get hit. Simple, right?
 
 ![OP](src/main/resources/Assets/Screenshots/20xx_shot.png)
+
+When you lose a round, rather than instantly die though, you gain some percent
+damage. The more damage you get, the higher the the likelihood a move from your
+opponent will kill.
+
+Each character has different weights, moves with different damages, and
+abilities, so the game technically plays the same with each character, but the
+when you die, and when you kill other players is different.
 
 # Setup                                  
 
@@ -53,12 +66,6 @@ Finally, type this command:
 
 Fight me Bill Gates. Windows uses a weird font for the terminal. Change it to something more standard to make it look better.
 
-    1. Right click on the top bar
-    2. Click on properties
-    3. Click on Font
-    4. Choose a smaller size for your current font
-    5. Hit OK
-
 ## Heeeelp everything doesn't fit on my screen
 
 Go to your terminal settings, and make the font smaller. ✅
@@ -71,7 +78,8 @@ If you want to add characters, check out understand.txt in src/main/resources/st
 
 It'll give you the scoop on the garbage file format I wrote years ago and how it works.
 
-If you want contribute to the code, it's kind of the worst so good luck.
+If you want contribute to the code, good luck.
+
 Honestly it's the worst and was written years ago by me. It was "refactored"
 recently so that it will work in jars and the like, but that doesn't mean it's
 good.
