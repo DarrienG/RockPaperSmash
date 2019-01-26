@@ -63,3 +63,26 @@ Fight me Bill Gates. Windows uses a weird font for the terminal. Change it to so
 ##Heeeelp everything doesn't fit on my screen
 
 Go to your terminal settings, and make the font smaller. ✅
+
+# Contributing
+
+WE FINALLY have a build system, so this is now contributable.
+
+If you want to add characters, check out understand.txt in src/main/resources/stats/understand.txt
+
+It'll give you the scoop on the garbage file format I wrote years ago and how it works.
+
+If you want contribute to the code, it's kind of the worst so good luck.
+Honestly it's the worst and was written years ago by me. It was "refactored"
+recently so that it will work in jars and the like, but that doesn't mean it's
+good.
+
+Happy to have contributions though :)
+
+building:
+
+```
+./gradlew build
+```
+
+Beautiful. To distribute your own version, use `./gradlew distZip`
