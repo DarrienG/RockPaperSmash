@@ -8,7 +8,7 @@ I don't care how it works, just let me play the damn game.
 
 Make sure you have Java installed.
 
-Download [RPS](https://github.com/DarrienG/RockPaperSmash/releases/download/1.5/RockPaperSmash.zip). 
+Download [RPS](https://github.com/DarrienG/RockPaperSmash/releases/download/1.6/RockPaperSmash.zip). 
 
 Open a terminal full screen. Unzip RPS and run the binary in the bin folder.
 
