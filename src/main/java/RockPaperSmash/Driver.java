@@ -2,11 +2,13 @@ package RockPaperSmash;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.nio.file.Paths;
-import java.util.Arrays;
+import java.util.Objects;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.Stack;
+
+import static RockPaperSmash.CPU_DIFFICULTY.difficult;
+import static RockPaperSmash.CPU_DIFFICULTY.easy;
 
 /**
  * Main class. Everything is run here.
@@ -85,12 +87,16 @@ public class Driver {
      */
     private static final Stage[] STAGE_LIST = {new Battlefield()};
 
+    private static final String CPU_IDENTIFIER = "CPU";
+
     /**
      * Names of player 1 and player 2.
      */
     private static String mP1Name, mP2Name;
 
-    public static void main(String args[]) {
+    private final static String ATTACK_STRING = ", what move do you want to make? (a)ttack, (g)rab, (s)hield\n> ";
+
+    public static void main(String[] args) {
         try {
             menu();
         } catch (Exception e) {
@@ -98,6 +104,15 @@ public class Driver {
             e.printStackTrace();
             cleanDir();
         }
+
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+
+            public void start() {
+                println("Exiting.");
+                println("Thanks for playing RockPaperSmash!");
+                cleanDir();
+            }
+        });
     }
 
     private static final File TMP_DIR = FileReader.getTmpDir();
@@ -158,6 +173,30 @@ public class Driver {
         // Player becomes a Marth if some impossible flaw in logic causes this to happen
         println("Fatal choosing error. Defaulting to Marth.");
         return new Marth(player);
+    }
+
+    public static Champion pickRandomCharacter() {
+        println("Picking CPU character...");
+        snooze(1000);
+        int uncleanRand = new Random().nextInt() % CHAR_LIST.length;
+        int rand = -1;
+        if (uncleanRand < 0) {
+            rand = uncleanRand * -1;
+        } else {
+            rand = uncleanRand;
+        }
+        Champion cpuChampion = CHAR_LIST[rand];
+        cpuChampion.resetName(CPU_IDENTIFIER);
+        animateNoJump(cpuChampion.getFileNames()[0]);
+        println(
+            "CPU picks: "
+                + cpuChampion.getChampionName()
+                .toLowerCase()
+                .trim()
+        );
+
+        snooze(2000);
+        return cpuChampion;
     }
 
     /**
@@ -248,8 +287,34 @@ public class Driver {
     }
 
     /**
+     * Decides which player gets to go first based off of a coin flip, then begins the battle.
+     *
+     * @param player1 Player 1, the first {@link Champion} in the battle.
+     * @param cpuPlayer Player 2, the second {@link Champion} in the battle.
+     * @param arena   The chosen {@link Stage} where the players will be battling.
+     */
+    public static void cpuBattle(Champion player1, CPU cpuPlayer, Stage arena) {
+        Scanner sc = new Scanner(System.in);
+        println("Today on " + arena.getStageName() + " we have \n" + player1.getCharName() + ": " + player1.getChampionName() +
+            "\n\tvs.\n" + cpuPlayer.champion.getCharName() + ": " + cpuPlayer.champion.getChampionName());
+
+        println(
+            "Single player battle. "
+                + player1.getCharName()
+                + " vs. "
+                + CPU_IDENTIFIER
+        );
+        println(player1.getCharName() + " (Player 1) goes first!");
+        print("<ENTER> to begin");
+        sc.nextLine();
+        cpuBattleBegin(player1, cpuPlayer, arena);
+    }
+
+    /**
      * Potential helper method. Can be called after after battle() for randomized start, or called on its own so
      * players get to pick who goes first.
+     *
+     * TODO: Refactor the bulk of this method into a shared method.
      *
      * @param first  The first {@link Champion} in the battle.
      * @param second The second {@link Champion} in the battle.
@@ -267,12 +332,12 @@ public class Driver {
             formatNames(first, second);
             animateNoJump(new FileResource(percentageMaker(first, second), false));
 
-            print(first.getCharName() + ", what move do you want to make? attack, grab, shield\n> ");
+            print(first.getCharName() + ATTACK_STRING);
             inputFirst = sc.nextLine().toLowerCase().trim();
 
             clear();
 
-            print(second.getCharName() + ", what move do you want to make? attack, grab, shield\n> ");
+            print(second.getCharName() + ATTACK_STRING);
             inputSecond = sc.nextLine().toLowerCase().trim();
             // Do the array thing with choices tomorrow
 
@@ -404,6 +469,151 @@ public class Driver {
     }
 
     /**
+     * Potential helper method. Can be called after after battle() for randomized start, or called on its own so
+     * players get to pick who goes first.
+     *
+     * TODO: Refactor bulk of this method into a different shared method.
+     *
+     * @param first  The first {@link Champion} in the battle.
+     * @param cpu CPU to battle againt.
+     * @param arena  The chosen {@link Stage} where the players will be battling.
+     */
+    public static void cpuBattleBegin(Champion first, CPU cpu, Stage arena) {
+        Scanner sc = new Scanner(System.in);
+        String inputFirst, inputSecond;
+        FileCat fc = new FileCat(first.getFileNames()[1], cpu.champion.getFileNames()[2]);
+        String partBattle = fc.LateralOp(TMP_DIR.getAbsolutePath() + "/PartBattleFile.txt");
+
+        double knockBack;
+        while (!first.isKO() && !cpu.champion.isKO()) {
+            animate(new FileResource(partBattle, false));
+            formatNames(first, cpu.champion);
+            animateNoJump(new FileResource(percentageMaker(first, cpu.champion), false));
+
+            print(first.getCharName() + ATTACK_STRING);
+            inputFirst = sc.nextLine().toLowerCase().trim();
+
+            clear();
+
+            println(cpu.champion.getCharName() + " thinking...");
+            snooze(750);
+            clear();
+            cpu.champion.setActionFlag(cpu.chooseMove());
+
+            first.setActionFlag(-1);
+            for (String a : ATTACK_OPS) {
+                if (inputFirst.equals(a)) {
+                    first.setActionFlag(0);
+                }
+            }
+            for (String g : GRAB_OPS) {
+                if (inputFirst.equals(g)) {
+                    first.setActionFlag(1);
+                }
+            }
+            for (String s : SHIELD_OPS) {
+                if (inputFirst.equals(s)) {
+                    first.setActionFlag(2);
+                }
+            }
+
+            if (first.getActionFlag() != -1 && cpu.champion.getActionFlag() != -1) {
+                // Print result of each attack
+                // As a reminder, 0 = attack (rock), 1 = grab (scissors), 2 = shield (paper)
+
+                int p1Action = first.getActionFlag(), p2Action = cpu.champion.getActionFlag();
+
+                if (p1Action == 0 && p2Action == 0 || p1Action == 1 && p2Action == 1 || p1Action == 2 && p2Action == 2) {
+                    println("Same option chosen by " + first.getCharName() + " and " + cpu.champion.getCharName() + "!\nNo damage taken.");
+                } else if (p2Action == p1Action + 1 || p2Action == p1Action - 2) {
+                    // Player 1 wins the round
+                    cpu.setMemory(p1Action, true);
+                    double initDmg = cpu.champion.getPercentDmg();
+                    knockBack = first.attack(cpu.champion);
+
+                    if (first.isSpecial()) {
+                        animate(first.getFileNames()[3]);
+                        snooze(1500);
+                    }
+
+                    actionDisplay(first, cpu.champion);
+
+                    println(cpu.champion.getCharName() + " takes: ");
+                    singlePercDisplay(cpu.champion.getPercentDmg() - initDmg);
+
+                    // Is knockback horizontal?
+                    if (first.getStats()[first.getActionFlag()][2] == 0) {
+                        knockBack = (cpu.champion.getPercentDmg() * knockBack) * cpu.champion.getGravity();
+
+                        if (knockBack > arena.getHorizontalLen()) {
+                            cpu.champion.toggleKO();
+                            println(cpu.champion.getCharName() + " has been KO'd!");
+                        }
+                    }
+
+                    // Or is is vertical?
+                    else {
+                        knockBack = (cpu.champion.getPercentDmg() * knockBack) / cpu.champion.getGravity();
+
+                        if (knockBack > arena.getVerticalLen() || knockBack > cpu.champion.getRecovery()) {
+                            cpu.champion.toggleKO();
+                            println(cpu.champion.getCharName() + " has been KO'd!");
+                        }
+                    }
+
+                } else {
+                    // CPU wins the round
+                    cpu.setMemory(p1Action, false);
+
+                    double initDmg = first.getPercentDmg();
+                    knockBack = cpu.champion.attack(first);
+
+                    if (cpu.champion.isSpecial()) {
+                        animate(cpu.champion.getFileNames()[4]);
+                        snooze(1500);
+                    }
+
+                    actionDisplay(first, cpu.champion);
+
+                    println(first.getCharName() + " takes :");
+                    singlePercDisplay(first.getPercentDmg() - initDmg);
+
+                    // Is knockback horizontal?
+                    if (cpu.champion.getStats()[cpu.champion.getActionFlag()][2] == 0) {
+                        knockBack = (first.getPercentDmg() * knockBack) * first.getGravity();
+
+                        if (knockBack > arena.getHorizontalLen() || knockBack > first.getRecovery()) {
+                            first.toggleKO();
+                            println(first.getCharName() + " has been KO'd!");
+                        }
+                    }
+
+                    // Or is is vertical?
+                    else {
+                        knockBack = (first.getPercentDmg() * knockBack) / first.getGravity();
+
+                        if (knockBack > arena.getVerticalLen()) {
+                            first.toggleKO();
+                            println(first.getCharName() + " has been KO'd!");
+                        }
+                    }
+                }
+                println("<ENTER> to continue");
+                sc.nextLine();
+            }
+
+            // Invalid action entered by one of the two players
+            else {
+                String misMatch = first.getActionFlag() == -1 ? first.getCharName() : cpu.champion.getCharName();
+                println("Invalid action entered by " + misMatch + " please re-enter commands.");
+            }
+            // TODO: End battle, possible increment counter, champs may require extra data member to determine player
+            // number
+
+        }
+    }
+
+    /**
      * Takes actions by two players, and outputs them to a unicode art version of the move.
      *
      * @param first  The first player.
@@ -500,7 +710,7 @@ public class Driver {
     /**
      * Takes a file name, and outputs the result to the screen, after clearing the screen.
      *
-     * @param fileName Name of file to be opened and output.
+     * @param file Resource of file to be opened and output.
      */
     public static void animate(FileResource file) {
         String line;
@@ -520,7 +730,7 @@ public class Driver {
     /**
      * Takes a file name, and outputs the results to the screen.
      *
-     * @param fileName Name of file to be opened and output.
+     * @param file Resource of file to be opened and output.
      */
     public static void animateNoJump(FileResource file) {
         String line;
@@ -636,7 +846,7 @@ public class Driver {
      * @param first  Player 1.
      * @param second Player 2.
      */
-    public static void formatNames(Champion first, Champion second) {
+    private static void formatNames(Champion first, Champion second) {
         int trueSpacer = first.getSpacer() + 25 - first.getCharName().length();
         print(first.getCharName());
         if (trueSpacer < 1) {
@@ -653,9 +863,12 @@ public class Driver {
     /**
      * Removes temporary battle files from tmpBattleFiles folder.
      */
-    public static void cleanDir() {
-        for (File file : TMP_DIR.listFiles()) {
-            file.delete();
+    private static void cleanDir() {
+       for (File file : Objects.requireNonNull(TMP_DIR.listFiles())) {
+            boolean result = file.delete();
+            if (!result) {
+                println("Error cleaning up file: " + file.getAbsolutePath());
+            }
         }
     }
 
@@ -674,7 +887,7 @@ public class Driver {
             }
         }
 
-        println("Press Start to begin ");
+        println("Press Start (<ENTER>) to begin!");
         sc.nextLine();
     }
 
@@ -685,18 +898,16 @@ public class Driver {
         Scanner sc = new Scanner(System.in);
         String input;
         displayTitle();
-        int choice = -1;
-
         while (true) {
             clear();
             println("~~~~~~~~~~~~~~~~~~");
             println("Main menu");
             println("1. Options");
             println("2. Player vs. Player");
-            println("3. Show Characters");
-            print("4. Quit\n> ");
-            // Add i"n when implemented
-            // println("3. Player vs. CPU");
+            println("3. Player vs. CPU");
+            println("4. Show Characters");
+            println("5. Quit");
+            print("> ");
 
             input = sc.nextLine().trim().toLowerCase();
 
@@ -704,7 +915,6 @@ public class Driver {
                 case "options":
                 case "1":
                 case "1.":
-                    choice = 1;
                     options();
                     break;
                 case "2":
@@ -712,15 +922,18 @@ public class Driver {
                 case "pvp":
                 case "player vs. player":
                 case "player vs player":
-                    choice = 2;
                     pvp();
                     break;
                 case "3.":
                 case "3":
-                    showChars();
+                    pvcpu();
                     break;
                 case "4":
                 case "4.":
+                    showChars();
+                    break;
+                case "5":
+                case "5.":
                 case "quit":
                 case "q":
                     return;
@@ -729,17 +942,6 @@ public class Driver {
                     println("I didn't recognize that input. Please enter input again.\n");
                     break;
             }
-
-            // Does not seem to work right now, will work on fixing later.
-            /*if (choice == 2) {
-                print("Salty runback?\n> ");
-                input = sc.nextLine().toLowerCase().trim();
-                for (String s: POS_RESPONSES) {
-                    if (s.equals(input)) {
-                        battle(p1, p2, st);
-                    }
-                }
-            }*/
         }
     }
 
@@ -763,7 +965,7 @@ public class Driver {
     public static void options() {
         Scanner sc = new Scanner(System.in);
         animate(new FileResource("Assets/DisplayScreens/Options/Options.txt", true));
-        println("Ladies and gentlemen, this is an empty options menu.");
+        println("Empty settings menu for now. Come back later.");
         println("I'll fill it with good stuff later.");
         println("<ENTER> to return to the main menu");
         sc.nextLine();
@@ -773,7 +975,6 @@ public class Driver {
      * Begins a player vs. player battle.
      */
     public static void pvp() {
-        println(TMP_DIR.getAbsolutePath());
         makeNames();
         Champion p1 = clone(getCharacter(mP1Name));
         clear();
@@ -784,6 +985,35 @@ public class Driver {
         cleanDir();
     }
 
+    /**
+     * Begins a player vs. CPU battle.
+     */
+    public static void pvcpu() {
+        setUpPvCpu();
+        Champion p1 = clone(getCharacter(mP1Name));
+        clear();
+        Champion p2 = clone(pickRandomCharacter());
+        clear();
+        Stage st = getField();
+        cpuBattle(p1, new CPU(setCpuDifficulty(), p2), st);
+        cleanDir();
+    }
+
+    private static CPU_DIFFICULTY setCpuDifficulty() {
+        Scanner sc = new Scanner(System.in);
+        while (true) {
+            println("Set CPU difficulty: (e)asy, (d)ifficult");
+            print("> ");
+            String input = sc.nextLine().toLowerCase().trim();
+            if (input.equals("e")) {
+                return easy;
+            } else if (input.equals("d")) {
+                return difficult;
+            } else {
+                println("Invalid difficulty.\n");
+            }
+        }
+    }
 
     /**
      * Helper method, gets the tags of two players by calling getName twice
@@ -792,6 +1022,12 @@ public class Driver {
         animate(new FileResource("Assets/DisplayScreens/TagSelect/TagS.txt", true));
         mP1Name = getName("Player 1");
         mP2Name = getName("Player 2");
+    }
+
+    private static void setUpPvCpu() {
+        animate(new FileResource("Assets/DisplayScreens/TagSelect/TagS.txt", true));
+        mP1Name = getName("Player 1");
+        mP2Name = CPU_IDENTIFIER;
     }
 
     /**
@@ -820,6 +1056,7 @@ public class Driver {
 
     /**
      * Helper method, clears what is currently on the screen by printing new lines.
+     * TODO: Make this the size of the user's output device.
      */
     private static void clear() {
         for (int i = 0; i < 125; ++i) {
@@ -850,5 +1087,13 @@ public class Driver {
      */
     private static void print(Object object) {
         System.out.print(object);
+    }
+
+    private static void snooze(long millis) {
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException e) {
+            println("Something happened. idk");
+        }
     }
 }

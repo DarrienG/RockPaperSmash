@@ -6,9 +6,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.net.URL;
-import java.net.URISyntaxException;
 
 public class FileReader {
     public static BufferedReader loadFile(FileResource rFile) throws java.io.IOException {
@@ -18,7 +17,8 @@ public class FileReader {
         } else {
             file = new FileInputStream(rFile.getFileName());
         }
-        return new BufferedReader(new InputStreamReader(file, "UTF-8"));
+        assert file != null;
+        return new BufferedReader(new InputStreamReader(file, StandardCharsets.UTF_8));
     }
 
     public static File getTmpDir() {
