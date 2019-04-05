@@ -63,17 +63,15 @@ public class CPU {
         if (rand > 90) {
             return simpleDecision();
         }
-        // Opponent did not win the last round.
-        // They will likely pick whatever beat my last choice.
-        // Which just so happens to be their last choice.
-        // :smirk:
         if (opponentWonLastRound) {
-            System.out.println("Opponent won the last round.");
             // Opponent won the last round, so they will likely pick the same thing again.
             // Pick whatever beats what they just picked.
             return ((opponentPreviousMove + 2) % 3);
         } else {
-            System.out.println("Opponent lost the last round.");
+            // Opponent did not win the last round.
+            // They will likely pick whatever beat my last choice.
+            // Which just so happens to be their last choice.
+            // :smirk:
             return opponentPreviousMove;
         }
     }
