@@ -333,12 +333,12 @@ public class Driver {
             animateNoJump(new FileResource(percentageMaker(first, second), false));
 
             print(first.getCharName() + ATTACK_STRING);
-            inputFirst = sc.nextLine().toLowerCase().trim();
+            inputFirst = new String(System.console().readPassword()).toLowerCase().trim();
 
             clear();
 
             print(second.getCharName() + ATTACK_STRING);
-            inputSecond = sc.nextLine().toLowerCase().trim();
+            inputSecond = new String(System.console().readPassword()).toLowerCase().trim();
             // Do the array thing with choices tomorrow
 
             first.setActionFlag(-1);
@@ -491,7 +491,7 @@ public class Driver {
             animateNoJump(new FileResource(percentageMaker(first, cpu.champion), false));
 
             print(first.getCharName() + ATTACK_STRING);
-            inputFirst = sc.nextLine().toLowerCase().trim();
+            inputFirst = new String(System.console().readPassword()).toLowerCase().trim();
 
             clear();
 
