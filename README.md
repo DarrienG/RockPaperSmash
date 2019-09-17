@@ -1,3 +1,12 @@
+## Fair Disclaimer
+
+This code is really, really old, and the base of almost everything was written
+before I really had a good grasp on how to code. Please don't look too hard at
+the code unless you're planning on helping on the rewrite it needs :D
+
+With the said, the game still works, so read on below if you don't care about
+the code.
+
 # ROCK PAPER SMASH
 
 ![RPS-IMAGE](src/main/resources/Assets/Screenshots/genesis_3.png?raw=true)
@@ -8,7 +17,7 @@ I don't care how it works, just let me play the damn game.
 
 Make sure you have Java installed.
 
-Download [RPS](https://github.com/DarrienG/RockPaperSmash/releases/download/1.6/RockPaperSmash.zip). 
+Download [RPS](https://github.com/DarrienG/RockPaperSmash/releases/download/1.6/RockPaperSmash.zip).
 
 Open a terminal full screen. Unzip RPS and run the binary in the bin folder.
 
@@ -40,7 +49,7 @@ Each character has different weights, moves with different damages, and
 abilities, so the game technically plays the same with each character, but the
 when you die, and when you kill other players is different.
 
-# Setup                                  
+# Setup
 
 Got Java? No? Then go get it and come back.
 
