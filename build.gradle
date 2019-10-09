@@ -27,3 +27,5 @@ compileTestKotlin {
 run {
     standardInput = System.in
 }
+
+mainClassName = 'RockPaperSmash.DriverKt'
