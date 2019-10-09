@@ -102,7 +102,7 @@ class Driver {
     // Only go here if the player chose a valid Stage
     // Should never reach here
     // Stage becomes Battlefield if some impossible flaw in logic causes this to happen
-    val field: Stage
+    private val field: Stage
         get() {
             var input: String
             var response: String
@@ -116,7 +116,7 @@ class Driver {
                 }
                 println()
                 print("What stage would you like to pick?\n> ")
-                input = sc.nextLine().toLowerCase().trim({ it <= ' ' })
+                input = sc.nextLine().toLowerCase().trim { it <= ' ' }
 
                 var count = 0
                 for (st in STAGE_LIST) {
@@ -134,7 +134,7 @@ class Driver {
                     animate(FileResource(STAGE_LIST[count].fileLoc))
                     print("Is \"$input\" good?\n> ")
                     response = sc.nextLine()
-                    response = response.toLowerCase().trim({ it <= ' ' })
+                    response = response.toLowerCase().trim { it <= ' ' }
                     for (comparator in POS_RESPONSES) {
                         if (response == comparator) {
                             return STAGE_LIST[count]
@@ -163,16 +163,16 @@ class Driver {
         while (!goodPick) {
             print("Character list: ")
             for (ch in CHAR_LIST) {
-                print("\"" + ch.championName + "\" ")
+                print("\"${ch.championName}\" ")
             }
             println()
-            print(player + " please choose your character: ")
-            input = sc.nextLine().toLowerCase().trim({ it <= ' ' })
+            print("$player please choose your character: ")
+            input = sc.nextLine().toLowerCase().trim { it <= ' ' }
 
             var count = 0
             // Test validity of player choice for a character
             for (ch in CHAR_LIST) {
-                if (ch.championName.toLowerCase().trim({ it <= ' ' }) == input) {
+                if (ch.championName.toLowerCase().trim { it <= ' ' } == input) {
                     goodPick = true
                     break
                 }
@@ -188,7 +188,7 @@ class Driver {
                 animate(CHAR_LIST[count].fileNames[0])
                 print("Is \"$input\" good?\n> ")
                 response = sc.nextLine()
-                response = response.toLowerCase().trim({ it <= ' ' })
+                response = response.toLowerCase().trim { it <= ' ' }
                 for (comparator in POS_RESPONSES) {
                     if (response == comparator) {
                         val ch = CHAR_LIST[count]
@@ -212,11 +212,8 @@ class Driver {
         val cpuChampion = CHAR_LIST[(Random().nextInt() % CHAR_LIST.size).absoluteValue]
         cpuChampion.resetName(CPU_IDENTIFIER)
         animateNoJump(cpuChampion.fileNames[0])
-        println(
-                "CPU picks: " + cpuChampion.championName
-                        .toLowerCase()
-                        .trim({ it <= ' ' })
-        )
+        val prettyChampion = cpuChampion.championName.toLowerCase().trim { it <= ' ' }
+        println("CPU picks: $prettyChampion")
 
         snooze(2000)
         return cpuChampion
@@ -236,22 +233,25 @@ class Driver {
 
         clear()
 
-        println("Today on " + arena.stageName + " we have \n" + player1.charName + ": " + player1.championName +
-                "\n\tvs.\n" + player2.charName + ": " + player2.championName)
+        println("Today on ${arena.stageName} we have ")
+        println("${player1.charName}: ${player1.championName}")
+        println("\tvs.")
+        println("${player2.charName}: ${player2.championName}")
 
 
         // Player 1 goes first
         if (coinFlip > .5) {
-            println(player1.charName + " (Player 1) goes first!")
+            println("${player1.charName} (Player 1) goes first!")
             print("<ENTER> to begin")
             sc.nextLine()
             battleBegin(player1, player2, arena)
         } else {
-            println(player2.charName + " (Player 2) goes first!")
+            println("${player2.charName} (Player 2) goes first!")
             print("\n\n<ENTER> to begin ")
             sc.nextLine()
             battleBegin(player2, player1, arena)
-        }// Player 2 goes first
+        }
+        // Player 2 goes first
     }
 
     /**
@@ -263,16 +263,14 @@ class Driver {
      */
     fun cpuBattle(player1: Champion, cpuPlayer: CPU, arena: Stage) {
         val sc = Scanner(System.`in`)
-        println("Today on " + arena.stageName + " we have \n" + player1.charName + ": " + player1.championName +
-                "\n\tvs.\n" + cpuPlayer.champion.charName + ": " + cpuPlayer.champion.championName)
 
-        println(
-                "Single player battle. "
-                        + player1.charName
-                        + " vs. "
-                        + CPU_IDENTIFIER
-        )
-        println(player1.charName + " (Player 1) goes first!")
+        println("Today on ${arena.stageName} we have ")
+        println("${player1.charName}: ${player1.championName}")
+        println("\tvs.")
+        println("${cpuPlayer.champion.charName}: ${cpuPlayer.champion.championName}")
+
+        println("Single player battle. ${player1.charName} vs. $CPU_IDENTIFIER")
+        println("${player1.charName} (Player 1) goes first!")
         print("<ENTER> to begin")
         sc.nextLine()
         cpuBattleBegin(player1, cpuPlayer, arena)
@@ -293,7 +291,7 @@ class Driver {
         var inputFirst: String
         var inputSecond: String
         val fc = FileCat(first.fileNames[1], second.fileNames[2])
-        val partBattle = fc.LateralOp(TMP_DIR.absolutePath + "/PartBattleFile.txt")
+        val partBattle = fc.lateralOp(TMP_DIR.absolutePath + "/PartBattleFile.txt")
 
         var knockBack: Double
         while (!first.isKO && !second.isKO) {
@@ -302,12 +300,12 @@ class Driver {
             animateNoJump(FileResource(percentageMaker(first, second), false))
 
             print(first.charName + ATTACK_STRING)
-            inputFirst = String(System.console().readPassword()).toLowerCase().trim({ it <= ' ' })
+            inputFirst = String(System.console().readPassword()).toLowerCase().trim { it <= ' ' }
 
             clear()
 
             print(second.charName + ATTACK_STRING)
-            inputSecond = String(System.console().readPassword()).toLowerCase().trim({ it <= ' ' })
+            inputSecond = String(System.console().readPassword()).toLowerCase().trim { it <= ' ' }
             // Do the array thing with choices tomorrow
 
             first.actionFlag = -1
@@ -366,7 +364,7 @@ class Driver {
 
                     // Is knockback horizontal?
                     if (first.stats[first.actionFlag][2] == 0.0) {
-                        knockBack = second.percentDmg * knockBack * second.gravity
+                        knockBack *= second.percentDmg * second.gravity
 
                         if (knockBack > arena.horizontalLen) {
                             second.toggleKO()
@@ -402,7 +400,7 @@ class Driver {
 
                     // Is knockback horizontal?
                     if (second.stats[second.actionFlag][2] == 0.0) {
-                        knockBack = first.percentDmg * knockBack * first.gravity
+                        knockBack *= first.percentDmg * first.gravity
 
                         if (knockBack > arena.horizontalLen || knockBack > first.recovery) {
                             first.toggleKO()
@@ -443,7 +441,7 @@ class Driver {
         val sc = Scanner(System.`in`)
         var inputFirst: String
         val fc = FileCat(first.fileNames[1], cpu.champion.fileNames[2])
-        val partBattle = fc.LateralOp(TMP_DIR.absolutePath + "/PartBattleFile.txt")
+        val partBattle = fc.lateralOp(TMP_DIR.absolutePath + "/PartBattleFile.txt")
 
         var knockBack: Double
         while (!first.isKO && !cpu.champion.isKO) {
@@ -452,7 +450,7 @@ class Driver {
             animateNoJump(FileResource(percentageMaker(first, cpu.champion), false))
 
             print(first.charName + ATTACK_STRING)
-            inputFirst = String(System.console().readPassword()).toLowerCase().trim({ it <= ' ' })
+            inputFirst = String(System.console().readPassword()).toLowerCase().trim { it <= ' ' }
 
             clear()
 
@@ -478,6 +476,36 @@ class Driver {
                 }
             }
 
+            val processResult = { winner: Champion, loser: Champion ->
+                val initDmg = loser.percentDmg
+                knockBack = winner.attack(loser)
+
+                if (winner.isSpecial) {
+                    animate(winner.fileNames[3])
+                    snooze(1500)
+                }
+
+                actionDisplay(winner, loser)
+                println("${loser.charName} takes: ")
+                singlePercDisplay(loser.percentDmg - initDmg)
+
+                // Is knockback horizontal?
+                if (winner.stats[winner.actionFlag][2] == 0.0) {
+                    knockBack *= loser.percentDmg * loser.gravity
+                    if (knockBack > arena.horizontalLen) {
+                        loser.toggleKO()
+                        println("${loser.charName} has been KO'd!")
+                    }
+                } else {
+                    knockBack *= loser.percentDmg / loser.gravity
+                    if (knockBack > arena.verticalLen || knockBack > loser.recovery) {
+                        loser.toggleKO()
+                        println("${loser.charName} has been KO'd!")
+                    }
+                }
+                // Or is is vertical?
+            }
+
             if (first.actionFlag != -1 && cpu.champion.actionFlag != -1) {
                 // Print result of each attack
                 // As a reminder, 0 = attack (rock), 1 = grab (scissors), 2 = shield (paper)\
@@ -485,81 +513,25 @@ class Driver {
                 if (first.actionFlag == 0 && cpu.champion.actionFlag == 0 ||
                         first.actionFlag == 1 && cpu.champion.actionFlag == 1 ||
                         first.actionFlag == 2 && cpu.champion.actionFlag == 2) {
-                    println("Same option chosen by " + first.charName + " and " + cpu.champion.charName + "!\nNo damage taken.")
+                    println("Same option chosen by ${first.charName} and ${cpu.champion.charName}!")
+                    println("No damage taken.")
                 } else if (cpu.champion.actionFlag == first.actionFlag + 1 ||
                         cpu.champion.actionFlag == first.actionFlag - 2) {
                     // Player 1 wins the round
                     cpu.setMemory(first.actionFlag, true)
-                    val initDmg = cpu.champion.percentDmg
-                    knockBack = first.attack(cpu.champion)
-
-                    if (first.isSpecial) {
-                        animate(first.fileNames[3])
-                        snooze(1500)
-                    }
-
-                    actionDisplay(first, cpu.champion)
-
-                    println(cpu.champion.charName + " takes: ")
-                    singlePercDisplay(cpu.champion.percentDmg - initDmg)
-
-                    // Is knockback horizontal?
-                    if (first.stats[first.actionFlag][2] == 0.0) {
-                        knockBack = cpu.champion.percentDmg * knockBack * cpu.champion.gravity
-
-                        if (knockBack > arena.horizontalLen) {
-                            cpu.champion.toggleKO()
-                            println(cpu.champion.charName + " has been KO'd!")
-                        }
-                    } else {
-                        knockBack = cpu.champion.percentDmg * knockBack / cpu.champion.gravity
-
-                        if (knockBack > arena.verticalLen || knockBack > cpu.champion.recovery) {
-                            cpu.champion.toggleKO()
-                            println(cpu.champion.charName + " has been KO'd!")
-                        }
-                    }// Or is is vertical?
-
+                    processResult(first, cpu.champion)
                 } else {
                     // CPU wins the round
                     cpu.setMemory(first.actionFlag, false)
-
-                    val initDmg = first.percentDmg
-                    knockBack = cpu.champion.attack(first)
-
-                    if (cpu.champion.isSpecial) {
-                        animate(cpu.champion.fileNames[4])
-                        snooze(1500)
-                    }
-
-                    actionDisplay(first, cpu.champion)
-
-                    println(first.charName + " takes :")
-                    singlePercDisplay(first.percentDmg - initDmg)
-
-                    // Is knockback horizontal?
-                    if (cpu.champion.stats[cpu.champion.actionFlag][2] == 0.0) {
-                        knockBack = first.percentDmg * knockBack * first.gravity
-
-                        if (knockBack > arena.horizontalLen || knockBack > first.recovery) {
-                            first.toggleKO()
-                            println(first.charName + " has been KO'd!")
-                        }
-                    } else {
-                        knockBack = first.percentDmg * knockBack / first.gravity
-
-                        if (knockBack > arena.verticalLen) {
-                            first.toggleKO()
-                            println(first.charName + " has been KO'd!")
-                        }
-                    }// Or is is vertical?
+                    processResult(cpu.champion, first)
                 }
                 println("<ENTER> to continue")
                 sc.nextLine()
             } else {
                 val misMatch = if (first.actionFlag == -1) first.charName else cpu.champion.charName
                 println("Invalid action entered by $misMatch please re-enter commands.")
-            }// Invalid action entered by one of the two players
+            }
+            // Invalid action entered by one of the two players
             // TODO: End battle, possible increment counter, champs may require extra data member to determine player
             // number
 
@@ -574,11 +546,11 @@ class Driver {
      */
     fun actionDisplay(first: Champion, second: Champion) {
         var fc = FileCat(ACTION_FILES[first.actionFlag], ACTION_FILES[3])
-        var outFile = fc.LateralOp(TMP_DIR.absolutePath + "/tmpPerc.txt")
+        var outFile = fc.lateralOp(TMP_DIR.absolutePath + "/tmpPerc.txt")
 
         val resourceOutFile = FileResource(outFile, false)
         fc = FileCat(resourceOutFile, ACTION_FILES[second.actionFlag])
-        outFile = fc.LateralOp(TMP_DIR.absolutePath + "/PercFin.txt")
+        outFile = fc.lateralOp(TMP_DIR.absolutePath + "/PercFin.txt")
         animateNoJump(FileResource(outFile, false))
     }
 
@@ -604,33 +576,33 @@ class Driver {
             // Leading zero on percentages less than 10
             if (numStack.size == 1) {
                 fc = FileCat(NUM_LOC[0], NUM_LOC[numStack.pop()])
-                fileOut = fc.LateralOp(tmpLoc + "TmpDmg.txt")
+                fileOut = fc.lateralOp(tmpLoc + "TmpDmg.txt")
                 fc = FileCat(FileResource(fileOut, false), NUM_LOC[10])
-                fileOut = fc.LateralOp(tmpLoc + "UnspacedDmg.txt")
+                fileOut = fc.lateralOp(tmpLoc + "UnspacedDmg.txt")
             } else {
                 fc = FileCat(NUM_LOC[numStack.pop()], NUM_LOC[numStack.pop()])
-                fileOut = fc.LateralOp(tmpLoc + "TmpDmg.txt")
+                fileOut = fc.lateralOp(tmpLoc + "TmpDmg.txt")
                 // Percentage greater than 100
                 if (numStack.size > 0) {
                     fc = FileCat(FileResource(fileOut, false), NUM_LOC[numStack.pop()])
-                    fileOut = fc.LateralOp(tmpLoc + "TmpDmg2.txt")
+                    fileOut = fc.lateralOp(tmpLoc + "TmpDmg2.txt")
                 }
                 fc = FileCat(FileResource(fileOut, false), NUM_LOC[10])
-                fileOut = fc.LateralOp(tmpLoc + "FinDmg.txt")
+                fileOut = fc.lateralOp(tmpLoc + "FinDmg.txt")
             }// Percentage greater than/equal to 9
         } else {
             fc = FileCat(NUM_LOC[0], NUM_LOC[0])
-            fileOut = fc.LateralOp(tmpLoc + "TmpDmg.txt")
+            fileOut = fc.lateralOp(tmpLoc + "TmpDmg.txt")
             fc = FileCat(FileResource(fileOut, false), NUM_LOC[10])
-            fileOut = fc.LateralOp(tmpLoc + "FinDmg.txt")
+            fileOut = fc.lateralOp(tmpLoc + "FinDmg.txt")
         }
 
         /*fc = new FileCat(fileOut, NUM_LOC[9]);
         fileOut = fc.LateralOp(tmpLoc + "modPlus.txt");*/
-        fc = FileCat(FileResource(fileOut, false), " ", 8)
-        fileOut = fc.LateralOp(tmpLoc + "dmgPlus.txt")
+        fc = FileCat(FileResource(fileOut, false), 8)
+        fileOut = fc.lateralOp(tmpLoc + "dmgPlus.txt")
         fc = FileCat(FileResource(fileOut, false), FileResource("Assets/Extras/Damage.txt"))
-        animateNoJump(FileResource(fc.LateralOp(tmpLoc + "outDmg.txt"), false))
+        animateNoJump(FileResource(fc.lateralOp(tmpLoc + "outDmg.txt"), false))
     }
 
     /**
@@ -640,20 +612,17 @@ class Driver {
      * @return Clean version of Champion chosen.
      */
     fun clone(ch: Champion): Champion {
-        val selected = ch.championName.toLowerCase()
-        if (selected == "marth") {
-            return Marth(ch.charName)
-        } else if (selected == "fox") {
-            return Fox(ch.charName)
-        } else if (selected == "falco") {
-            return Falco(ch.charName)
-        } else if (selected == "captain falcon") {
-            return CaptainFalcon(ch.charName)
+        return when (ch.championName.toLowerCase()) {
+            "marth" -> Marth(ch.charName)
+            "fox" -> Fox(ch.charName)
+            "falco" -> Falco(ch.charName)
+            "captain falcon" -> CaptainFalcon(ch.charName)
+            else -> {
+                // Default to Marth if there is some impossible logic flaw that allows this to slip through the cracks
+                println("Impossible logic flaw. Defaulting to Marth.")
+                Marth(ch.charName)
+            }
         }
-
-        // Default to Marth if there is some impossible logic flaw that allows this to slip through the cracks
-        println("Impossible logic flaw. Defaulting to Marth.")
-        return Marth(ch.charName)
     }
 
     /**
@@ -718,31 +687,31 @@ class Driver {
             // Leading zero on percentages less than 10
             if (numStack.size == 1) {
                 fc = FileCat(NUM_LOC[0], NUM_LOC[numStack.pop()])
-                firstLoc = fc.LateralOp(tmpLoc + "tmpFirstPercent.txt")
+                firstLoc = fc.lateralOp(tmpLoc + "tmpFirstPercent.txt")
                 fc = FileCat(FileResource(firstLoc, false), NUM_LOC[10])
-                firstLoc = fc.LateralOp(tmpLoc + "unspacedFirstPercent.txt")
+                firstLoc = fc.lateralOp(tmpLoc + "unspacedFirstPercent.txt")
             } else {
                 fc = FileCat(NUM_LOC[numStack.pop()], NUM_LOC[numStack.pop()])
-                firstLoc = fc.LateralOp(tmpLoc + "tmpFirstPercent.txt")
+                firstLoc = fc.lateralOp(tmpLoc + "tmpFirstPercent.txt")
                 // Percentage greater than 100
                 if (numStack.size > 0) {
                     fc = FileCat(FileResource(firstLoc, false), NUM_LOC[numStack.pop()])
-                    firstLoc = fc.LateralOp(tmpLoc + "tmpFirstPercent2.txt")
+                    firstLoc = fc.lateralOp(tmpLoc + "tmpFirstPercent2.txt")
                     hundredPlusFlag = true
                 }
                 fc = FileCat(FileResource(firstLoc, false), NUM_LOC[10])
-                firstLoc = fc.LateralOp(tmpLoc + "unspacedFirstPercent.txt")
+                firstLoc = fc.lateralOp(tmpLoc + "unspacedFirstPercent.txt")
             }// Percentage greater than/equal to 9
         } else {
             fc = FileCat(NUM_LOC[0], NUM_LOC[0])
-            firstLoc = fc.LateralOp(tmpLoc + "tmpFirstPercent.txt")
+            firstLoc = fc.lateralOp(tmpLoc + "tmpFirstPercent.txt")
             fc = FileCat(FileResource(firstLoc, false), NUM_LOC[10])
-            firstLoc = fc.LateralOp(tmpLoc + "unspacedFirstPercent.txt")
+            firstLoc = fc.lateralOp(tmpLoc + "unspacedFirstPercent.txt")
         }
 
         spacer = if (hundredPlusFlag) spacer - 8 else spacer
-        fc = FileCat(FileResource(firstLoc, false), " ", spacer)
-        firstLoc = fc.LateralOp(tmpLoc + "firstPercent.txt")
+        fc = FileCat(FileResource(firstLoc, false), spacer)
+        firstLoc = fc.lateralOp(tmpLoc + "firstPercent.txt")
 
         // Second player's percentage
         if (secondPercent > 0) {
@@ -754,28 +723,28 @@ class Driver {
             // Leading zero on percentages less than 10
             if (numStack.size == 1) {
                 fc = FileCat(NUM_LOC[0], NUM_LOC[numStack.pop()])
-                secondLoc = fc.LateralOp(tmpLoc + "tmpSecondPercent.txt")
+                secondLoc = fc.lateralOp(tmpLoc + "tmpSecondPercent.txt")
                 fc = FileCat(FileResource(secondLoc, false), NUM_LOC[10])
-                secondLoc = fc.LateralOp(tmpLoc + "secondPercent.txt")
+                secondLoc = fc.lateralOp(tmpLoc + "secondPercent.txt")
             } else {
                 fc = FileCat(NUM_LOC[numStack.pop()], NUM_LOC[numStack.pop()])
-                secondLoc = fc.LateralOp(tmpLoc + "tmpSecondPercent.txt")
+                secondLoc = fc.lateralOp(tmpLoc + "tmpSecondPercent.txt")
                 // Percentage greater than 100
                 if (numStack.size > 0) {
                     fc = FileCat(FileResource(secondLoc, false), NUM_LOC[numStack.pop()])
-                    secondLoc = fc.LateralOp(tmpLoc + "tmpSecondPercent2.txt")
+                    secondLoc = fc.lateralOp(tmpLoc + "tmpSecondPercent2.txt")
                 }
                 fc = FileCat(FileResource(secondLoc, false), NUM_LOC[10])
-                secondLoc = fc.LateralOp(tmpLoc + "secondPercent.txt")
+                secondLoc = fc.lateralOp(tmpLoc + "secondPercent.txt")
             }// Percentage greater than/equal to 9
         } else {
             fc = FileCat(NUM_LOC[0], NUM_LOC[0])
-            secondLoc = fc.LateralOp(tmpLoc + "tmpSecondPercent.txt")
+            secondLoc = fc.lateralOp(tmpLoc + "tmpSecondPercent.txt")
             fc = FileCat(FileResource(secondLoc, false), NUM_LOC[10])
-            secondLoc = fc.LateralOp(tmpLoc + "secondPercent.txt")
+            secondLoc = fc.lateralOp(tmpLoc + "secondPercent.txt")
         }
         fc = FileCat(FileResource(firstLoc, false), FileResource(secondLoc, false))
-        return fc.LateralOp(tmpLoc + "finalPercents.txt")
+        return fc.lateralOp(tmpLoc + "finalPercents.txt")
     }
 
     /**
@@ -802,8 +771,7 @@ class Driver {
      * Removes temporary battle files from tmpBattleFiles folder.
      */
     fun cleanDir() {
-        TMP_DIR.listFiles()?.mapNotNull {
-            file ->
+        TMP_DIR.listFiles()?.mapNotNull { file ->
             if (!file.delete()) {
                 println("Error cleaning up file: " + file.absolutePath)
             }
@@ -924,13 +892,12 @@ class Driver {
         while (true) {
             println("Set CPU difficulty: (e)asy, (d)ifficult")
             print("> ")
-            val input = sc.nextLine().toLowerCase().trim({ it <= ' ' })
-            if (input == "e") {
-                return easy
-            } else if (input == "d") {
-                return difficult
-            } else {
-                println("Invalid difficulty.\n")
+            when (sc.nextLine().toLowerCase().trim { it <= ' ' }) {
+                "e" -> return easy
+                "d" -> return difficult
+                else -> {
+                    println("Invalid difficulty.\n")
+                }
             }
         }
     }
@@ -966,7 +933,7 @@ class Driver {
             input = sc.nextLine()
             print("Is \"$input\" good?\n> ")
             response = sc.nextLine()
-            response = response.toLowerCase().trim({ it <= ' ' })
+            response = response.toLowerCase().trim { it <= ' ' }
             for (comparator in POS_RESPONSES) {
                 if (response == comparator) {
                     return input

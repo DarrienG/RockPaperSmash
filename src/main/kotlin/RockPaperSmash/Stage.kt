@@ -1,13 +1,8 @@
 package RockPaperSmash
 
-abstract class Stage
-/**
- * Basic constructor. Takes string file containing stage's stats.
- *
- * @param statsFile String containing stage's tats,
- */
-(statsFile: String) {
+import kotlin.system.exitProcess
 
+abstract class Stage(statsFile: String) {
     var fileLoc: String = ""
 
     /**
@@ -16,7 +11,7 @@ abstract class Stage
      * | HoriztonalLen | VerticalLen |
      * +---------------+-------------+
      */
-    private val stageStats: DoubleArray
+    private val stageStats = DoubleArray(2)
 
     val horizontalLen: Double
         get() = stageStats[0]
@@ -27,7 +22,6 @@ abstract class Stage
     abstract val stageName: String
 
     init {
-        stageStats = DoubleArray(2)
         try {
             val br = FileReader.loadFile(FileResource(statsFile, true))
             fileLoc = br.readLine()
@@ -37,7 +31,7 @@ abstract class Stage
         } catch (e: java.io.IOException) {
             // Restart program when failure - add later
             println("Invalid parameters. Process failed.")
-            System.exit(1)
+            exitProcess(1)
         }
 
     }

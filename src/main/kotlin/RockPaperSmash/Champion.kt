@@ -1,18 +1,20 @@
 package RockPaperSmash
 
+import kotlin.system.exitProcess
+
 /**
  * Champion class. Characters, and their stats are stored here.
  */
-abstract class Champion
-/**
- * Basic constructor. Takes file where Champion stats are located to construct Champion.
- *
- * @param file Where Champion stats are located.
- */
-(file: String) {
+abstract class Champion(file: String) {
 
     /** Name of the player if given.  */
     var charName: String = ""
+        get() {
+            if (field == "") {
+                return championName
+            }
+            return field
+        }
         protected set
 
     /** Possible array of strings containing all file names needed to access.  */
@@ -29,25 +31,24 @@ abstract class Champion
      * | shieldDmg | shieldKB | shieldDir |
      * +-----------+----------+-----------+
      */
-    lateinit var stats: Array<DoubleArray>
-        protected set
+    val stats = Array(3) { DoubleArray(3) }
 
     /**
      * How heavy the player is, affects vertical survivability, and horizontal recovery.
      */
-    var gravity: Double = 0.toDouble()
+    var gravity: Double = 0.0
         private set
 
     /**
      * How long character's recovery is when knocked off horizontally.
      */
-    var recovery: Double = 0.toDouble()
+    var recovery: Double = 0.0
         private set
 
     /**
      * Amount of damage character has taken thus far.
      */
-    var percentDmg: Double = 0.toDouble()
+    var percentDmg: Double = 0.0
         private set
 
     /**
@@ -164,45 +165,45 @@ abstract class Champion
      * @param file Name of file containing [Champion&#39;s][Champion] stats.
      */
     fun dataCrawler(file: String) {
-        stats = Array(3) { DoubleArray(3) }
-
         val DELIMITER = ", "
-        val numArgs = 3
 
         try {
             val br = FileReader.loadFile(FileResource(file, true))
             var tokens: Array<String>
+            val readLine = { ->
+                br.readLine().split(DELIMITER.toRegex()).dropLastWhile {
+                    it.isEmpty()
+                }.toTypedArray()
+            }
 
             // Set file information immediately to raw data in file
-            fileNames = resourceToFileResource(br.readLine().split(DELIMITER.toRegex()).dropLastWhile({ it.isEmpty() }).toTypedArray())
+            fileNames = resourceToFileResource(readLine())
 
             if (fileNames.size != 6) {
                 // Make real exceptions when class is finished
                 // throw invalidData;
                 println("Invalid arguments. Process failed.")
-                System.exit(1)
+                exitProcess(1)
             }
 
             // Get attack, grab, and shield stats, and set them
-            for (i in 0 until numArgs) {
-                tokens = br.readLine().split(DELIMITER.toRegex()).dropLastWhile({ it.isEmpty() }).toTypedArray()
-
-                if (tokens.size < numArgs) {
+            stats.forEach { row ->
+                tokens = readLine()
+                if (tokens.size < row.size) {
                     // Make real exceptions when class is finished
                     // throw invalidData;
                     println("Invalid arguments. Process failed.")
-                    System.exit(1)
+                    exitProcess(1)
                 }
-                stats[i][0] = java.lang.Double.parseDouble(tokens[0])
-                stats[i][1] = java.lang.Double.parseDouble(tokens[1])
-                stats[i][2] = Integer.parseInt(tokens[2]).toDouble()
+                row[0] = java.lang.Double.parseDouble(tokens[0])
+                row[1] = java.lang.Double.parseDouble(tokens[1])
+                row[2] = Integer.parseInt(tokens[2]).toDouble()
             }
 
             gravity = java.lang.Double.parseDouble(br.readLine())
             recovery = java.lang.Double.parseDouble(br.readLine())
             spacer = Integer.parseInt(br.readLine())
             attribute = br.readLine()
-
         } catch (e: java.io.IOException) {
             throw RuntimeException("Invalid or corrupted file data. Failing$e")
         }
