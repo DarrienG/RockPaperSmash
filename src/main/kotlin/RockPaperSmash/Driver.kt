@@ -1,8 +1,5 @@
 package RockPaperSmash
 
-import java.io.BufferedReader
-import java.io.File
-import java.util.Objects
 import java.util.Random
 import java.util.Scanner
 import java.util.Stack
@@ -11,10 +8,29 @@ import RockPaperSmash.CPU_DIFFICULTY.difficult
 import RockPaperSmash.CPU_DIFFICULTY.easy
 import kotlin.math.absoluteValue
 
+fun main() {
+    val d = Driver()
+    try {
+        d.menu()
+    } catch (e: Exception) {
+        println("Program prematurely killed. Cleaning up before exiting.")
+        e.printStackTrace()
+        d.cleanDir()
+    }
+
+    Runtime.getRuntime().addShutdownHook(object : Thread() {
+        override fun start() {
+            println("Exiting.")
+            println("Thanks for playing RockPaperSmash!")
+            d.cleanDir()
+        }
+    })
+}
+
 /**
  * Main class. Everything is run here.
  */
-object Driver {
+class Driver {
 
     /**
      * Positive responses that can be used to answer dialogs.
@@ -130,26 +146,6 @@ object Driver {
             println("Fatal choosing error. Defaulting to Battlefield.")
             return Battlefield()
         }
-
-    @JvmStatic
-    fun main(args: Array<String>) {
-        try {
-            menu()
-        } catch (e: Exception) {
-            println("Program prematurely killed. Cleaning up before exiting.")
-            e.printStackTrace()
-            cleanDir()
-        }
-
-        Runtime.getRuntime().addShutdownHook(object : Thread() {
-
-            override fun start() {
-                println("Exiting.")
-                println("Thanks for playing RockPaperSmash!")
-                cleanDir()
-            }
-        })
-    }
 
     /**
      * Has one player choose the [Champion] they would like to play.
@@ -805,7 +801,7 @@ object Driver {
     /**
      * Removes temporary battle files from tmpBattleFiles folder.
      */
-    private fun cleanDir() {
+    fun cleanDir() {
         TMP_DIR.listFiles()?.mapNotNull {
             file ->
             if (!file.delete()) {

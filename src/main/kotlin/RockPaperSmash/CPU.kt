@@ -1,7 +1,5 @@
 package RockPaperSmash
 
-import javafx.util.Pair
-
 import java.util.Random
 import kotlin.math.absoluteValue
 

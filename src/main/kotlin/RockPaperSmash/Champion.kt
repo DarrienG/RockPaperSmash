@@ -1,10 +1,5 @@
 package RockPaperSmash
 
-import java.io.BufferedReader
-import java.io.File
-import java.io.InputStream
-import java.io.InputStreamReader
-
 /**
  * Champion class. Characters, and their stats are stored here.
  */

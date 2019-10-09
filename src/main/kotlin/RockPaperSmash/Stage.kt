@@ -1,9 +1,5 @@
 package RockPaperSmash
 
-import java.io.BufferedReader
-import java.io.InputStream
-import java.io.InputStreamReader
-
 abstract class Stage
 /**
  * Basic constructor. Takes string file containing stage's stats.
