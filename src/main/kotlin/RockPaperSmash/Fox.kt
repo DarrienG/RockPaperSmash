@@ -3,9 +3,7 @@ package RockPaperSmash
 import java.util.Random
 
 class Fox(playerName: String) : Champion("stats/FoxStats.txt") {
-
-    override val championName: String
-        get() = "FOX"
+    override val championName: String = "FOX"
 
     init {
         charName = playerName

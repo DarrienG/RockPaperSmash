@@ -6,8 +6,7 @@ internal class CaptainFalcon(playerName: String) : Champion("stats/CaptainFalcon
     private val modifier = 2.0
     private var setUp = false
 
-    override val championName: String
-        get() = "CAPTAIN FALCON"
+    override val championName: String = "CAPTAIN FALCON"
 
     init {
         charName = playerName

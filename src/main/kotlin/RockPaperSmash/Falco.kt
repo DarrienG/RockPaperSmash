@@ -3,8 +3,7 @@ package RockPaperSmash
 class Falco(playerName: String) : Champion("stats/FalcoStats.txt") {
     private var damageModifier = 1.0
 
-    override val championName: String
-        get() = "FALCO"
+    override val championName: String = "FALCO"
 
     init {
         charName = playerName
