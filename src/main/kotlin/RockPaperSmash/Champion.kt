@@ -10,10 +10,7 @@ abstract class Champion(file: String) {
     /** Name of the player if given.  */
     var charName: String = ""
         get() {
-            if (field == "") {
-                return championName
-            }
-            return field
+            return if (field == "") championName else field
         }
         protected set
 
