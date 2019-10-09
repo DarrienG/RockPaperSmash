@@ -22,7 +22,6 @@ object FileReader {
 
         }
 
-    @Throws(java.io.IOException::class)
     fun loadFile(rFile: FileResource): BufferedReader {
         val file: InputStream? = if (rFile.resource) {
             ClassLoader.getSystemResourceAsStream(rFile.fileName)
